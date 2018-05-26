@@ -1,0 +1,46 @@
+https://git-scm.com/book/pt-br/v1/Git-Essencial-Trabalhando-com-Remotos
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+
+
+
+git init  - monta o git na pasta atual 
+git status - mostra status arquivo
+git add Arquivo    - adiciona arquivo para proximo commit commitar
+git add --all   - adiciona todos os arquivos
+
+
+git commit  -m “Cria o arquivo exemplo”     - atualiza arquivos para commitar (-m parametro adicionar mensagem)
+
+
+toda alteracao deve ser definida para proximo commit salvar, com git add Arquivo, se nao não salva!
+
+git commit  -a -m “adicionar arquivos em para commitar e comittar em sequencia”
+o arquivo já deve ter sido commitado pela primeira vez.
+
+
+
+git branch v1   - cria branch v1
+
+git checkout v1  - seleciona o branch v1
+
+git merge <selecionar merge para juntar>
+
+ git remote add origin https://github.com/clevertondecker/programWeb - Pega diretorio da web
+
+git pull originPWeb master - puxa arquivos da web
+
+git push originPWeb master  - joga arquivos
+
+Para que seja configurado o proxy, abra seu GitBash e digite: git config --global http.proxy http://10.19.255.254:3128
+
+
+git log - mostra mudanças
+
+https://github.com/thiagobitencourt/programa101  - clonar diretorio da nuvem.
+
+
+
+

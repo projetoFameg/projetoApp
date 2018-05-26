@@ -1,0 +1,123 @@
+
+<ion-header>
+
+    <ion-navbar color="primary">
+      <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content padding>
+   
+    <form [formGroup]="form">
+           
+          <ion-item>
+              <ion-label stacked>Nome</ion-label>
+              <ion-input type="text" formControlName="nome"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!form.controls.nome.valid && (form.controls.nome.dirty || form.controls.nome.touched)" color="danger">
+                <div [hidden]="!form.controls.nome.errors.required">
+                  O campo é obrigatório
+                </div>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label stacked>Sobrenome</ion-label>
+                  <ion-input type="text" formControlName="sobrenome"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="!form.controls.sobrenome.valid && (form.controls.sobrenome.dirty || form.controls.sobrenome.touched)" color="danger">
+                    <div [hidden]="!form.controls.sobrenome.errors.required">
+                      O campo é obrigatório
+                    </div>
+                  </ion-item>
+
+                  <ion-item>
+                      <ion-label stacked>Altura</ion-label>
+                      <ion-input type="text" formControlName="altura"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="!form.controls.altura.valid && (form.controls.altura.dirty || form.controls.altura.touched)" color="danger">
+                        <div [hidden]="!form.controls.altura.errors.required">
+                          O campo é obrigatório
+                        </div>
+                      </ion-item>
+
+
+                <ion-item>
+                    <ion-label stacked>Peso</ion-label>
+                    <ion-input type="text" formControlName="peso"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!form.controls.peso.valid && (form.controls.peso.dirty || form.controls.peso.touched)" color="danger">
+                      <div [hidden]="!form.controls.peso.errors.required">
+                        O campo é obrigatório
+                      </div>
+                    </ion-item>
+
+
+
+                  <ion-item>
+                      <ion-label stacked>idade</ion-label>
+                      <ion-input type="text" formControlName="idade"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="!form.controls.idade.valid && (form.controls.idade.dirty || form.controls.idade.touched)" color="danger">
+                        <div [hidden]="!form.controls.idade.errors.required">
+                          O campo é obrigatório
+                        </div>
+                      </ion-item>
+
+
+                    <ion-item>
+                        <ion-label stacked>Circuferência Cintura</ion-label>
+                        <ion-input type="text" formControlName="circuCintura"></ion-input>
+                      </ion-item>
+                      <ion-item *ngIf="!form.controls.circuCintura.valid && (form.controls.circuCintura.dirty || form.controls.circuCintura.touched)" color="danger">
+                          <div [hidden]="!form.controls.circuCintura.errors.required">
+                            O campo é obrigatório
+                          </div>
+                        </ion-item>
+
+
+                      <ion-item>
+                          <ion-label stacked>Circuferência Braço Esquerdo</ion-label>
+                          <ion-input type="text" formControlName="circuBracoEsquerdo"></ion-input>
+                        </ion-item>
+                        <ion-item *ngIf="!form.controls.circuBracoEsquerdo.valid && (form.controls.circuBracoEsquerdo.dirty || form.controls.circuBracoEsquerdo.touched)" color="danger">
+                            <div [hidden]="!form.controls.circuBracoEsquerdo.errors.required">
+                              O campo é obrigatório
+                            </div>
+                          </ion-item>
+                    
+
+                        <ion-item>
+                            <ion-label stacked>Circuferência Braço Direito</ion-label>
+                            <ion-input type="text" formControlName="circuBracoDireito"></ion-input>
+                          </ion-item>
+                          <ion-item *ngIf="!form.controls.circuBracoDireito.valid && (form.controls.circuBracoDireito.dirty || form.controls.circuBracoDireito.touched)" color="danger">
+                              <div [hidden]="!form.controls.circuBracoDireito.errors.required">
+                                O campo é obrigatório
+                              </div>
+                            </ion-item>
+        
+                            <ion-item>
+                                <ion-label stacked>Objetivo</ion-label>
+                                <ion-select formControlName="objetivo">
+                                  <ion-option value="1">Ganho de massa muscular</ion-option>
+                                  <ion-option value="2">Resistência</ion-option>
+                                  <ion-option value="2">Perca de gordura</ion-option>
+                                </ion-select>
+                              </ion-item>
+                              <ion-item *ngIf="!form.controls.objetivo.valid && (form.controls.objetivo.dirty || form.controls.objetivo.touched)" color="danger">
+                                  <div [hidden]="!form.controls.objetivo.errors.required">
+                                    O campo é obrigatório
+                                  </div>
+                                </ion-item>
+                            
+          <!-- <ion-item>
+            <ion-label stacked>Imagem</ion-label>
+            <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>
+          </ion-item> -->
+        
+          <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Atualizar Perfil</button>
+    </form>
+  
+  </ion-content>
+  

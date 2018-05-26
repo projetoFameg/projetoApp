@@ -1,0 +1,73 @@
+<!--
+  Generated template for the AddExercisePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="form">
+      <ion-item>
+          <ion-label stacked>Título</ion-label>
+          <ion-input type="text" formControlName="titulo"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!form.controls.titulo.valid && (form.controls.titulo.dirty || form.controls.titulo.touched)" color="danger">
+          <div [hidden]="!form.controls.titulo.errors.required">
+            O campo é obrigatório
+          </div>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label stacked>Descrição</ion-label>
+          <ion-input type="text" formControlName="descricao"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">
+            <div [hidden]="!form.controls.descricao.errors.required">
+              O campo é obrigatório
+            </div>
+          </ion-item>
+      
+        <ion-item>
+          <ion-label stacked>Equipamento</ion-label>
+          <ion-select formControlName="equipamento">
+            <ion-option value="Esteira">Esteira</ion-option>
+            <ion-option value="Leg Press 45°">Leg Press 45°</ion-option>
+            <ion-option value="Cross Over Angular">Cross Over Angular</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="!form.controls.equipamento.valid && (form.controls.equipamento.dirty || form.controls.equipamento.touched)" color="danger">
+            <div [hidden]="!form.controls.equipamento.errors.required">
+              O campo é obrigatório
+            </div>
+          </ion-item>
+      
+        <ion-item>
+          <ion-label stacked>Grupo Muscular</ion-label>
+          <ion-select formControlName="grupoMuscular">
+            <ion-option value="1">Abdominal</ion-option>
+            <ion-option value="2">Dorsal</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="!form.controls.grupoMuscular.valid && (form.controls.grupoMuscular.dirty || form.controls.grupoMuscular.touched)" color="danger">
+            <div [hidden]="!form.controls.grupoMuscular.errors.required">
+              O campo é obrigatório
+            </div>
+          </ion-item>
+      
+        <!-- <ion-item>
+          <ion-label stacked>Imagem</ion-label>
+          <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>
+        </ion-item> -->
+      
+        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Exercício</button>
+  </form>
+
+</ion-content>

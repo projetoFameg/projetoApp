@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Lista de Exercícios</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-fab right bottom>
+        <button ion-fab color="primary" (click)="navigateAddExercisePage()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let exercise of exercise | async">
+
+      <ion-item>
+          <h1>{{exercise.titulo}}</h1>
+          <h2>{{exercise.grupoMuscular}}</h2>
+          <p>{{exercise.descricao}}</p>
+          
+      </ion-item>
+
+      <ion-item-options side="left">
+        <button ion-button color="secondary" (click)="editExercise(exercise)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button ion-button color="danger" (click)="removeExercise(exercise.key)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+        
+      </ion-item-options>
+
+      
+    </ion-item-sliding>
+  </ion-list>
+  
+      <ion-fab bottom left>
+        <button ion-button round color="primary" (click)="signOut()"> logout   -
+          <ion-icon name="md-exit"></ion-icon>
+        </button>
+      </ion-fab>
+      
+
+</ion-content>

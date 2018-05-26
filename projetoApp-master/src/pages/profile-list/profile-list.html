@@ -1,0 +1,47 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+      <ion-title>Seu perfil:</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+      <ion-fab right bottom>
+          <button ion-fab color="primary" (click)="navigateEditProfilePage()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+      </ion-fab>
+  
+    <ion-list>
+      <ion-item-sliding *ngFor="let profile of profile | async">
+  
+        <ion-item>
+            <h2><p>Nome: </p>{{profile.nome}} </h2>
+            <h2><p>Sobrenome: </p>{{profile.sobrenome}} </h2>
+            <h3><p>Idade: </p>{{profile.idade}}</h3>
+            <h3><p>Altura: </p>{{profile.altura}}</h3>
+            <h3><p>Peso: </p>{{profile.peso}}</h3>
+            <h3><p>Circuferência Cintura: </p>{{profile.circuCintura}}</h3>
+            <h3><p>Circuferência Braço Direito: </p>{{profile.circuBracoDireito}}</h3>
+            <h3><p>Circuferência Braço Esquerdo: </p>{{profile.circuBracoEsquerdo}}</h3>
+            <h3><p>Objetivo: </p>{{profile.objetivo}}</h3>
+
+        </ion-item>
+  
+  
+        <ion-item-options side="left">
+            <button ion-button color="secondary" (click)="editProfile(profile)">
+              <ion-icon name="create"></ion-icon>
+            </button>
+          <button ion-button color="danger" (click)="removeProfile(profile.key)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-item-options>
+  
+      </ion-item-sliding>
+    </ion-list>
+  </ion-content>
+  

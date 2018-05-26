@@ -1,0 +1,56 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+ 
+  <form [formGroup]="form">
+
+      <ion-item>
+          <ion-label stacked>Título</ion-label>
+          <ion-input type="text" formControlName="titulo"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!form.controls.titulo.valid && (form.controls.titulo.dirty || form.controls.titulo.touched)" color="danger">
+          <div [hidden]="!form.controls.titulo.errors.required">
+            O campo é obrigatório
+          </div>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>descricao</ion-label>
+            <ion-input type="text" formControlName="descricao"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">
+              <div [hidden]="!form.controls.descricao.errors.required">
+                O campo é obrigatório
+              </div>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Repeticão</ion-label>
+                <ion-input type="text" formControlName="repeticoes"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!form.controls.repeticoes.valid && (form.controls.repeticoes.dirty || form.controls.repeticoes.touched)" color="danger">
+                  <div [hidden]="!form.controls.repeticoes.errors.required">
+                    O campo é obrigatório
+                  </div>
+                </ion-item>
+
+      
+          
+            
+                          
+        <!-- <ion-item>
+          <ion-label stacked>Imagem</ion-label>
+          <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>
+        </ion-item> -->
+      
+        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Atualizar Treino</button>
+  </form>
+
+</ion-content>
