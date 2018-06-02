@@ -263,6 +263,8 @@ dependencies {
     implementation(project(path: ":CordovaLib"))
     compile "com.facebook.android:facebook-android-sdk:4.+"
     compile "com.android.support:customtabs:23.3.0"
+    compile "com.google.android.gms:play-services-auth:+"
+    compile "com.google.android.gms:play-services-identity:+"
     // SUB-PROJECT DEPENDENCIES END
 }
 

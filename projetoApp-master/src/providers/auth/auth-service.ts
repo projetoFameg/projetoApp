@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from './user';
 import * as firebase from 'firebase/app';
 import { GooglePlus } from '@ionic-native/google-plus';
+import AuthProvider = firebase.auth.AuthProvider;
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 /**/
@@ -43,19 +44,30 @@ export class AuthServiceProvider {
       });
 }
 */
-  signInWithGoogle() {
-    return this.googlePlus.login({
-      'webClientId': '543412652932-o9nu6t1b06b3enk5lriotemfqca0di0b.apps.googleusercontent.com',
-      'offline': true
-    })
+signInWithGoogle() {
+  console.log('Sign in with google');
+  return this.oauthSignIn(new firebase.auth.GoogleAuthProvider());
+}
 
-      .then(res => {
-        return this.angularFireAuth.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
-          .then((user: firebase.User) => {
-            // atualizando o profile do usuario
-            return user.updateProfile({ displayName: res.displayName, photoURL: res.imageUrl });
-          });
+private oauthSignIn(provider: AuthProvider) {
+  if (!(<any>window).cordova) {
+    return this.angularFireAuth.auth.signInWithPopup(provider);
+  } else {
+    return this.angularFireAuth.auth.signInWithRedirect(provider)
+    .then(() => {
+      return this.angularFireAuth.auth.getRedirectResult().then( result => {
+        // This gives you a Google Access Token.
+        // You can use it to access the Google API.
+        let token = result.credential.accessToken;
+        // The signed-in user info.
+        let user = result.user;
+        console.log(token, user);
+      }).catch(function(error) {
+        // Handle Errors here.
+        alert(error.message);
       });
+    });
+  }
 }
 
   signOut() {

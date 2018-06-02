@@ -87,9 +87,6 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="1.1.19" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="2.0.5" />
-    <plugin name="cordova-plugin-googleplus" spec="^5.3.0">
-        <variable name="REVERSED_CLIENT_ID" value="myreversedclientid" />
-    </plugin>
     <plugin name="cordova-plugin-facebook4" spec="^2.1.0">
         <variable name="APP_ID" value="351873075322892" />
         <variable name="APP_NAME" value="authLogin" />
@@ -99,5 +96,10 @@
     <plugin name="cordova-universal-links-plugin" spec="^1.2.1" />
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+    <plugin name="cordova-plugin-googleplus" spec="git+https://git@github.com/mzealey/cordova-plugin-googleplus.git">
+        <variable name="REVERSED_CLIENT_ID" value="543412652932-2fl8vb2s99vcsemfmc1krvd39qk2gart.apps.googleusercontent.com" />
+    </plugin>
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <engine name="android" spec="7.0.0" />
+    <engine name="browser" spec="5.0.3" />
 </widget>

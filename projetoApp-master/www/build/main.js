@@ -1165,18 +1165,30 @@ var AuthServiceProvider = /** @class */ (function () {
    }
    */
     AuthServiceProvider.prototype.signInWithGoogle = function () {
+        console.log('Sign in with google');
+        return this.oauthSignIn(new __WEBPACK_IMPORTED_MODULE_2_firebase_app__["auth"].GoogleAuthProvider());
+    };
+    AuthServiceProvider.prototype.oauthSignIn = function (provider) {
         var _this = this;
-        return this.googlePlus.login({
-            'webClientId': '543412652932-o9nu6t1b06b3enk5lriotemfqca0di0b.apps.googleusercontent.com',
-            'offline': true
-        })
-            .then(function (res) {
-            return _this.angularFireAuth.auth.signInWithCredential(__WEBPACK_IMPORTED_MODULE_2_firebase_app__["auth"].GoogleAuthProvider.credential(res.idToken))
-                .then(function (user) {
-                // atualizando o profile do usuario
-                return user.updateProfile({ displayName: res.displayName, photoURL: res.imageUrl });
+        if (!window.cordova) {
+            return this.angularFireAuth.auth.signInWithPopup(provider);
+        }
+        else {
+            return this.angularFireAuth.auth.signInWithRedirect(provider)
+                .then(function () {
+                return _this.angularFireAuth.auth.getRedirectResult().then(function (result) {
+                    // This gives you a Google Access Token.
+                    // You can use it to access the Google API.
+                    var token = result.credential.accessToken;
+                    // The signed-in user info.
+                    var user = result.user;
+                    console.log(token, user);
+                }).catch(function (error) {
+                    // Handle Errors here.
+                    alert(error.message);
+                });
             });
-        });
+        }
     };
     AuthServiceProvider.prototype.signOut = function () {
         var _this = this;

@@ -31,6 +31,7 @@
     "angularfire2": "^5.0.0-rc.6.0",
     "cordova": "^8.0.0",
     "cordova-android": "7.0.0",
+    "cordova-browser": "5.0.3",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-buildinfo": "^2.0.1",
     "cordova-plugin-compat": "^1.2.0",
@@ -42,6 +43,7 @@
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-secure-storage": "^2.6.8",
     "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-universal-links-plugin": "^1.2.1",
     "enhanced-resolve": "^3.3.0",
@@ -52,6 +54,7 @@
     "promise-polyfill": "7.1.2",
     "rxjs": "5.5.10",
     "sw-toolbox": "3.6.0",
+    "web": "0.0.2",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
@@ -67,7 +70,8 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "myreversedclientid"
+        "REVERSED_CLIENT_ID": "myreversedclientid",
+        "WEB_APPLICATION_CLIENT_ID": "543412652932-2fl8vb2s99vcsemfmc1krvd39qk2gart.apps.googleusercontent.com"
       },
       "cordova-plugin-facebook4": {
         "APP_ID": "351873075322892",
@@ -77,10 +81,12 @@
       "cordova-plugin-buildinfo": {},
       "cordova-universal-links-plugin": {},
       "cordova-plugin-browsertab": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-statusbar": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }

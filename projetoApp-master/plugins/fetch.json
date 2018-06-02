@@ -90,5 +90,24 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-googleplus": {
+    "source": {
+      "type": "registry",
+      "id": "git+https://git@github.com/mzealey/cordova-plugin-googleplus.git"
+    },
+    "is_top_level": true,
+    "variables": {
+      "REVERSED_CLIENT_ID": "myreversedclientid",
+      "WEB_APPLICATION_CLIENT_ID": "543412652932-2fl8vb2s99vcsemfmc1krvd39qk2gart.apps.googleusercontent.com"
+    }
+  },
+  "cordova-plugin-statusbar": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-statusbar@2.4.2"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

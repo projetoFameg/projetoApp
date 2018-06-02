@@ -8,7 +8,7 @@ import { SignupPage } from '../signup/signup';
 import { ResetpasswordPage } from '../resetpassword/resetpassword';
 import { ExerciseListPage } from '../exercise-list/exercise-list';
 import firebase from 'firebase';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
