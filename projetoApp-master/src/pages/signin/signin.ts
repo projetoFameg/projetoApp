@@ -9,6 +9,8 @@ import { ResetpasswordPage } from '../resetpassword/resetpassword';
 import { ExerciseListPage } from '../exercise-list/exercise-list';
 import firebase from 'firebase';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Facebook } from '@ionic-native/facebook';
+
 
 @IonicPage()
 @Component({
@@ -18,29 +20,36 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 export class SigninPage {
+  userProfile: any = null;
   user: User = new User();
   @ViewChild('form') form: NgForm;
 
   constructor(
     public navCtrl: NavController,
     private toastCtrl: ToastController,
-    private authService: AuthServiceProvider) {
+    private authService: AuthServiceProvider,
+    private facebook: Facebook) {
   }
   
+  
+    signInWithFacebook(): void {
+      this.facebook.login(['email']).then( (response) => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider
+          .credential(response.authResponse.accessToken);
+  
+        firebase.auth().signInWithCredential(facebookCredential)
+          .then((success) => {
+            console.log("Firebase success: " + JSON.stringify(success));
+            this.userProfile = success;
+          })
+          .catch((error) => {
+            console.log("Firebase failure: " + JSON.stringify(error));
+        });
+  
+      }).catch((error) => { console.log(error) });
+    }
   
 
-  
-  signInWithFacebook() {
-    let provider = new firebase.auth.FacebookAuthProvider();
-    
-      firebase.auth().signInWithRedirect(provider).then(() =>{
-      firebase.auth().getRedirectResult().then((result) =>{
-        alert(JSON.stringify(result));
-        }).catch(function(error) {
-          alert(JSON.stringify(error))
-        });
-      })
-  }
 
   signInWithGoogle() {
     this.authService.signInWithGoogle()

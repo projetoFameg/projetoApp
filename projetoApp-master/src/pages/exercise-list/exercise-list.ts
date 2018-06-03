@@ -47,6 +47,8 @@ export class ExerciseListPage {
   }
 
   
+
+  // Criado para o admin fazer logout
   signOut() {
     this.authService.signOut()
     .then(() => {

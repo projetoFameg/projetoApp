@@ -32,7 +32,7 @@ export class AddExercisePage {
   createForm(){
     this.form = this.formBuilder.group({
       key: [this.exercise.key],
-      titulo: [this.exercise.titulo, Validators.required],
+      NomeExercicio: [this.exercise.NomeExercicio, Validators.required],
       descricao: [this.exercise.descricao, Validators.required],
       equipamento: [this.exercise.equipamento, Validators.required],
       grupoMuscular: [this.exercise.grupoMuscular, Validators.required]

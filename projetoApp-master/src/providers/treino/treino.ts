@@ -33,7 +33,7 @@ export class TreinoProvider {
         this.db.list(this.PATH)
         .update(treino.key,
           {
-            titulo: treino.titulo,
+            NomeExercicio: treino.NomeExercicio,
             descricao: treino.descricao,
             repeticoes: treino.repeticoes,
             equipamento: exercise.equipamento,
@@ -45,7 +45,7 @@ export class TreinoProvider {
       }else{
         this.db.list(this.PATH)
         .push({
-          titulo: treino.titulo,
+          NomeExercicio: treino.NomeExercicio,
           descricao: treino.descricao,
           repeticoes: treino.repeticoes,
           equipamento: exercise.equipamento,

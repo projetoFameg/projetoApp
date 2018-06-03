@@ -13,10 +13,10 @@
 
       <ion-item>
           <ion-label stacked>Título</ion-label>
-          <ion-input type="text" formControlName="titulo"></ion-input>
+          <ion-input type="text" formControlName="NomeExercicio"></ion-input>
         </ion-item>
-        <ion-item *ngIf="!form.controls.titulo.valid && (form.controls.titulo.dirty || form.controls.titulo.touched)" color="danger">
-          <div [hidden]="!form.controls.titulo.errors.required">
+        <ion-item *ngIf="!form.controls.NomeExercicio.valid && (form.controls.NomeExercicio.dirty || form.controls.NomeExercicio.touched)" color="danger">
+          <div [hidden]="!form.controls.NomeExercicio.errors.required">
             O campo é obrigatório
           </div>
         </ion-item>

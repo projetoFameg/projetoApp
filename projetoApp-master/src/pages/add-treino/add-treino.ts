@@ -32,7 +32,7 @@ export class AddTreinoPage {
   createForm(){
     this.form = this.formBuilder.group({
       key: [this.treino.key],
-      titulo: [this.treino.titulo],
+      NomeExercicio: [this.treino.NomeExercicio],
       descricao: [this.treino.descricao],
       repeticoes: [this.treino.repeticoes],
     })

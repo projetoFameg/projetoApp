@@ -51,7 +51,7 @@ var ExerciseProvider = /** @class */ (function () {
             if (exercise.key) {
                 _this.db.list(_this.PATH)
                     .update(exercise.key, {
-                    titulo: exercise.titulo,
+                    NomeExercicio: exercise.NomeExercicio,
                     descricao: exercise.descricao,
                     equipamento: exercise.equipamento,
                     grupoMuscular: exercise.grupoMuscular
@@ -63,7 +63,7 @@ var ExerciseProvider = /** @class */ (function () {
             else {
                 _this.db.list(_this.PATH)
                     .push({
-                    titulo: exercise.titulo,
+                    NomeExercicio: exercise.NomeExercicio,
                     descricao: exercise.descricao,
                     equipamento: exercise.equipamento,
                     grupoMuscular: exercise.grupoMuscular
@@ -137,7 +137,7 @@ var TreinoProvider = /** @class */ (function () {
             if (treino.key) {
                 _this.db.list(_this.PATH)
                     .update(treino.key, {
-                    titulo: treino.titulo,
+                    NomeExercicio: treino.NomeExercicio,
                     descricao: treino.descricao,
                     repeticoes: treino.repeticoes,
                     equipamento: exercise.equipamento,
@@ -150,7 +150,7 @@ var TreinoProvider = /** @class */ (function () {
             else {
                 _this.db.list(_this.PATH)
                     .push({
-                    titulo: treino.titulo,
+                    NomeExercicio: treino.NomeExercicio,
                     descricao: treino.descricao,
                     repeticoes: treino.repeticoes,
                     equipamento: exercise.equipamento,
@@ -274,14 +274,14 @@ var ProfileProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 130:
+/***/ 131:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ExerciseListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_exercise_add_exercise__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_exercise_add_exercise__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_exercise_exercise__ = __webpack_require__(117);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__signin_signin__ = __webpack_require__(67);
@@ -329,6 +329,7 @@ var ExerciseListPage = /** @class */ (function () {
             _this.toast.create({ message: 'Erro ao remover o exercício.', duration: 3000 }).present();
         });
     };
+    // Criado para o admin fazer logout
     ExerciseListPage.prototype.signOut = function () {
         var _this = this;
         this.authService.signOut()
@@ -341,7 +342,7 @@ var ExerciseListPage = /** @class */ (function () {
     };
     ExerciseListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-exercise-list',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\exercise-list\exercise-list.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Lista de Exercícios</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-fab right bottom>\n        <button ion-fab color="primary" (click)="navigateAddExercisePage()">\n          <ion-icon name="add"></ion-icon>\n        </button>\n    </ion-fab>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let exercise of exercise | async">\n\n      <ion-item>\n          <h1>{{exercise.titulo}}</h1>\n          <h2>{{exercise.grupoMuscular}}</h2>\n          <p>{{exercise.descricao}}</p>\n          \n      </ion-item>\n\n      <ion-item-options side="left">\n        <button ion-button color="secondary" (click)="editExercise(exercise)">\n          <ion-icon name="create"></ion-icon>\n        </button>\n        <button ion-button color="danger" (click)="removeExercise(exercise.key)">\n          <ion-icon name="trash"></ion-icon>\n        </button>\n        \n      </ion-item-options>\n\n      \n    </ion-item-sliding>\n  </ion-list>\n  \n      <ion-fab bottom left>\n        <button ion-button round color="primary" (click)="signOut()"> logout   -\n          <ion-icon name="md-exit"></ion-icon>\n        </button>\n      </ion-fab>\n      \n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\exercise-list\exercise-list.html"*/,
+            selector: 'page-exercise-list',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\exercise-list\exercise-list.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Lista de Exercícios</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-fab right bottom>\n        <button ion-fab color="primary" (click)="navigateAddExercisePage()">\n          <ion-icon name="add"></ion-icon>\n        </button>\n    </ion-fab>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let exercise of exercise | async">\n\n      <ion-item>\n          <h1>{{exercise.NomeExercicio}}</h1>\n          <h2>Grupo Muscular: {{exercise.grupoMuscular}}</h2>\n          <h2>Equipamento: {{exercise.equipamento}}</h2>\n          <p>Descriçao: {{exercise.descricao}}</p>\n          \n      </ion-item>\n\n      <ion-item-options side="left">\n        <button ion-button color="secondary" (click)="editExercise(exercise)">\n          <ion-icon name="create"></ion-icon>\n        </button>\n        <button ion-button color="danger" (click)="removeExercise(exercise.key)">\n          <ion-icon name="trash"></ion-icon>\n        </button>\n        \n      </ion-item-options>\n\n      \n    </ion-item-sliding>\n  </ion-list>\n  \n      <ion-fab bottom left>\n        <button ion-button round color="primary" (click)="signOut()"> logout   -\n          <ion-icon name="md-exit"></ion-icon>\n        </button>\n      </ion-fab>\n      \n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\exercise-list\exercise-list.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__providers_exercise_exercise__["a" /* ExerciseProvider */],
@@ -355,7 +356,7 @@ var ExerciseListPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 158:
+/***/ 159:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -430,7 +431,7 @@ var ResetpasswordPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 159:
+/***/ 160:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -469,7 +470,7 @@ var AddExercisePage = /** @class */ (function () {
     AddExercisePage.prototype.createForm = function () {
         this.form = this.formBuilder.group({
             key: [this.exercise.key],
-            titulo: [this.exercise.titulo, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required],
+            NomeExercicio: [this.exercise.NomeExercicio, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required],
             descricao: [this.exercise.descricao, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required],
             equipamento: [this.exercise.equipamento, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required],
             grupoMuscular: [this.exercise.grupoMuscular, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]
@@ -492,7 +493,7 @@ var AddExercisePage = /** @class */ (function () {
     };
     AddExercisePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-add-exercise',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/'<!--\n  Generated template for the AddExercisePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <form [formGroup]="form">\n      <ion-item>\n          <ion-label stacked>Título</ion-label>\n          <ion-input type="text" formControlName="titulo"></ion-input>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.titulo.valid && (form.controls.titulo.dirty || form.controls.titulo.touched)" color="danger">\n          <div [hidden]="!form.controls.titulo.errors.required">\n            O campo é obrigatório\n          </div>\n        </ion-item>\n      \n        <ion-item>\n          <ion-label stacked>Descrição</ion-label>\n          <ion-input type="text" formControlName="descricao"></ion-input>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">\n            <div [hidden]="!form.controls.descricao.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n      \n        <ion-item>\n          <ion-label stacked>Equipamento</ion-label>\n          <ion-select formControlName="equipamento">\n            <ion-option value="Esteira">Esteira</ion-option>\n            <ion-option value="Leg Press 45°">Leg Press 45°</ion-option>\n            <ion-option value="Cross Over Angular">Cross Over Angular</ion-option>\n          </ion-select>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.equipamento.valid && (form.controls.equipamento.dirty || form.controls.equipamento.touched)" color="danger">\n            <div [hidden]="!form.controls.equipamento.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n      \n        <ion-item>\n          <ion-label stacked>Grupo Muscular</ion-label>\n          <ion-select formControlName="grupoMuscular">\n            <ion-option value="1">Abdominal</ion-option>\n            <ion-option value="2">Dorsal</ion-option>\n          </ion-select>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.grupoMuscular.valid && (form.controls.grupoMuscular.dirty || form.controls.grupoMuscular.touched)" color="danger">\n            <div [hidden]="!form.controls.grupoMuscular.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n      \n        <!-- <ion-item>\n          <ion-label stacked>Imagem</ion-label>\n          <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>\n        </ion-item> -->\n      \n        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Exercício</button>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/,
+            selector: 'page-add-exercise',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/'<!--\n  Generated template for the AddExercisePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <form [formGroup]="form">\n\n    <ion-item>\n      <ion-label stacked>Nome do exercício</ion-label>\n      <ion-input type="text" formControlName="NomeExercicio"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.NomeExercicio.valid && (form.controls.NomeExercicio.dirty || form.controls.NomeExercicio.touched)" color="danger">\n      <div [hidden]="!form.controls.NomeExercicio.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n      \n        <ion-item>\n          <ion-label stacked>Descrição</ion-label>\n          <ion-input type="text" formControlName="descricao"></ion-input>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">\n            <div [hidden]="!form.controls.descricao.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n      \n        <ion-item>\n          <ion-label stacked>Equipamento</ion-label>\n          <ion-select formControlName="equipamento">\n            <ion-option value="Esteira">Esteira</ion-option>\n            <ion-option value="Bicicleta">Bicicleta</ion-option>\n            <ion-option value="Barra fixa">Barra fixa</ion-option>\n            <ion-option value="Barra">Barra fixa</ion-option>\n            <ion-option value="Barra V">Barra V</ion-option>\n            <ion-option value="Banco inclinado">Banco inclinado</ion-option>\n            <ion-option value="Banco declinado">Banco declinado</ion-option>\n            <ion-option value="Banco">Banco</ion-option>\n            <ion-option value="Cross over">Cross over</ion-option>\n            <ion-option value="Mesa flexora">Mesa flexora</ion-option>\n            <ion-option value="Leg Press 45*">Leg Press 45*</ion-option>\n            <ion-option value="Halteres">Halteres</ion-option>\n            <ion-option value="Corda">Corda</ion-option>\n          </ion-select>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.equipamento.valid && (form.controls.equipamento.dirty || form.controls.equipamento.touched)" color="danger">\n            <div [hidden]="!form.controls.equipamento.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n      \n        <ion-item>\n          <ion-label stacked>Grupo Muscular</ion-label>\n          <ion-select formControlName="grupoMuscular">\n            <ion-option value="Abdominal">Abdominal</ion-option>\n            <ion-option value="Trapézio">Trapézio</ion-option>\n            <ion-option value="Dorsal">Dorsal</ion-option>\n            <ion-option value="Ombro posterior">Ombro posterior</ion-option>           \n            <ion-option value="Ombro frontal">Ombro frontal</ion-option>\n            <ion-option value="Ombro Lateral">Ombro Lateral</ion-option>\n            <ion-option value="Peito superior">Peito superior</ion-option>\n            <ion-option value="Peito">Peito</ion-option>\n            <ion-option value="Biceps">Biceps</ion-option>\n            <ion-option value="Triceps Lateral">Triceps Lateral</ion-option>\n            <ion-option value="Triceps branquial">Triceps branquial</ion-option>\n            <ion-option value="Antebraço">Antebraço</ion-option>\n            <ion-option value="Glúteo">Glúteo</ion-option>\n            <ion-option value="Quadrícepes">Quadrícepes</ion-option>\n\n          </ion-select>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.grupoMuscular.valid && (form.controls.grupoMuscular.dirty || form.controls.grupoMuscular.touched)" color="danger">\n            <div [hidden]="!form.controls.grupoMuscular.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n      \n        <!-- <ion-item>\n          <ion-label stacked>Imagem</ion-label>\n          <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>\n        </ion-item> -->\n      \n        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Exercício</button>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__["a" /* ExerciseProvider */],
@@ -505,7 +506,7 @@ var AddExercisePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 160:
+/***/ 161:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -544,7 +545,7 @@ var AddTreinoPage = /** @class */ (function () {
     AddTreinoPage.prototype.createForm = function () {
         this.form = this.formBuilder.group({
             key: [this.treino.key],
-            titulo: [this.treino.titulo],
+            NomeExercicio: [this.treino.NomeExercicio],
             descricao: [this.treino.descricao],
             repeticoes: [this.treino.repeticoes],
         });
@@ -565,7 +566,7 @@ var AddTreinoPage = /** @class */ (function () {
     };
     AddTreinoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-add-treino',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-treino\add-treino.html"*/'\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n \n  <form [formGroup]="form">\n\n      <ion-item>\n          <ion-label stacked>Título</ion-label>\n          <ion-input type="text" formControlName="titulo"></ion-input>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.titulo.valid && (form.controls.titulo.dirty || form.controls.titulo.touched)" color="danger">\n          <div [hidden]="!form.controls.titulo.errors.required">\n            O campo é obrigatório\n          </div>\n        </ion-item>\n\n        <ion-item>\n            <ion-label stacked>descricao</ion-label>\n            <ion-input type="text" formControlName="descricao"></ion-input>\n          </ion-item>\n          <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">\n              <div [hidden]="!form.controls.descricao.errors.required">\n                O campo é obrigatório\n              </div>\n            </ion-item>\n\n            <ion-item>\n                <ion-label stacked>Repeticão</ion-label>\n                <ion-input type="text" formControlName="repeticoes"></ion-input>\n              </ion-item>\n              <ion-item *ngIf="!form.controls.repeticoes.valid && (form.controls.repeticoes.dirty || form.controls.repeticoes.touched)" color="danger">\n                  <div [hidden]="!form.controls.repeticoes.errors.required">\n                    O campo é obrigatório\n                  </div>\n                </ion-item>\n\n      \n          \n            \n                          \n        <!-- <ion-item>\n          <ion-label stacked>Imagem</ion-label>\n          <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>\n        </ion-item> -->\n      \n        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Atualizar Treino</button>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-treino\add-treino.html"*/,
+            selector: 'page-add-treino',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-treino\add-treino.html"*/'\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n \n  <form [formGroup]="form">\n\n      <ion-item>\n          <ion-label stacked>Título</ion-label>\n          <ion-input type="text" formControlName="NomeExercicio"></ion-input>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.NomeExercicio.valid && (form.controls.NomeExercicio.dirty || form.controls.NomeExercicio.touched)" color="danger">\n          <div [hidden]="!form.controls.NomeExercicio.errors.required">\n            O campo é obrigatório\n          </div>\n        </ion-item>\n\n        <ion-item>\n            <ion-label stacked>descricao</ion-label>\n            <ion-input type="text" formControlName="descricao"></ion-input>\n          </ion-item>\n          <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">\n              <div [hidden]="!form.controls.descricao.errors.required">\n                O campo é obrigatório\n              </div>\n            </ion-item>\n\n            <ion-item>\n                <ion-label stacked>Repeticão</ion-label>\n                <ion-input type="text" formControlName="repeticoes"></ion-input>\n              </ion-item>\n              <ion-item *ngIf="!form.controls.repeticoes.valid && (form.controls.repeticoes.dirty || form.controls.repeticoes.touched)" color="danger">\n                  <div [hidden]="!form.controls.repeticoes.errors.required">\n                    O campo é obrigatório\n                  </div>\n                </ion-item>\n\n      \n          \n            \n                          \n        <!-- <ion-item>\n          <ion-label stacked>Imagem</ion-label>\n          <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>\n        </ion-item> -->\n      \n        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Atualizar Treino</button>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-treino\add-treino.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__providers_treino_treino__["a" /* TreinoProvider */],
@@ -578,7 +579,7 @@ var AddTreinoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 161:
+/***/ 162:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -657,14 +658,14 @@ var EditProfilePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 162:
+/***/ 163:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfileListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_profile_profile__ = __webpack_require__(128);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -719,7 +720,7 @@ var ProfileListPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 163:
+/***/ 164:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -734,7 +735,7 @@ var User = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 164:
+/***/ 165:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -742,7 +743,7 @@ var User = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_user__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_user__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(68);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -814,7 +815,7 @@ var SignupPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 176:
+/***/ 177:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -827,11 +828,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 176;
+webpackEmptyAsyncContext.id = 177;
 
 /***/ }),
 
-/***/ 218:
+/***/ 219:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -879,7 +880,7 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 218;
+webpackAsyncContext.id = 219;
 module.exports = webpackAsyncContext;
 
 /***/ }),
@@ -893,7 +894,7 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_treino_treino__ = __webpack_require__(127);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_treino_add_treino__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_treino_add_treino__ = __webpack_require__(161);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -939,7 +940,7 @@ var ListTreinoPage = /** @class */ (function () {
     };
     ListTreinoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-list-treino',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-treino\list-treino.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Lista de Treinos</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-fab right bottom>\n        <button ion-fab color="primary" (click)="navigateAddTreinoPage()">\n          <ion-icon name="add"></ion-icon>\n        </button>\n    </ion-fab>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let treino of treino | async">\n\n      <ion-item>\n        <h2><p>titulo: </p>{{treino.titulo}} </h2>\n        <h2><p>descricao: </p>{{treino.descricao}} </h2>\n        <h3><p>repeticoes: </p>{{treino.repeticoes}}</h3>\n       \n     \n      </ion-item>\n\n      <ion-item-options side="left">\n        <button ion-button color="secondary" (click)="editTreino(treino)">\n          <ion-icon name="create"></ion-icon>\n        </button>\n        <button ion-button color="danger" (click)="removeTreino(treino.key)">\n          <ion-icon name="trash"></ion-icon>\n        </button>\n        \n      </ion-item-options>\n\n      \n    </ion-item-sliding>\n  </ion-list>\n  \n  \n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-treino\list-treino.html"*/,
+            selector: 'page-list-treino',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-treino\list-treino.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Lista de Treinos</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-fab right bottom>\n        <button ion-fab color="primary" (click)="navigateAddTreinoPage()">\n          <ion-icon name="add"></ion-icon>\n        </button>\n    </ion-fab>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let treino of treino | async">\n\n      <ion-item>\n        <h2><p>NomeExercicio: </p>{{treino.NomeExercicio}} </h2>\n        <h2><p>descricao: </p>{{treino.descricao}} </h2>\n        <h3><p>repeticoes: </p>{{treino.repeticoes}}</h3>\n       \n     \n      </ion-item>\n\n      <ion-item-options side="left">\n        <button ion-button color="secondary" (click)="editTreino(treino)">\n          <ion-icon name="create"></ion-icon>\n        </button>\n        <button ion-button color="danger" (click)="removeTreino(treino.key)">\n          <ion-icon name="trash"></ion-icon>\n        </button>\n        \n      </ion-item-options>\n\n      \n    </ion-item-sliding>\n  </ion-list>\n  \n  \n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-treino\list-treino.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__providers_treino_treino__["a" /* TreinoProvider */],
@@ -983,22 +984,22 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(514);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_home_home__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_signin_signin__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_signup_signup__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_resetpassword_resetpassword__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_add_exercise_add_exercise__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_exercise_list_exercise_list__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_edit_profile_edit_profile__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_profile_list_profile_list__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_signup_signup__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_resetpassword_resetpassword__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_add_exercise_add_exercise__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_exercise_list_exercise_list__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_edit_profile_edit_profile__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_profile_list_profile_list__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_auth_auth_service__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_auth_servicenpm_auth_servicenpm__ = __webpack_require__(515);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_exercise_exercise__ = __webpack_require__(117);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_facebook__ = __webpack_require__(275);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_google_plus__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_facebook__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_google_plus__ = __webpack_require__(274);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_angularfire2_database__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_profile_profile__ = __webpack_require__(128);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_treino_treino__ = __webpack_require__(127);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_list_treino_list_treino__ = __webpack_require__(276);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_add_treino_add_treino__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_add_treino_add_treino__ = __webpack_require__(161);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1117,10 +1118,10 @@ var AppModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthServiceProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase_app__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase_app__ = __webpack_require__(273);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase_app__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_google_plus__ = __webpack_require__(273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_facebook__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_google_plus__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_facebook__ = __webpack_require__(130);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1342,14 +1343,15 @@ var AuthServicenpmProvider = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_user__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_user__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__signup_signup__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__resetpassword_resetpassword__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__exercise_list_exercise_list__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__signup_signup__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__resetpassword_resetpassword__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__exercise_list_exercise_list__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(468);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_facebook__ = __webpack_require__(130);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1369,22 +1371,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SigninPage = /** @class */ (function () {
-    function SigninPage(navCtrl, toastCtrl, authService) {
+    function SigninPage(navCtrl, toastCtrl, authService, facebook) {
         this.navCtrl = navCtrl;
         this.toastCtrl = toastCtrl;
         this.authService = authService;
+        this.facebook = facebook;
+        this.userProfile = null;
         this.user = new __WEBPACK_IMPORTED_MODULE_3__providers_auth_user__["a" /* User */]();
     }
     SigninPage.prototype.signInWithFacebook = function () {
-        var provider = new __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.auth.FacebookAuthProvider();
-        __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.auth().signInWithRedirect(provider).then(function () {
-            __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.auth().getRedirectResult().then(function (result) {
-                alert(JSON.stringify(result));
-            }).catch(function (error) {
-                alert(JSON.stringify(error));
+        var _this = this;
+        this.facebook.login(['email']).then(function (response) {
+            var facebookCredential = __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.auth.FacebookAuthProvider
+                .credential(response.authResponse.accessToken);
+            __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.auth().signInWithCredential(facebookCredential)
+                .then(function (success) {
+                console.log("Firebase success: " + JSON.stringify(success));
+                _this.userProfile = success;
+            })
+                .catch(function (error) {
+                console.log("Firebase failure: " + JSON.stringify(error));
             });
-        });
+        }).catch(function (error) { console.log(error); });
     };
     SigninPage.prototype.signInWithGoogle = function () {
         var _this = this;
@@ -1473,7 +1483,8 @@ var SigninPage = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__["a" /* AuthServiceProvider */]])
+            __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__["a" /* AuthServiceProvider */],
+            __WEBPACK_IMPORTED_MODULE_10__ionic_native_facebook__["a" /* Facebook */]])
     ], SigninPage);
     return SigninPage;
 }());
@@ -1491,8 +1502,8 @@ var SigninPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__signin_signin__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__exercise_list_exercise_list__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__profile_list_profile_list__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__exercise_list_exercise_list__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__profile_list_profile_list__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__list_treino_list_treino__ = __webpack_require__(276);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
