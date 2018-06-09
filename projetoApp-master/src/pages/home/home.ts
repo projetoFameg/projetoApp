@@ -27,9 +27,6 @@ export class HomePage {
     })
   }
 
-  ExerciciosRedirect() {
-      this.navCtrl.push(ExerciseListPage);
-  }
 
   ProfileRedirect() {
     this.navCtrl.push(ProfileListPage);

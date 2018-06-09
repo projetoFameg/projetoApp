@@ -1502,9 +1502,8 @@ var SigninPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__signin_signin__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__exercise_list_exercise_list__ = __webpack_require__(131);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__profile_list_profile_list__ = __webpack_require__(163);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__list_treino_list_treino__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__profile_list_profile_list__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__list_treino_list_treino__ = __webpack_require__(276);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1514,7 +1513,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -1536,22 +1534,20 @@ var HomePage = /** @class */ (function () {
             console.error(error);
         });
     };
-    HomePage.prototype.ExerciciosRedirect = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__exercise_list_exercise_list__["a" /* ExerciseListPage */]);
-    };
     HomePage.prototype.ProfileRedirect = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__profile_list_profile_list__["a" /* ProfileListPage */]);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__profile_list_profile_list__["a" /* ProfileListPage */]);
     };
     HomePage.prototype.TreinoRedirect = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__list_treino_list_treino__["a" /* ListTreinoPage */]);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__list_treino_list_treino__["a" /* ListTreinoPage */]);
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Workout!\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  \n\n    <ion-menu [content]="content">\n        <ion-content>\n          <ion-list>\n          <button ion-button  color="primary" (click)="ProfileRedirect()"> \n                Perfil\n            </button>\n          </ion-list>\n          \n            <ion-list>\n            <button ion-button  color="primary" (click)="TreinoRedirect()"> \n                Montar Treino\n              </button>\n            </ion-list>\n        \n          <ion-list>\n              <button ion-button  color="primary" (click)="ExerciciosRedirect()"> \n                      Adicionar Exercicios\n              </button>\n          </ion-list>\n          </ion-content>\n     \n        </ion-menu>      \n      <ion-nav #content [root]="HomePage"></ion-nav>\n\n\n   <ion-buttons start>\n   <button ion-button icon-only menuToggle>   \n    <ion-icon name="menu"></ion-icon>       Menu Principal \n  </button>\n  </ion-buttons>\n\n  <ion-fab bottom left>\n  <button ion-button round color="primary" (click)="signOut()"> logout   -\n    <ion-icon name="md-exit"></ion-icon>\n  </button>\n</ion-fab>\n\n\n  \n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Workout!\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="bg">\n  \n\n    <ion-menu [content]="content">\n        <ion-content>\n          <ion-list>\n          <button ion-button  color="primary" (click)="ProfileRedirect()"> \n                Perfil\n            </button>\n          </ion-list>\n          \n            <ion-list>\n            <button ion-button  color="primary" (click)="TreinoRedirect()"> \n                Montar Treino\n              </button>\n            </ion-list>\n          </ion-content>\n     \n        </ion-menu>      \n      <ion-nav #content [root]="HomePage"></ion-nav>\n\n\n   <ion-buttons start>\n   <button ion-button icon-only menuToggle>   \n    <ion-icon name="menu"></ion-icon>       Menu Principal \n  </button>\n  </ion-buttons>\n\n  <ion-fab bottom left>\n  <button ion-button round color="primary" (click)="signOut()"> logout   -\n    <ion-icon name="md-exit"></ion-icon>\n  </button>\n</ion-fab>\n\n\n  \n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__["a" /* AuthServiceProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__["a" /* AuthServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__["a" /* AuthServiceProvider */]) === "function" && _b || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=home.js.map
