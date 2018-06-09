@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth/auth-service';
+
 import { SigninPage } from '../signin/signin';
 import { ExerciseListPage } from '../exercise-list/exercise-list';
 import { AddExercisePage } from '../add-exercise/add-exercise';
 import { ProfileListPage } from '../profile-list/profile-list';
 import { ListTreinoPage } from '../list-treino/list-treino';
 import { AddTreinoPage } from '../add-treino/add-treino';
+import { ContatoPage} from '../contato/contato';
 
 @Component({
   selector: 'page-home',
@@ -34,6 +36,10 @@ export class HomePage {
 
 TreinoRedirect() {
   this.navCtrl.push(ListTreinoPage);
+}
+
+ContatoRedirect() {
+  this.navCtrl.push(ContatoPage);
 }
 
 }

@@ -27972,7 +27972,38 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+page-contato .bg-menu {
+  background-color: #F5FFFA;
+  font-size: 14px;
+}
+
+page-contato hr {
+  border: 2px solid red !important;
+  height: 10px !important;
+  width: 500px !important;
+  background: blue !important;
+  display: block !important;
+  font-size: 2em !important;
+  visibility: visible !important;
+}
+
+page-contato p {
+  font-size: 14px;
+}
+
 page-home .bg {
   background-image: url("../../assets/imgs/background.jpg");
   background-size: cover;
+}
+
+page-home .bg-menu {
+  background-color: #F5FFFA;
+  border-style: inset;
+  border-width: medium;
+}
+
+page-home .bg-logout {
+  width: 250px;
+  border-radius: 4px;
+  float: right;
 }

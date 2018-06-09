@@ -10,35 +10,42 @@
   
 
     <ion-menu [content]="content">
-        <ion-content>
-          <ion-list>
-          <button ion-button  color="primary" (click)="ProfileRedirect()"> 
+        <ion-content class="bg-menu">
+          <ion-list >
+          <button ion-button  full color="primary" (click)="ProfileRedirect()"> 
                 Perfil
             </button>
           </ion-list>
           
             <ion-list>
-            <button ion-button  color="primary" (click)="TreinoRedirect()"> 
-                Montar Treino
+            <button ion-button full  color="primary" (click)="TreinoRedirect()"> 
+                Treino
               </button>
             </ion-list>
-          </ion-content>
-     
+
+          <ion-list>
+              <button ion-button full  color="primary" (click)="ContatoRedirect()"> 
+                  Contato
+                </button>
+              </ion-list>
+            </ion-content>
+
         </ion-menu>      
       <ion-nav #content [root]="HomePage"></ion-nav>
 
 
-   <ion-buttons start>
+      <button ion-button class="bg-logout" around  color="primary" (click)="signOut()">
+          <ion-icon name="md-exit"></ion-icon>
+            Logout
+        </button>
+
+   <ion-buttons  start>
    <button ion-button icon-only menuToggle>   
     <ion-icon name="menu"></ion-icon>       Menu Principal 
   </button>
   </ion-buttons>
 
-  <ion-fab bottom left>
-  <button ion-button round color="primary" (click)="signOut()"> logout   -
-    <ion-icon name="md-exit"></ion-icon>
-  </button>
-</ion-fab>
+ 
 
 
   

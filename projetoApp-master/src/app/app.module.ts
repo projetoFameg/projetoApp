@@ -30,6 +30,8 @@ import { ProfileProvider } from '../providers/profile/profile';
 import { TreinoProvider } from '../providers/treino/treino';
 import { ListTreinoPage } from '../pages/list-treino/list-treino';
 import { AddTreinoPage } from '../pages/add-treino/add-treino';
+import { ContatoPage} from '../pages/contato/contato';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAJSb_bRCzXH5VwTkDI5Toz2Z2Hv3TB1q0",
@@ -53,7 +55,8 @@ const firebaseConfig = {
     EditProfilePage,
     ProfileListPage,
     ListTreinoPage,
-    AddTreinoPage
+    AddTreinoPage,
+    ContatoPage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,7 @@ const firebaseConfig = {
     ProfileListPage,
     ListTreinoPage,
     AddTreinoPage,
-    
+    ContatoPage
   ],
   providers: [
     StatusBar,

@@ -6,7 +6,23 @@ page-home {
 
     .bg {
         background-image: url('../../assets/imgs/background.jpg');
-        background-size: cover;
+        background-size: cover;  //img preenche tela
+        
+        
     }
-    
+
+    .bg-menu {
+        background-color: #F5FFFA;
+        border-style: inset;
+        border-width: medium;
+      
+    }
+
+    .bg-logout {
+     width: 250px;
+     border-radius: 4px;
+     float:right
+}
+
+
 }
