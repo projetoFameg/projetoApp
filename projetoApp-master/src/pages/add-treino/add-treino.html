@@ -11,25 +11,27 @@
  
   <form [formGroup]="form">
 
-      <ion-item>
-          <ion-label stacked>Título</ion-label>
-          <ion-input type="text" formControlName="NomeExercicio"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="!form.controls.NomeExercicio.valid && (form.controls.NomeExercicio.dirty || form.controls.NomeExercicio.touched)" color="danger">
-          <div [hidden]="!form.controls.NomeExercicio.errors.required">
-            O campo é obrigatório
-          </div>
-        </ion-item>
 
-        <ion-item>
-            <ion-label stacked>descricao</ion-label>
-            <ion-input type="text" formControlName="descricao"></ion-input>
+
+      <ion-item>
+          <ion-label stacked>Dia semana</ion-label>
+          <ion-select formControlName="diaSemana">
+              <ion-option value="Segunda Feira">Segunda Feira</ion-option>
+            <ion-option value="Terça Feira">Terça Feira</ion-option>
+            <ion-option value="Quarta Feira">Quarta Feira</ion-option>
+            <ion-option value="Quinta Feira">Quinta Feira</ion-option>
+            <ion-option value="Sexta Feira">Sexta Feira</ion-option>
+            <ion-option value="Sábado">Sábado</ion-option>
+            <ion-option value="Domingo">Domingo</ion-option>
+  
+          </ion-select>
+        </ion-item>
+            <ion-item *ngIf="!form.controls.diaSemana.valid && (form.controls.diaSemana.dirty || form.controls.diaSemana.touched)" color="danger">
+            <div [hidden]="!form.controls.diaSemana.errors.required">
+              O campo é obrigatório
+            </div>
           </ion-item>
-          <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">
-              <div [hidden]="!form.controls.descricao.errors.required">
-                O campo é obrigatório
-              </div>
-            </ion-item>
+
 
             <ion-item>
                 <ion-label stacked>Repeticão</ion-label>
@@ -42,7 +44,75 @@
                 </ion-item>
 
       
-          
+                <ion-item>
+                    <ion-label stacked>Nome do exercício</ion-label>
+                    <ion-input type="text" formControlName="NomeExercicio"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!form.controls.NomeExercicio.valid && (form.controls.NomeExercicio.dirty || form.controls.NomeExercicio.touched)" color="danger">
+                    <div [hidden]="!form.controls.NomeExercicio.errors.required">
+                      O campo é obrigatório
+                    </div>
+                  </ion-item>
+                    
+                      <ion-item>
+                        <ion-label stacked>Descrição</ion-label>
+                        <ion-input type="text" formControlName="descricao"></ion-input>
+                      </ion-item>
+                      <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">
+                          <div [hidden]="!form.controls.descricao.errors.required">
+                            O campo é obrigatório
+                          </div>
+                        </ion-item>
+                    
+                      <ion-item>
+                        <ion-label stacked>Equipamento</ion-label>
+                        <ion-select formControlName="equipamento">
+                          <ion-option value="Esteira">Esteira</ion-option>
+                          <ion-option value="Bicicleta">Bicicleta</ion-option>
+                          <ion-option value="Barra fixa">Barra fixa</ion-option>
+                          <ion-option value="Barra">Barra fixa</ion-option>
+                          <ion-option value="Barra V">Barra V</ion-option>
+                          <ion-option value="Banco inclinado">Banco inclinado</ion-option>
+                          <ion-option value="Banco declinado">Banco declinado</ion-option>
+                          <ion-option value="Banco">Banco</ion-option>
+                          <ion-option value="Cross over">Cross over</ion-option>
+                          <ion-option value="Mesa flexora">Mesa flexora</ion-option>
+                          <ion-option value="Leg Press 45*">Leg Press 45*</ion-option>
+                          <ion-option value="Halteres">Halteres</ion-option>
+                          <ion-option value="Corda">Corda</ion-option>
+                        </ion-select>
+                      </ion-item>
+                      <ion-item *ngIf="!form.controls.equipamento.valid && (form.controls.equipamento.dirty || form.controls.equipamento.touched)" color="danger">
+                          <div [hidden]="!form.controls.equipamento.errors.required">
+                            O campo é obrigatório
+                          </div>
+                        </ion-item>
+                    
+                      <ion-item>
+                        <ion-label stacked>Grupo Muscular</ion-label>
+                        <ion-select formControlName="grupoMuscular">
+                          <ion-option value="Abdominal">Abdominal</ion-option>
+                          <ion-option value="Trapézio">Trapézio</ion-option>
+                          <ion-option value="Dorsal">Dorsal</ion-option>
+                          <ion-option value="Ombro posterior">Ombro posterior</ion-option>           
+                          <ion-option value="Ombro frontal">Ombro frontal</ion-option>
+                          <ion-option value="Ombro Lateral">Ombro Lateral</ion-option>
+                          <ion-option value="Peito superior">Peito superior</ion-option>
+                          <ion-option value="Peito">Peito</ion-option>
+                          <ion-option value="Biceps">Biceps</ion-option>
+                          <ion-option value="Triceps Lateral">Triceps Lateral</ion-option>
+                          <ion-option value="Triceps branquial">Triceps branquial</ion-option>
+                          <ion-option value="Antebraço">Antebraço</ion-option>
+                          <ion-option value="Glúteo">Glúteo</ion-option>
+                          <ion-option value="Quadrícepes">Quadrícepes</ion-option>
+              
+                        </ion-select>
+                      </ion-item>
+                      <ion-item *ngIf="!form.controls.grupoMuscular.valid && (form.controls.grupoMuscular.dirty || form.controls.grupoMuscular.touched)" color="danger">
+                          <div [hidden]="!form.controls.grupoMuscular.errors.required">
+                            O campo é obrigatório
+                          </div>
+                        </ion-item>
             
                           
         <!-- <ion-item>

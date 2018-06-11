@@ -27994,6 +27994,7 @@ page-contato p {
 page-home .bg {
   background-image: url("../../assets/imgs/background.jpg");
   background-size: cover;
+  border-width: medium;
 }
 
 page-home .bg-menu {
@@ -28006,4 +28007,23 @@ page-home .bg-logout {
   width: 250px;
   border-radius: 4px;
   float: right;
+}
+
+page-list-treino .bg-menu {
+  background-color: #F5FFFA;
+  border-style: inset;
+  border-width: medium;
+}
+
+page-list-treino .bg-logout {
+  width: 250px;
+  border-radius: 4px;
+  float: right;
+}
+
+page-list-treino p {
+  width: 115px;
+  font-size: 13px;
+  border-radius: 4px;
+  float: left;
 }

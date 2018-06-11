@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding  class="bg">
 
     <ion-fab right bottom>
         <button ion-fab color="primary" (click)="navigateAddTreinoPage()">
@@ -15,14 +15,16 @@
         </button>
     </ion-fab>
 
-  <ion-list>
+  <ion-list >
     <ion-item-sliding *ngFor="let treino of treino | async">
 
       <ion-item>
-        <h2><p>NomeExercicio: </p>{{treino.NomeExercicio}} </h2>
-        <h2><p>descricao: </p>{{treino.descricao}} </h2>
-        <h3><p>repeticoes: </p>{{treino.repeticoes}}</h3>
-       
+          <h4><p>Dia da Semana: </p>{{treino.diaSemana}} </h4>
+          <h3><p>NomeExercicio: </p>{{treino.NomeExercicio}}</h3>
+          <h3><p>Descricao: </p>{{treino.descricao}}</h3>
+          <h3><p>equipamento: </p>{{treino.equipamento}}</h3>
+          <h3><p>grupoMuscular: </p>{{treino.grupoMuscular}}</h3>
+          <h3><p>Repeticoes: </p>{{treino.repeticoes}}</h3>
      
       </ion-item>
 
@@ -40,6 +42,10 @@
     </ion-item-sliding>
   </ion-list>
   
-  
+  <ion-footer>
+      <ion-toolbar> Copyright 2018
+        <ion-title></ion-title>
+      </ion-toolbar>
+    </ion-footer>
 
 </ion-content>

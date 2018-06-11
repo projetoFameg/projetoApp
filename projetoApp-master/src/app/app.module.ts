@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import {enableProdMode} from '@angular/core';
+import { AuthServicenpmProvider } from '../providers/auth-servicenpm/auth-servicenpm';
 
 
 import { MyApp } from './app.component';
@@ -20,7 +21,6 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ProfileListPage } from '../pages/profile-list/profile-list';
 
 import { AuthServiceProvider } from '../providers/auth/auth-service';
-import { AuthServicenpmProvider } from '../providers/auth-servicenpm/auth-servicenpm';
 import { ExerciseProvider } from '../providers/exercise/exercise';
 
 import { Facebook } from '@ionic-native/facebook';
@@ -86,7 +86,7 @@ const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthServiceProvider,
-    AuthServicenpmProvider,
+    AuthServicenpmProvider ,
     GooglePlus,
     ExerciseProvider,
     Facebook,
