@@ -63,37 +63,57 @@
     </ion-segment>
 
     <ion-list>
-      <ion-item-sliding *ngFor="let exercise of listExercise">
-        <ion-item>
-          <h2>{{exercise.nomeExercicio}}</h2>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                <p>Série</p>
-              </ion-col>
-              <ion-col col-6>
-                <p>Repetição</p>
-              </ion-col>
-              <ion-col>
-                <p>Carga</p>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <p>{{exercise.serie}}</p>
-              </ion-col>
-              <ion-col col-6>
-                <p>{{exercise.grupoMuscular}}</p>
-              </ion-col>
-              <ion-col col-6>
-                <p>{{exercise.repeticao}}</p>
-              </ion-col>
-              <ion-col>
-                <p>{{exercise.carga}}</p>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
+        <ion-item-sliding *ngFor="let exercise of listExercise">
+    
+       
+    
+          <ion-item-options side="left">
+            <button ion-button color="secondary" (click)="editExercise(exercise)">
+              <ion-icon name="create"></ion-icon>
+            </button>
+            <button ion-button color="danger" (click)="removeExercise(exercise.key)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+            
+          </ion-item-options>
+    
+          
+        </ion-item-sliding>
+      </ion-list>
+
+
+
+      <ion-list>
+          <ion-item-sliding *ngFor="let exercise of listExercise">
+            <ion-item>
+                <h2>Exercício: {{exercise.nomeExercicio}}</h2>
+                <h4>Musculo: {{exercise.grupoMuscular}}</h4>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                        <p>Série</p>
+                    </ion-col>
+                    <ion-col col-6>
+                        <p>Repetição</p>
+                    </ion-col>
+                    <ion-col>
+                        <p>Carga</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                     <ion-col>
+                        <p>{{exercise.serie}}</p>
+                     </ion-col>
+                     <ion-col col-6>
+                        <p>{{exercise.repeticao}}</p>
+                     </ion-col>
+                     <ion-col>
+                        <p>{{exercise.carga}}</p>
+                     </ion-col>
+                    </ion-row>
+                  </ion-grid>
+            </ion-item>
+
 
         <ion-item-options side="left">
           <button ion-button color="secondary" (click)="editExercise(exercise.keyExercise)">
