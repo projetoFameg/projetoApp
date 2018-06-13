@@ -7,6 +7,7 @@ webpackJsonp([9],{
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkoutProgramProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(51);
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -26,20 +27,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var WorkoutProgramProvider = /** @class */ (function () {
-    function WorkoutProgramProvider(db) {
+    function WorkoutProgramProvider(db, auth) {
         this.db = db;
+        this.auth = auth;
         this.PATH = 'workoutProgram/';
     }
     WorkoutProgramProvider.prototype.getAll = function () {
-        return this.db.list(this.PATH)
+        return this.db.list(this.PATH + this.auth.auth.currentUser.uid)
             .snapshotChanges()
             .map(function (changes) {
             return changes.map(function (c) { return (__assign({ key: c.payload.key }, c.payload.val())); });
         });
     };
     WorkoutProgramProvider.prototype.get = function (key) {
-        return this.db.object(this.PATH + key)
+        return this.db.object(this.PATH + this.auth.auth.currentUser.uid)
             .snapshotChanges()
             .map(function (c) {
             return __assign({ key: c.key }, c.payload.val());
@@ -49,7 +52,7 @@ var WorkoutProgramProvider = /** @class */ (function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
             if (workoutProgram.key) {
-                _this.db.list(_this.PATH)
+                _this.db.list(_this.PATH + _this.auth.auth.currentUser.uid)
                     .update(workoutProgram.key, {
                     titulo: workoutProgram.titulo,
                     objetivo: workoutProgram.objetivo,
@@ -59,7 +62,7 @@ var WorkoutProgramProvider = /** @class */ (function () {
                     .catch(function (e) { return reject(e); });
             }
             else {
-                _this.db.list(_this.PATH)
+                _this.db.list(_this.PATH + _this.auth.auth.currentUser.uid)
                     .push({
                     titulo: workoutProgram.titulo,
                     objetivo: workoutProgram.objetivo,
@@ -71,11 +74,11 @@ var WorkoutProgramProvider = /** @class */ (function () {
     };
     WorkoutProgramProvider.prototype.remove = function (key) {
         this.db.list('WorkoutProgramExercise/').remove(key);
-        return this.db.list(this.PATH).remove(key);
+        return this.db.list(this.PATH + this.auth.auth.currentUser.uid).remove(key);
     };
     WorkoutProgramProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */]])
     ], WorkoutProgramProvider);
     return WorkoutProgramProvider;
 }());
@@ -177,7 +180,7 @@ var WorkoutProgramExerciseProvider = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfileProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(51);
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -352,7 +355,7 @@ var ResetpasswordPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddExercisePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -709,14 +712,14 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 272:
+/***/ 274:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddWorkoutexercisePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_workout_program_exercise_workout_program_exercise__ = __webpack_require__(130);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_workout_program_add_workout_program__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(14);
@@ -864,7 +867,7 @@ var ProfileListPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_exercise_add_exercise__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_exercise_exercise__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_exercise_exercise__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__signin_signin__ = __webpack_require__(70);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -963,7 +966,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(329);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(330);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_auth_servicenpm_auth_servicenpm__ = __webpack_require__(517);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(521);
@@ -976,12 +979,12 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_edit_profile_edit_profile__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_profile_list_profile_list__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_auth_auth_service__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_exercise_exercise__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_exercise_exercise__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__providers_workout_program_workout_program__ = __webpack_require__(129);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_workout_program_exercise_workout_program_exercise__ = __webpack_require__(130);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_add_workout_program_add_workout_program__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_list_workout_program_list_workout_program__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_add_workout_exercise_add_workout_exercise__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_add_workout_exercise_add_workout_exercise__ = __webpack_require__(274);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_facebook__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_google_plus__ = __webpack_require__(276);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_angularfire2_database__ = __webpack_require__(48);
@@ -1116,7 +1119,7 @@ var AppModule = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthServiceProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase_app__ = __webpack_require__(275);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase_app__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_google_plus__ = __webpack_require__(276);
@@ -1279,7 +1282,7 @@ var AuthServicenpmProvider = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(330);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(329);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_signin_signin__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_list_workout_program_list_workout_program__ = __webpack_require__(93);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1347,7 +1350,7 @@ var MyApp = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreinoProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(51);
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -1432,7 +1435,7 @@ var TreinoProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 62:
+/***/ 63:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1743,9 +1746,9 @@ var HomePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_workout_program_workout_program__ = __webpack_require__(129);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_workout_exercise_add_workout_exercise__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_workout_exercise_add_workout_exercise__ = __webpack_require__(274);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_workout_program_exercise_workout_program_exercise__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_exercise_exercise__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_exercise_exercise__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1852,7 +1855,7 @@ var AddWorkoutProgramPage = /** @class */ (function () {
     };
     AddWorkoutProgramPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-add-workout-program',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-program\add-workout-program.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="bg">\n\n  <form [formGroup]="form">\n\n    <ion-item>\n      <ion-label stacked>Treinos Da Semana:</ion-label>\n      <ion-select formControlName="titulo">\n        <ion-option value="Segunda Feira">Segunda Feira</ion-option>\n        <ion-option value="Terça Feira">Terça Feira</ion-option>\n        <ion-option value="Quarta Feira">Quarta Feira</ion-option>\n        <ion-option value="Quinta Feira">Quinta Feira</ion-option>\n        <ion-option value="Sexta Feira">Sexta Feira</ion-option>\n        <ion-option value="Sábado">Sábado</ion-option>\n        <ion-option value="Domingo">Domingo</ion-option>\n      </ion-select>\n    </ion-item>\n\n\n    <ion-item>\n        <ion-label stacked>Objetivo:</ion-label>\n        <ion-select formControlName="objetivo">\n          <ion-option value="Emagrecimento">Emagrecimento</ion-option>\n          <ion-option value="Resistência Muscular">Resistência Muscular</ion-option>\n          <ion-option value="Hipertrofia Muscular">Hipertrofia Muscular</ion-option>\n          <ion-option value="Ganho de força">Ganho de força</ion-option>\n        </ion-select>\n      </ion-item>\n\n      \n    <ion-item>\n      <ion-label stacked>Grupo Muscular</ion-label>\n      <ion-select formControlName="grupoMuscular">\n        <ion-option value="Abdominal">Abdominal</ion-option>\n        <ion-option value="Trapézio">Trapézio</ion-option>\n        <ion-option value="Dorsal">Dorsal</ion-option>\n        <ion-option value="Ombro posterior">Ombro posterior</ion-option>\n        <ion-option value="Ombro frontal">Ombro frontal</ion-option>\n        <ion-option value="Ombro Lateral">Ombro Lateral</ion-option>\n        <ion-option value="Peito superior">Peito superior</ion-option>\n        <ion-option value="Peito">Peito</ion-option>\n        <ion-option value="Biceps">Biceps</ion-option>\n        <ion-option value="Triceps Lateral">Triceps Lateral</ion-option>\n        <ion-option value="Triceps branquial">Triceps branquial</ion-option>\n        <ion-option value="Antebraço">Antebraço</ion-option>\n        <ion-option value="Glúteo">Glúteo</ion-option>\n        <ion-option value="Quadrícepes">Quadrícepes</ion-option>\n      </ion-select>\n    </ion-item>\n\n    <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Salvar Treino</button>\n\n    <ion-segment color="dark">\n      <ion-segment-button value="standard">\n        EXERCÍCIOS\n      </ion-segment-button>\n    </ion-segment>\n\n    <ion-list>\n      <ion-item-sliding *ngFor="let exercise of listExercise">\n        <ion-item>\n          <h2>{{exercise.nomeExercicio}}</h2>\n          <ion-grid>\n            <ion-row>\n              <ion-col>\n                <p>Série</p>\n              </ion-col>\n              <ion-col col-6>\n                <p>{{exercise.grupoMuscular}}</p>\n              </ion-col>\n              <ion-col col-6>\n                <p>Repetição</p>\n              </ion-col>\n              <ion-col>\n                <p>Carga</p>\n              </ion-col>\n            </ion-row>\n            <ion-row>\n              <ion-col>\n                <p>{{exercise.serie}}</p>\n              </ion-col>\n              <ion-col col-6>\n                <p>{{exercise.grupoMuscular}}</p>\n              </ion-col>\n              <ion-col col-6>\n                <p>{{exercise.repeticao}}</p>\n              </ion-col>\n              <ion-col>\n                <p>{{exercise.carga}}</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n\n        <ion-item-options side="left">\n          <button ion-button color="secondary" (click)="editExercise(exercise.keyExercise)">\n            <ion-icon name="create"></ion-icon>\n          </button>\n          <button ion-button color="danger" (click)="removeExercise(exercise.keyExercise)">\n            <ion-icon name="trash"></ion-icon>\n          </button>\n        </ion-item-options>\n\n      </ion-item-sliding>\n    </ion-list>\n  </form>\n\n  <ion-fab right bottom>\n    <button ion-fab color="primary" (click)="navigateAddWorkoutexercisePage()">\n      <ion-icon name="add"></ion-icon>\n    </button>\n  </ion-fab>\n\n</ion-content>'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-program\add-workout-program.html"*/,
+            selector: 'page-add-workout-program',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-program\add-workout-program.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="bg">\n\n  <form [formGroup]="form">\n\n    <ion-item>\n      <ion-label stacked>Treinos Da Semana:</ion-label>\n      <ion-select formControlName="titulo">\n        <ion-option value="Segunda Feira">Segunda Feira</ion-option>\n        <ion-option value="Terça Feira">Terça Feira</ion-option>\n        <ion-option value="Quarta Feira">Quarta Feira</ion-option>\n        <ion-option value="Quinta Feira">Quinta Feira</ion-option>\n        <ion-option value="Sexta Feira">Sexta Feira</ion-option>\n        <ion-option value="Sábado">Sábado</ion-option>\n        <ion-option value="Domingo">Domingo</ion-option>\n      </ion-select>\n    </ion-item>\n\n\n    <ion-item>\n        <ion-label stacked>Objetivo:</ion-label>\n        <ion-select formControlName="objetivo">\n          <ion-option value="Emagrecimento">Emagrecimento</ion-option>\n          <ion-option value="Resistência Muscular">Resistência Muscular</ion-option>\n          <ion-option value="Hipertrofia Muscular">Hipertrofia Muscular</ion-option>\n          <ion-option value="Ganho de força">Ganho de força</ion-option>\n        </ion-select>\n      </ion-item>\n\n      \n    <ion-item>\n      <ion-label stacked>Grupo Muscular</ion-label>\n      <ion-select formControlName="grupoMuscular">\n        <ion-option value="Abdominal">Abdominal</ion-option>\n        <ion-option value="Trapézio">Trapézio</ion-option>\n        <ion-option value="Dorsal">Dorsal</ion-option>\n        <ion-option value="Ombro posterior">Ombro posterior</ion-option>\n        <ion-option value="Ombro frontal">Ombro frontal</ion-option>\n        <ion-option value="Ombro Lateral">Ombro Lateral</ion-option>\n        <ion-option value="Peito superior">Peito superior</ion-option>\n        <ion-option value="Peito">Peito</ion-option>\n        <ion-option value="Biceps">Biceps</ion-option>\n        <ion-option value="Triceps Lateral">Triceps Lateral</ion-option>\n        <ion-option value="Triceps branquial">Triceps branquial</ion-option>\n        <ion-option value="Antebraço">Antebraço</ion-option>\n        <ion-option value="Glúteo">Glúteo</ion-option>\n        <ion-option value="Quadrícepes">Quadrícepes</ion-option>\n      </ion-select>\n    </ion-item>\n\n    <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Salvar Treino</button>\n\n    <ion-segment color="dark">\n      <ion-segment-button value="standard">\n        EXERCÍCIOS\n      </ion-segment-button>\n    </ion-segment>\n\n    <ion-list>\n      <ion-item-sliding *ngFor="let exercise of listExercise">\n        <ion-item>\n          <h2>{{exercise.nomeExercicio}}</h2>\n          <ion-grid>\n            <ion-row>\n              <ion-col>\n                <p>Série</p>\n              </ion-col>\n              <ion-col col-6>\n                <p>Repetição</p>\n              </ion-col>\n              <ion-col>\n                <p>Carga</p>\n              </ion-col>\n            </ion-row>\n            <ion-row>\n              <ion-col>\n                <p>{{exercise.serie}}</p>\n              </ion-col>\n              <ion-col col-6>\n                <p>{{exercise.grupoMuscular}}</p>\n              </ion-col>\n              <ion-col col-6>\n                <p>{{exercise.repeticao}}</p>\n              </ion-col>\n              <ion-col>\n                <p>{{exercise.carga}}</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n\n        <ion-item-options side="left">\n          <button ion-button color="secondary" (click)="editExercise(exercise.keyExercise)">\n            <ion-icon name="create"></ion-icon>\n          </button>\n          <button ion-button color="danger" (click)="removeExercise(exercise.keyExercise)">\n            <ion-icon name="trash"></ion-icon>\n          </button>\n        </ion-item-options>\n\n      </ion-item-sliding>\n    </ion-list>\n  </form>\n\n  <ion-fab right bottom>\n    <button ion-fab color="primary" (click)="navigateAddWorkoutexercisePage()">\n      <ion-icon name="add"></ion-icon>\n    </button>\n  </ion-fab>\n\n</ion-content>'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-program\add-workout-program.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__providers_workout_program_workout_program__["a" /* WorkoutProgramProvider */],

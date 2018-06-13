@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+
 
 @Injectable()
 export class WorkoutProgramProvider {
 
   private PATH = 'workoutProgram/';
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase, public auth: AngularFireAuth) { }
 
   getAll(){
-    return this.db.list(this.PATH)
+    return this.db.list(this.PATH + this.auth.auth.currentUser.uid )
     .snapshotChanges()
     .map(changes => {
       return changes.map(c => ({
@@ -18,7 +20,7 @@ export class WorkoutProgramProvider {
   }
 
   get(key: string){
-    return this.db.object(this.PATH + key)
+    return this.db.object(this.PATH + this.auth.auth.currentUser.uid)
     .snapshotChanges()
     .map(c => {
       return { key: c.key, ...c.payload.val() };
@@ -28,7 +30,7 @@ export class WorkoutProgramProvider {
   save(workoutProgram: any){
     return new Promise((resolve,reject) => {
       if (workoutProgram.key){
-        this.db.list(this.PATH)
+        this.db.list(this.PATH + this.auth.auth.currentUser.uid)
         .update(workoutProgram.key,
           {
             titulo: workoutProgram.titulo,
@@ -38,7 +40,7 @@ export class WorkoutProgramProvider {
         .then(() => resolve())
         .catch((e) => reject(e));
       }else{
-        this.db.list(this.PATH)
+        this.db.list(this.PATH + this.auth.auth.currentUser.uid)
         .push({
           titulo: workoutProgram.titulo,
           objetivo: workoutProgram.objetivo,
@@ -51,6 +53,6 @@ export class WorkoutProgramProvider {
   
   remove(key: string){
     this.db.list('WorkoutProgramExercise/').remove(key);
-    return this.db.list(this.PATH).remove(key);
+    return this.db.list(this.PATH + this.auth.auth.currentUser.uid).remove(key);
   }
 }
