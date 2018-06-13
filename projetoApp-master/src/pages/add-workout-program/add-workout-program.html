@@ -1,0 +1,91 @@
+  <ion-header>
+
+    <ion-navbar color="primary">
+      <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+
+       
+
+    <form [formGroup]="form">
+        
+          <ion-item>
+            <ion-label stacked>Título</ion-label>
+            <ion-input type="text" formControlName="titulo"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!form.controls.titulo.valid && (form.controls.titulo.dirty || form.controls.titulo.touched)" color="danger">
+            <div [hidden]="!form.controls.titulo.errors.required">
+              O campo é obrigatório
+            </div>
+          </ion-item>
+
+          <ion-item>
+              <ion-label stacked>Objetivo</ion-label>
+              <ion-input type="text" formControlName="objetivo"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!form.controls.objetivo.valid && (form.controls.objetivo.dirty || form.controls.objetivo.touched)" color="danger">
+            <div [hidden]="!form.controls.objetivo.errors.required">
+              O campo é obrigatório
+            </div>
+          </ion-item>
+
+        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Treino</button>
+      
+        <ion-segment color="dark">
+            <ion-segment-button value="standard">
+              EXERCÍCIOS
+            </ion-segment-button>
+          </ion-segment>
+
+          <ion-list>
+              <ion-item-sliding *ngFor="let exercise of listExercise">
+                <ion-item>
+                    <h2>{{exercise.nomeExercicio}}</h2>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col>
+                            <p>Série</p>
+                        </ion-col>
+                        <ion-col col-6>
+                            <p>Repetição</p>
+                        </ion-col>
+                        <ion-col>
+                            <p>Carga</p>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                         <ion-col>
+                            <p>{{exercise.serie}}</p>
+                         </ion-col>
+                         <ion-col col-6>
+                            <p>{{exercise.repeticao}}</p>
+                         </ion-col>
+                         <ion-col>
+                            <p>{{exercise.carga}}</p>
+                         </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                </ion-item>
+          
+                <ion-item-options side="left">
+                  <button ion-button color="secondary" (click)="editExercise(exercise.keyExercise)">
+                    <ion-icon name="create"></ion-icon>
+                  </button>
+                  <button ion-button color="danger" (click)="removeExercise(exercise.keyExercise)">
+                    <ion-icon name="trash"></ion-icon>
+                  </button>
+                </ion-item-options>
+          
+              </ion-item-sliding>
+            </ion-list>
+    </form>
+
+    <ion-fab right bottom>
+        <button ion-fab color="primary" (click)="navigateAddWorkoutexercisePage()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab>
+
+  </ion-content>

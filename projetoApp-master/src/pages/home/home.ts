@@ -9,6 +9,8 @@ import { ProfileListPage } from '../profile-list/profile-list';
 import { ListTreinoPage } from '../list-treino/list-treino';
 import { AddTreinoPage } from '../add-treino/add-treino';
 import { ContatoPage} from '../contato/contato';
+import { ListMenutreinoPage } from '../list-menutreino/list-menutreino';
+import { ListWorkoutProgramPage } from '../list-workout-program/list-workout-program';
 
 @Component({
   selector: 'page-home',
@@ -35,11 +37,12 @@ export class HomePage {
 }
 
 TreinoRedirect() {
-  this.navCtrl.push(ListTreinoPage);
+  this.navCtrl.push(ListWorkoutProgramPage);
 }
 
 ContatoRedirect() {
   this.navCtrl.push(ContatoPage);
 }
+
 
 }

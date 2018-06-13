@@ -10,6 +10,8 @@ import * as firebase from 'firebase/app';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { SigninPage } from '../pages/signin/signin';
+import { ListWorkoutProgramPage } from '../pages/list-workout-program/list-workout-program';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -32,6 +34,12 @@ export class MyApp {
       }
     });
     
+    this.pages = [
+      { title: 'Home', component: HomePage },
+      { title: 'Treinos', component: ListWorkoutProgramPage }
+    ];
+
+
     
 
   

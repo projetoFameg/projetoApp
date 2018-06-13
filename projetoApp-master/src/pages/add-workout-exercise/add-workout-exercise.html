@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>addWorkoutExercise</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="form">
+        
+          <ion-item>
+            <ion-label stacked>Exercício</ion-label>
+            <ion-select formControlName="idExercicio">
+              <ion-option *ngFor="let exercise of exercise | async" value="{{exercise.key}}">{{exercise.NomeExercicio}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf="!form.controls.idExercicio.valid && (form.controls.idExercicio.dirty || form.controls.idExercicio.touched)" color="danger">
+              <div [hidden]="!form.controls.idExercicio.errors.required">
+                O campo é obrigatório
+              </div>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label stacked>Série</ion-label>
+            <ion-input type="text" formControlName="serie"></ion-input>
+          </ion-item>
+           
+          <ion-item>
+            <ion-label stacked>Repetição</ion-label>
+            <ion-input type="text" formControlName="repeticao"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label stacked>Carga</ion-label>
+            <ion-input type="text" formControlName="carga"></ion-input>
+          </ion-item>
+
+          <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Exercício</button>
+    </form>
+  
+
+</ion-content>

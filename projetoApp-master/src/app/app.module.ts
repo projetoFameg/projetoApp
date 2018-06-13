@@ -22,6 +22,12 @@ import { ProfileListPage } from '../pages/profile-list/profile-list';
 
 import { AuthServiceProvider } from '../providers/auth/auth-service';
 import { ExerciseProvider } from '../providers/exercise/exercise';
+import { WorkoutProgramProvider } from '../providers/workout-program/workout-program';
+import { WorkoutProgramExerciseProvider } from '../providers/workout-program-exercise/workout-program-exercise';
+
+import { AddWorkoutProgramPage } from '../pages/add-workout-program/add-workout-program';
+import { ListWorkoutProgramPage } from '../pages/list-workout-program/list-workout-program';
+import { AddWorkoutexercisePage } from '../pages/add-workout-exercise/add-workout-exercise';
 
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -31,7 +37,7 @@ import { TreinoProvider } from '../providers/treino/treino';
 import { ListTreinoPage } from '../pages/list-treino/list-treino';
 import { AddTreinoPage } from '../pages/add-treino/add-treino';
 import { ContatoPage} from '../pages/contato/contato';
-
+import { ListMenutreinoPage } from  '../pages/list-menutreino/list-menutreino'
 
 const firebaseConfig = {
   apiKey: "AIzaSyAJSb_bRCzXH5VwTkDI5Toz2Z2Hv3TB1q0",
@@ -56,7 +62,11 @@ const firebaseConfig = {
     ProfileListPage,
     ListTreinoPage,
     AddTreinoPage,
-    ContatoPage
+    ContatoPage,
+    ListMenutreinoPage ,
+    AddWorkoutProgramPage,
+    ListWorkoutProgramPage,
+    AddWorkoutexercisePage
   ],
   imports: [
     BrowserModule,
@@ -79,7 +89,11 @@ const firebaseConfig = {
     ProfileListPage,
     ListTreinoPage,
     AddTreinoPage,
-    ContatoPage
+    ContatoPage,
+    ListMenutreinoPage,
+    AddWorkoutProgramPage,
+    ListWorkoutProgramPage,
+    AddWorkoutexercisePage
   ],
   providers: [
     StatusBar,
@@ -91,7 +105,9 @@ const firebaseConfig = {
     ExerciseProvider,
     Facebook,
     ProfileProvider,
-    TreinoProvider
+    TreinoProvider,
+    WorkoutProgramProvider,
+    WorkoutProgramExerciseProvider,
   ]
 })
 export class AppModule {}

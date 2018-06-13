@@ -1,14 +1,14 @@
 webpackJsonp([7],{
 
-/***/ 521:
+/***/ 532:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddTreinoPageModule", function() { return AddTreinoPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetpasswordPageModule", function() { return ResetpasswordPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_treino__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resetpassword__ = __webpack_require__(158);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AddTreinoPageModule = /** @class */ (function () {
-    function AddTreinoPageModule() {
+var ResetpasswordPageModule = /** @class */ (function () {
+    function ResetpasswordPageModule() {
     }
-    AddTreinoPageModule = __decorate([
+    ResetpasswordPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__add_treino__["a" /* AddTreinoPage */],
+                __WEBPACK_IMPORTED_MODULE_2__resetpassword__["a" /* ResetpasswordPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_treino__["a" /* AddTreinoPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__resetpassword__["a" /* ResetpasswordPage */]),
             ],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__resetpassword__["a" /* ResetpasswordPage */]
+            ]
         })
-    ], AddTreinoPageModule);
-    return AddTreinoPageModule;
+    ], ResetpasswordPageModule);
+    return ResetpasswordPageModule;
 }());
 
-//# sourceMappingURL=add-treino.module.js.map
+//# sourceMappingURL=resetpassword.module.js.map
 
 /***/ })
 

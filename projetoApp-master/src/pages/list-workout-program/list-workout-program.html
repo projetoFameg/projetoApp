@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Treinos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding>
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let workoutProgram of workoutProgram | async">
+    
+          <ion-item>
+              <h1>{{workoutProgram.titulo}}</h1>
+              <h2>{{workoutProgram.objetivo}}</h2>
+          </ion-item>
+    
+    
+          <ion-item-options side="left">
+            <button ion-button color="secondary" (click)="editExercise(workoutProgram)">
+              <ion-icon name="create"></ion-icon>
+            </button>
+            <button ion-button color="danger" (click)="removeExercise(workoutProgram.key)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-item-options>
+    
+        </ion-item-sliding>
+      </ion-list>
+
+  <ion-fab right bottom>
+      <button ion-fab color="primary" (click)="navigateAddWorkoutProgramPage()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+  </ion-fab>
+
+</ion-content>
