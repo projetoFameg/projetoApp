@@ -34,10 +34,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ProfileProvider } from '../providers/profile/profile';
 import { TreinoProvider } from '../providers/treino/treino';
-import { ListTreinoPage } from '../pages/list-treino/list-treino';
-import { AddTreinoPage } from '../pages/add-treino/add-treino';
 import { ContatoPage} from '../pages/contato/contato';
-import { ListMenutreinoPage } from  '../pages/list-menutreino/list-menutreino'
 
 const firebaseConfig = {
   apiKey: "AIzaSyAJSb_bRCzXH5VwTkDI5Toz2Z2Hv3TB1q0",
@@ -60,10 +57,7 @@ const firebaseConfig = {
     ExerciseListPage,
     EditProfilePage,
     ProfileListPage,
-    ListTreinoPage,
-    AddTreinoPage,
     ContatoPage,
-    ListMenutreinoPage ,
     AddWorkoutProgramPage,
     ListWorkoutProgramPage,
     AddWorkoutexercisePage
@@ -87,10 +81,7 @@ const firebaseConfig = {
     ExerciseListPage,
     EditProfilePage,
     ProfileListPage,
-    ListTreinoPage,
-    AddTreinoPage,
     ContatoPage,
-    ListMenutreinoPage,
     AddWorkoutProgramPage,
     ListWorkoutProgramPage,
     AddWorkoutexercisePage

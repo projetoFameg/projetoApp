@@ -32,7 +32,8 @@ export class WorkoutProgramProvider {
         .update(workoutProgram.key,
           {
             titulo: workoutProgram.titulo,
-            objetivo: workoutProgram.objetivo
+            objetivo: workoutProgram.objetivo,
+            grupoMuscular: workoutProgram.grupoMuscular
           })
         .then(() => resolve())
         .catch((e) => reject(e));
@@ -40,7 +41,8 @@ export class WorkoutProgramProvider {
         this.db.list(this.PATH)
         .push({
           titulo: workoutProgram.titulo,
-          objetivo: workoutProgram.objetivo
+          objetivo: workoutProgram.objetivo,
+          grupoMuscular: workoutProgram.grupoMuscular
         })
         .then(() => resolve());
       }

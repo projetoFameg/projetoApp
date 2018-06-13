@@ -42,7 +42,9 @@ export class AddWorkoutProgramPage {
       this.form = this.formBuilder.group({
         key: [this.workoutProgram.key],
         titulo: [this.workoutProgram.titulo, Validators.required],
-        objetivo: [this.workoutProgram.objetivo, Validators.required]
+        objetivo: [this.workoutProgram.objetivo, Validators.required],
+        grupoMuscular: [this.workoutProgram.grupoMuscular, Validators.required]
+
       })
     }
 
@@ -83,6 +85,7 @@ export class AddWorkoutProgramPage {
       this.listExercise.push({
         keyExercise: exerciseWorkoutProgram.key,
         nomeExercicio: exercise.NomeExercicio,
+        grupoMuscular: exercise.grupoMuscular,
         serie: exerciseWorkoutProgram.serie,
         repeticao: exerciseWorkoutProgram.repeticao,
         carga: exerciseWorkoutProgram.carga

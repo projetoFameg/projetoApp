@@ -27972,6 +27972,12 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+page-add-workout-exercise .bg {
+  background-image: url("http://jw-sport.pro/published/publicdata/JWSPORT/attachments/SC/products_pictures/%D0%BD%D0%B0%D0%B1%D0%BE%D1%80-%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D0%B5%D0%B9%20POWERGRIP_enl.jpg?PHPSESSID=grcu4983grakoq5srjvpajib27");
+  background-size: cover;
+  border-width: medium;
+}
+
 page-contato .bg-menu {
   background-color: #F5FFFA;
   font-size: 14px;
@@ -27992,7 +27998,7 @@ page-contato p {
 }
 
 page-home .bg {
-  background-image: url("../../assets/imgs/background.jpg");
+  background-image: url("http://jw-sport.pro/published/publicdata/JWSPORT/attachments/SC/products_pictures/%D0%BD%D0%B0%D0%B1%D0%BE%D1%80-%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D0%B5%D0%B9%20POWERGRIP_enl.jpg?PHPSESSID=grcu4983grakoq5srjvpajib27");
   background-size: cover;
   border-width: medium;
 }
@@ -28009,14 +28015,8 @@ page-home .bg-logout {
   float: right;
 }
 
-page-list-menutreino .bg {
-  background-image: url("../../assets/imgs/background.jpg");
+page-list-workout-program .bg {
+  background-image: url("http://jw-sport.pro/published/publicdata/JWSPORT/attachments/SC/products_pictures/%D0%BD%D0%B0%D0%B1%D0%BE%D1%80-%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D0%B5%D0%B9%20POWERGRIP_enl.jpg?PHPSESSID=grcu4983grakoq5srjvpajib27");
   background-size: cover;
-  border-width: medium;
-}
-
-page-list-menutreino .bg-menu {
-  background-color: #F5FFFA;
-  border-style: inset;
   border-width: medium;
 }

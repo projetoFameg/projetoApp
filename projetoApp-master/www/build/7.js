@@ -1,14 +1,14 @@
 webpackJsonp([7],{
 
-/***/ 532:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetpasswordPageModule", function() { return ResetpasswordPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddWorkoutProgramPageModule", function() { return AddWorkoutProgramPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resetpassword__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_workout_program__ = __webpack_require__(92);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,26 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ResetpasswordPageModule = /** @class */ (function () {
-    function ResetpasswordPageModule() {
+var AddWorkoutProgramPageModule = /** @class */ (function () {
+    function AddWorkoutProgramPageModule() {
     }
-    ResetpasswordPageModule = __decorate([
+    AddWorkoutProgramPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__resetpassword__["a" /* ResetpasswordPage */],
+                __WEBPACK_IMPORTED_MODULE_2__add_workout_program__["a" /* AddWorkoutProgramPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__resetpassword__["a" /* ResetpasswordPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_workout_program__["a" /* AddWorkoutProgramPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__resetpassword__["a" /* ResetpasswordPage */]
-            ]
         })
-    ], ResetpasswordPageModule);
-    return ResetpasswordPageModule;
+    ], AddWorkoutProgramPageModule);
+    return AddWorkoutProgramPageModule;
 }());
 
-//# sourceMappingURL=resetpassword.module.js.map
+//# sourceMappingURL=add-workout-program.module.js.map
 
 /***/ })
 

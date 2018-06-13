@@ -1,13 +1,12 @@
-webpackJsonp([13],{
+webpackJsonp([9],{
 
-/***/ 127:
+/***/ 129:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreinoProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkoutProgramProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(66);
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -27,79 +26,158 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-var TreinoProvider = /** @class */ (function () {
-    function TreinoProvider(db, auth) {
+var WorkoutProgramProvider = /** @class */ (function () {
+    function WorkoutProgramProvider(db) {
         this.db = db;
-        this.auth = auth;
-        this.PATH = 'treino/';
+        this.PATH = 'workoutProgram/';
     }
-    TreinoProvider.prototype.getAll = function () {
-        return this.db.list(this.PATH + this.auth.auth.currentUser.uid)
+    WorkoutProgramProvider.prototype.getAll = function () {
+        return this.db.list(this.PATH)
             .snapshotChanges()
             .map(function (changes) {
             return changes.map(function (c) { return (__assign({ key: c.payload.key }, c.payload.val())); });
         });
     };
-    TreinoProvider.prototype.get = function (key) {
-        return this.db.object(this.PATH + this.auth.auth.currentUser.uid)
+    WorkoutProgramProvider.prototype.get = function (key) {
+        return this.db.object(this.PATH + key)
             .snapshotChanges()
             .map(function (c) {
             return __assign({ key: c.key }, c.payload.val());
         });
     };
-    TreinoProvider.prototype.save = function (treino, exercise) {
+    WorkoutProgramProvider.prototype.save = function (workoutProgram) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            if (treino.key) {
-                _this.db.list(_this.PATH + _this.auth.auth.currentUser.uid)
-                    .update(treino.key, {
-                    diaSemana: treino.diaSemana,
-                    NomeExercicio: treino.NomeExercicio,
-                    descricao: treino.descricao,
-                    equipamento: treino.equipamento,
-                    grupoMuscular: treino.grupoMuscular,
-                    repeticoes: treino.repeticoes,
+            if (workoutProgram.key) {
+                _this.db.list(_this.PATH)
+                    .update(workoutProgram.key, {
+                    titulo: workoutProgram.titulo,
+                    objetivo: workoutProgram.objetivo,
+                    grupoMuscular: workoutProgram.grupoMuscular
                 })
                     .then(function () { return resolve(); })
                     .catch(function (e) { return reject(e); });
             }
             else {
-                _this.db.list(_this.PATH + _this.auth.auth.currentUser.uid)
+                _this.db.list(_this.PATH)
                     .push({
-                    diaSemana: treino.diaSemana,
-                    NomeExercicio: treino.NomeExercicio,
-                    descricao: treino.descricao,
-                    equipamento: treino.equipamento,
-                    grupoMuscular: treino.grupoMuscular,
-                    repeticoes: treino.repeticoes,
+                    titulo: workoutProgram.titulo,
+                    objetivo: workoutProgram.objetivo,
+                    grupoMuscular: workoutProgram.grupoMuscular
                 })
                     .then(function () { return resolve(); });
             }
         });
     };
-    TreinoProvider.prototype.remove = function (key) {
-        return this.db.list(this.PATH + this.auth.auth.currentUser.uid).remove(key);
+    WorkoutProgramProvider.prototype.remove = function (key) {
+        this.db.list('WorkoutProgramExercise/').remove(key);
+        return this.db.list(this.PATH).remove(key);
     };
-    TreinoProvider = __decorate([
+    WorkoutProgramProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */]])
-    ], TreinoProvider);
-    return TreinoProvider;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+    ], WorkoutProgramProvider);
+    return WorkoutProgramProvider;
 }());
 
-//# sourceMappingURL=treino.js.map
+//# sourceMappingURL=workout-program.js.map
 
 /***/ }),
 
-/***/ 128:
+/***/ 130:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkoutProgramExerciseProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(48);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var WorkoutProgramExerciseProvider = /** @class */ (function () {
+    function WorkoutProgramExerciseProvider(db) {
+        this.db = db;
+        this.PATH = 'WorkoutProgramExercise/';
+    }
+    WorkoutProgramExerciseProvider.prototype.getAll = function (keyProgram) {
+        return this.db.list(this.PATH + keyProgram)
+            .snapshotChanges()
+            .map(function (changes) {
+            return changes.map(function (c) { return (__assign({ key: c.payload.key }, c.payload.val())); });
+        });
+    };
+    WorkoutProgramExerciseProvider.prototype.get = function (key, keyProgram) {
+        console.log(this.PATH + " " + keyProgram + " " + key);
+        return this.db.object(this.PATH + keyProgram)
+            .snapshotChanges()
+            .map(function (c) {
+            return __assign({ key: c.key }, c.payload.val());
+        });
+    };
+    WorkoutProgramExerciseProvider.prototype.save = function (WorkoutProgramExercise, keyProgram) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (WorkoutProgramExercise.key) {
+                _this.db.list(_this.PATH + keyProgram)
+                    .update(WorkoutProgramExercise.key, {
+                    idExercicio: WorkoutProgramExercise.idExercicio,
+                    serie: WorkoutProgramExercise.serie,
+                    repeticao: WorkoutProgramExercise.repeticao,
+                    carga: WorkoutProgramExercise.carga
+                })
+                    .then(function () { return resolve(); })
+                    .catch(function (e) { return reject(e); });
+            }
+            else {
+                _this.db.list(_this.PATH + keyProgram)
+                    .push({
+                    idExercicio: WorkoutProgramExercise.idExercicio,
+                    serie: WorkoutProgramExercise.serie,
+                    repeticao: WorkoutProgramExercise.repeticao,
+                    carga: WorkoutProgramExercise.carga
+                })
+                    .then(function () { return resolve(); });
+            }
+        });
+    };
+    WorkoutProgramExerciseProvider.prototype.remove = function (key, keyProgram) {
+        return this.db.list(this.PATH + keyProgram).remove(key);
+    };
+    WorkoutProgramExerciseProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+    ], WorkoutProgramExerciseProvider);
+    return WorkoutProgramExerciseProvider;
+}());
+
+//# sourceMappingURL=workout-program-exercise.js.map
+
+/***/ }),
+
+/***/ 131:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfileProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(67);
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -192,14 +270,14 @@ var ProfileProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 158:
+/***/ 161:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ResetpasswordPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -267,14 +345,14 @@ var ResetpasswordPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 159:
+/***/ 162:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddExercisePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -307,10 +385,6 @@ var AddExercisePage = /** @class */ (function () {
         this.form = this.formBuilder.group({
             key: [this.exercise.key],
             NomeExercicio: [this.exercise.NomeExercicio, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required],
-            descricao: [this.exercise.descricao, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required],
-            equipamento: [this.exercise.equipamento, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required],
-            grupoMuscular: [this.exercise.grupoMuscular, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]
-            //imagem: [this.exercise.titulo, Validators.required]
         });
     };
     AddExercisePage.prototype.onSubmit = function () {
@@ -329,7 +403,7 @@ var AddExercisePage = /** @class */ (function () {
     };
     AddExercisePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-add-exercise',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/'<!--\n  Generated template for the AddExercisePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <form [formGroup]="form">\n\n    <ion-item>\n      <ion-label stacked>Nome do exercício</ion-label>\n      <ion-input type="text" formControlName="NomeExercicio"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.NomeExercicio.valid && (form.controls.NomeExercicio.dirty || form.controls.NomeExercicio.touched)" color="danger">\n      <div [hidden]="!form.controls.NomeExercicio.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n      \n        <ion-item>\n          <ion-label stacked>Descrição</ion-label>\n          <ion-input type="text" formControlName="descricao"></ion-input>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">\n            <div [hidden]="!form.controls.descricao.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n      \n        <ion-item>\n          <ion-label stacked>Equipamento</ion-label>\n          <ion-select formControlName="equipamento">\n            <ion-option value="Esteira">Esteira</ion-option>\n            <ion-option value="Bicicleta">Bicicleta</ion-option>\n            <ion-option value="Barra fixa">Barra fixa</ion-option>\n            <ion-option value="Barra">Barra fixa</ion-option>\n            <ion-option value="Barra V">Barra V</ion-option>\n            <ion-option value="Banco inclinado">Banco inclinado</ion-option>\n            <ion-option value="Banco declinado">Banco declinado</ion-option>\n            <ion-option value="Banco">Banco</ion-option>\n            <ion-option value="Cross over">Cross over</ion-option>\n            <ion-option value="Mesa flexora">Mesa flexora</ion-option>\n            <ion-option value="Leg Press 45*">Leg Press 45*</ion-option>\n            <ion-option value="Halteres">Halteres</ion-option>\n            <ion-option value="Corda">Corda</ion-option>\n          </ion-select>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.equipamento.valid && (form.controls.equipamento.dirty || form.controls.equipamento.touched)" color="danger">\n            <div [hidden]="!form.controls.equipamento.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n      \n        <ion-item>\n          <ion-label stacked>Grupo Muscular</ion-label>\n          <ion-select formControlName="grupoMuscular">\n            <ion-option value="Abdominal">Abdominal</ion-option>\n            <ion-option value="Trapézio">Trapézio</ion-option>\n            <ion-option value="Dorsal">Dorsal</ion-option>\n            <ion-option value="Ombro posterior">Ombro posterior</ion-option>           \n            <ion-option value="Ombro frontal">Ombro frontal</ion-option>\n            <ion-option value="Ombro Lateral">Ombro Lateral</ion-option>\n            <ion-option value="Peito superior">Peito superior</ion-option>\n            <ion-option value="Peito">Peito</ion-option>\n            <ion-option value="Biceps">Biceps</ion-option>\n            <ion-option value="Triceps Lateral">Triceps Lateral</ion-option>\n            <ion-option value="Triceps branquial">Triceps branquial</ion-option>\n            <ion-option value="Antebraço">Antebraço</ion-option>\n            <ion-option value="Glúteo">Glúteo</ion-option>\n            <ion-option value="Quadrícepes">Quadrícepes</ion-option>\n\n          </ion-select>\n        </ion-item>\n        <ion-item *ngIf="!form.controls.grupoMuscular.valid && (form.controls.grupoMuscular.dirty || form.controls.grupoMuscular.touched)" color="danger">\n            <div [hidden]="!form.controls.grupoMuscular.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n      \n        <!-- <ion-item>\n          <ion-label stacked>Imagem</ion-label>\n          <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>\n        </ion-item> -->\n      \n        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Exercício</button>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/,
+            selector: 'page-add-exercise',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/'<!--\n  Generated template for the AddExercisePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <form [formGroup]="form">\n\n    <ion-item>\n      <ion-label stacked>Nome do exercício</ion-label>\n      <ion-input type="text" formControlName="NomeExercicio"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.NomeExercicio.valid && (form.controls.NomeExercicio.dirty || form.controls.NomeExercicio.touched)" color="danger">\n      <div [hidden]="!form.controls.NomeExercicio.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n      \n       \n   \n        \n       \n        <!-- <ion-item>\n          <ion-label stacked>Imagem</ion-label>\n          <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>\n        </ion-item> -->\n      \n        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Exercício</button>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__["a" /* ExerciseProvider */],
@@ -342,83 +416,7 @@ var AddExercisePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 160:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddTreinoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_treino_treino__ = __webpack_require__(127);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var AddTreinoPage = /** @class */ (function () {
-    function AddTreinoPage(navCtrl, navParams, formBuilder, provider, toast) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.provider = provider;
-        this.toast = toast;
-        this.treino = this.navParams.data.treino || {};
-        this.createForm();
-        this.setupPageTitle();
-    }
-    AddTreinoPage.prototype.setupPageTitle = function () {
-        this.title = this.navParams.data.treino ? 'Atualizar Treino' : 'Adicionar Treino';
-    };
-    AddTreinoPage.prototype.createForm = function () {
-        this.form = this.formBuilder.group({
-            key: [this.treino.key],
-            diaSemana: [this.treino.diaSemana],
-            repeticoes: [this.treino.repeticoes],
-            NomeExercicio: [this.treino.NomeExercicio, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["g" /* Validators */].required],
-            descricao: [this.treino.descricao, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["g" /* Validators */].required],
-            equipamento: [this.treino.equipamento, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["g" /* Validators */].required],
-            grupoMuscular: [this.treino.grupoMuscular, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["g" /* Validators */].required]
-        });
-    };
-    AddTreinoPage.prototype.onSubmit = function () {
-        var _this = this;
-        if (this.form.valid) {
-            this.provider.save(this.form.value, this.form.value)
-                .then(function () {
-                _this.toast.create({ message: 'Treino salvo com sucesso.', duration: 3000 }).present();
-                _this.navCtrl.pop();
-            })
-                .catch(function (e) {
-                _this.toast.create({ message: 'Erro ao salvar o alterações.', duration: 3000 }).present();
-                console.log(e);
-            });
-        }
-    };
-    AddTreinoPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-add-treino',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-treino\add-treino.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <form [formGroup]="form">\n\n\n\n    <ion-item>\n      <ion-label stacked>Dia semana</ion-label>\n      <ion-select formControlName="diaSemana">\n        <ion-option value="Segunda Feira">Segunda Feira</ion-option>\n        <ion-option value="Terça Feira">Terça Feira</ion-option>\n        <ion-option value="Quarta Feira">Quarta Feira</ion-option>\n        <ion-option value="Quinta Feira">Quinta Feira</ion-option>\n        <ion-option value="Sexta Feira">Sexta Feira</ion-option>\n        <ion-option value="Sábado">Sábado</ion-option>\n        <ion-option value="Domingo">Domingo</ion-option>\n\n      </ion-select>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.diaSemana.valid && (form.controls.diaSemana.dirty || form.controls.diaSemana.touched)" color="danger">\n      <div [hidden]="!form.controls.diaSemana.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label stacked>Repeticão</ion-label>\n      <ion-input type="text" formControlName="repeticoes"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.repeticoes.valid && (form.controls.repeticoes.dirty || form.controls.repeticoes.touched)"\n      color="danger">\n      <div [hidden]="!form.controls.repeticoes.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label stacked>Nome do exercício</ion-label>\n      <ion-input type="text" formControlName="NomeExercicio"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.NomeExercicio.valid && (form.controls.NomeExercicio.dirty || form.controls.NomeExercicio.touched)"\n      color="danger">\n      <div [hidden]="!form.controls.NomeExercicio.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Descrição</ion-label>\n      <ion-input type="text" formControlName="descricao"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.descricao.valid && (form.controls.descricao.dirty || form.controls.descricao.touched)" color="danger">\n      <div [hidden]="!form.controls.descricao.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Equipamento</ion-label>\n      <ion-select formControlName="equipamento">\n        <ion-option value="Esteira">Esteira</ion-option>\n        <ion-option value="Bicicleta">Bicicleta</ion-option>\n        <ion-option value="Barra fixa">Barra fixa</ion-option>\n        <ion-option value="Barra">Barra fixa</ion-option>\n        <ion-option value="Barra V">Barra V</ion-option>\n        <ion-option value="Banco inclinado">Banco inclinado</ion-option>\n        <ion-option value="Banco declinado">Banco declinado</ion-option>\n        <ion-option value="Banco">Banco</ion-option>\n        <ion-option value="Cross over">Cross over</ion-option>\n        <ion-option value="Mesa flexora">Mesa flexora</ion-option>\n        <ion-option value="Leg Press 45*">Leg Press 45*</ion-option>\n        <ion-option value="Halteres">Halteres</ion-option>\n        <ion-option value="Corda">Corda</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.equipamento.valid && (form.controls.equipamento.dirty || form.controls.equipamento.touched)"\n      color="danger">\n      <div [hidden]="!form.controls.equipamento.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Grupo Muscular</ion-label>\n      <ion-select formControlName="grupoMuscular">\n        <ion-option value="Abdominal">Abdominal</ion-option>\n        <ion-option value="Trapézio">Trapézio</ion-option>\n        <ion-option value="Dorsal">Dorsal</ion-option>\n        <ion-option value="Ombro posterior">Ombro posterior</ion-option>\n        <ion-option value="Ombro frontal">Ombro frontal</ion-option>\n        <ion-option value="Ombro Lateral">Ombro Lateral</ion-option>\n        <ion-option value="Peito superior">Peito superior</ion-option>\n        <ion-option value="Peito">Peito</ion-option>\n        <ion-option value="Biceps">Biceps</ion-option>\n        <ion-option value="Triceps Lateral">Triceps Lateral</ion-option>\n        <ion-option value="Triceps branquial">Triceps branquial</ion-option>\n        <ion-option value="Antebraço">Antebraço</ion-option>\n        <ion-option value="Glúteo">Glúteo</ion-option>\n        <ion-option value="Quadrícepes">Quadrícepes</ion-option>\n\n      </ion-select>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.grupoMuscular.valid && (form.controls.grupoMuscular.dirty || form.controls.grupoMuscular.touched)"\n      color="danger">\n      <div [hidden]="!form.controls.grupoMuscular.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n\n    <!-- <ion-item>\n          <ion-label stacked>Imagem</ion-label>\n          <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>\n        </ion-item> -->\n\n    <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Atualizar Treino</button>\n  </form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-treino\add-treino.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__providers_treino_treino__["a" /* TreinoProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
-    ], AddTreinoPage);
-    return AddTreinoPage;
-}());
-
-//# sourceMappingURL=add-treino.js.map
-
-/***/ }),
-
-/***/ 161:
+/***/ 163:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -463,7 +461,7 @@ var ContatoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 162:
+/***/ 164:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -471,7 +469,7 @@ var ContatoPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_profile_profile__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_profile_profile__ = __webpack_require__(131);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -542,112 +540,6 @@ var EditProfilePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 163:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListMenutreinoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__list_treino_list_treino__ = __webpack_require__(274);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var ListMenutreinoPage = /** @class */ (function () {
-    function ListMenutreinoPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    ListMenutreinoPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ListMenutreinoPage');
-    };
-    ListMenutreinoPage.prototype.MenuTreinoRedirect = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__list_treino_list_treino__["a" /* ListTreinoPage */]);
-    };
-    ListMenutreinoPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-list-menutreino',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-menutreino\list-menutreino.html"*/'<!--\n  Generated template for the ListMenutreinoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Treinos semanais:</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <ion-list>\n    <button ion-button around color="primary" (click)="MenuTreinoRedirect()">\n      Segunda\n    </button>\n  </ion-list>\n  <ion-list>\n\n    <button ion-button around color="primary" (click)="MenuTreinoRedirect()">\n      Terça\n    </button>\n  </ion-list>\n\n  <ion-list>\n    <button ion-button around color="primary" (click)="MenuTreinoRedirect()">\n      Quarta\n    </button>\n  </ion-list>\n\n  <ion-list>\n    <button ion-button around color="primary" (click)="MenuTreinoRedirect()">\n      Quinta\n    </button>\n  </ion-list>\n\n  <ion-list>\n    <button ion-button around color="primary" (click)="MenuTreinoRedirect()">\n      Sexta\n    </button>\n  </ion-list>\n\n  <ion-list>\n    <button ion-button around color="primary" (click)="MenuTreinoRedirect()">\n      Sábado\n    </button>\n  </ion-list>\n\n  <ion-list>\n    <button ion-button around color="primary" (click)="MenuTreinoRedirect()">\n      Domingo\n    </button>\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-menutreino\list-menutreino.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
-    ], ListMenutreinoPage);
-    return ListMenutreinoPage;
-}());
-
-//# sourceMappingURL=list-menutreino.js.map
-
-/***/ }),
-
-/***/ 164:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfileListPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_profile_profile__ = __webpack_require__(128);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var ProfileListPage = /** @class */ (function () {
-    function ProfileListPage(navCtrl, navParams, provider, toast) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.provider = provider;
-        this.toast = toast;
-        this.profile = this.provider.getAll();
-    }
-    ProfileListPage.prototype.navigateEditProfilePage = function () {
-        // Navegar o usuário para a AddExercisePage
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__["a" /* EditProfilePage */]);
-    };
-    ProfileListPage.prototype.editProfile = function (profile) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__["a" /* EditProfilePage */], { profile: profile });
-    };
-    ProfileListPage.prototype.removeProfile = function (key) {
-        var _this = this;
-        this.provider.remove(key)
-            .then(function () {
-            _this.toast.create({ message: 'Informação removido com sucesso.', duration: 3000 }).present();
-        })
-            .catch(function () {
-            _this.toast.create({ message: 'Erro ao remover o Informação.', duration: 3000 }).present();
-        });
-    };
-    ProfileListPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-profile-list',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\profile-list\profile-list.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n      <ion-title>Seu perfil:</ion-title>\n    </ion-navbar>\n  \n  </ion-header>\n  \n  \n  <ion-content padding>\n  \n      <ion-fab right bottom>\n          <button ion-fab color="primary" (click)="navigateEditProfilePage()">\n            <ion-icon name="add"></ion-icon>\n          </button>\n      </ion-fab>\n  \n    <ion-list>\n      <ion-item-sliding *ngFor="let profile of profile | async">\n  \n        <ion-item>\n            <h2><p>Nome: </p>{{profile.nome}} </h2>\n            <h2><p>Sobrenome: </p>{{profile.sobrenome}} </h2>\n            <h3><p>Idade: </p>{{profile.idade}}</h3>\n            <h3><p>Altura: </p>{{profile.altura}}</h3>\n            <h3><p>Peso: </p>{{profile.peso}}</h3>\n            <h3><p>Circuferência Cintura: </p>{{profile.circuCintura}}</h3>\n            <h3><p>Circuferência Braço Direito: </p>{{profile.circuBracoDireito}}</h3>\n            <h3><p>Circuferência Braço Esquerdo: </p>{{profile.circuBracoEsquerdo}}</h3>\n            <h3><p>Objetivo: </p>{{profile.objetivo}}</h3>\n\n        </ion-item>\n  \n  \n        <ion-item-options side="left">\n            <button ion-button color="secondary" (click)="editProfile(profile)">\n              <ion-icon name="create"></ion-icon>\n            </button>\n          <button ion-button color="danger" (click)="removeProfile(profile.key)">\n            <ion-icon name="trash"></ion-icon>\n          </button>\n        </ion-item-options>\n  \n      </ion-item-sliding>\n    </ion-list>\n  </ion-content>\n  '/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\profile-list\profile-list.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_profile_profile__["a" /* ProfileProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
-    ], ProfileListPage);
-    return ProfileListPage;
-}());
-
-//# sourceMappingURL=profile-list.js.map
-
-/***/ }),
-
 /***/ 165:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -672,8 +564,8 @@ var User = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_user__ = __webpack_require__(165);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(71);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -766,55 +658,39 @@ webpackEmptyAsyncContext.id = 178;
 var map = {
 	"../pages/add-exercise/add-exercise.module": [
 		523,
-		12
-	],
-	"../pages/add-treino/add-treino.module": [
-		524,
-		11
-	],
-	"../pages/add-workout-program/add-workout-program.module": [
-		525,
-		1
-	],
-	"../pages/add-workoutexercise/add-workoutexercise.module": [
-		526,
-		4
-	],
-	"../pages/contato/contato.module": [
-		527,
-		10
-	],
-	"../pages/edit-profile/edit-profile.module": [
-		528,
-		9
-	],
-	"../pages/list-menutreino/list-menutreino.module": [
-		529,
 		8
 	],
+	"../pages/add-workout-program/add-workout-program.module": [
+		524,
+		7
+	],
+	"../pages/contato/contato.module": [
+		525,
+		6
+	],
+	"../pages/edit-profile/edit-profile.module": [
+		526,
+		5
+	],
 	"../pages/list-workout-program/list-workout-program.module": [
+		527,
+		4
+	],
+	"../pages/resetpassword/resetpassword.module": [
+		528,
+		3
+	],
+	"../pages/signin/signin.module": [
+		529,
+		2
+	],
+	"../pages/signinwithemail/signinwithemail.module": [
 		530,
 		0
 	],
-	"../pages/profile/profile.module": [
-		531,
-		3
-	],
-	"../pages/resetpassword/resetpassword.module": [
-		532,
-		7
-	],
-	"../pages/signin/signin.module": [
-		533,
-		6
-	],
-	"../pages/signinwithemail/signinwithemail.module": [
-		534,
-		2
-	],
 	"../pages/signup/signup.module": [
-		535,
-		5
+		531,
+		1
 	]
 };
 function webpackAsyncContext(req) {
@@ -833,16 +709,17 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 274:
+/***/ 272:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListTreinoPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddWorkoutexercisePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_treino_treino__ = __webpack_require__(127);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_treino_add_treino__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_workout_program_exercise_workout_program_exercise__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_workout_program_add_workout_program__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -857,48 +734,63 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ListTreinoPage = /** @class */ (function () {
-    function ListTreinoPage(navCtrl, navParams, provider, authService, toast) {
+
+var AddWorkoutexercisePage = /** @class */ (function () {
+    function AddWorkoutexercisePage(navCtrl, navParams, formBuilder, provider, providerExercise, toast) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.formBuilder = formBuilder;
         this.provider = provider;
-        this.authService = authService;
+        this.providerExercise = providerExercise;
         this.toast = toast;
-        this.treino = this.provider.getAll();
+        this.exercise = this.provider.getAll();
+        this.keyProgram = this.navParams.data.keyProgram || {};
+        this.workoutProgramExercise = this.navParams.data.workoutProgramExercise || {};
+        console.log(this.keyProgram);
+        this.createForm();
+        this.setupPageTitle();
     }
-    ListTreinoPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ListTreinoPage');
+    AddWorkoutexercisePage.prototype.setupPageTitle = function () {
+        this.title = this.navParams.data.workoutProgran ? 'Alterar Exercícios' : 'Adicionar Exercícios';
     };
-    ListTreinoPage.prototype.navigateAddTreinoPage = function () {
-        // Navegar o usuário para a AddExercisePage
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__add_treino_add_treino__["a" /* AddTreinoPage */]);
-    };
-    ListTreinoPage.prototype.editTreino = function (treino) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__add_treino_add_treino__["a" /* AddTreinoPage */], { treino: treino });
-    };
-    ListTreinoPage.prototype.removeTreino = function (key) {
-        var _this = this;
-        this.provider.remove(key)
-            .then(function () {
-            _this.toast.create({ message: 'Treino removido com sucesso.', duration: 3000 }).present();
-        })
-            .catch(function () {
-            _this.toast.create({ message: 'Erro ao remover o treino.', duration: 3000 }).present();
+    AddWorkoutexercisePage.prototype.createForm = function () {
+        this.form = this.formBuilder.group({
+            key: [this.workoutProgramExercise.key],
+            idExercicio: [this.workoutProgramExercise.idExercicio, __WEBPACK_IMPORTED_MODULE_5__angular_forms__["g" /* Validators */].required],
+            serie: [this.workoutProgramExercise.serie],
+            repeticao: [this.workoutProgramExercise.repeticao],
+            carga: [this.workoutProgramExercise.carga]
         });
     };
-    ListTreinoPage = __decorate([
+    AddWorkoutexercisePage.prototype.navigateAddWorkoutexercisePage = function () {
+        this.navCtrl.popTo(__WEBPACK_IMPORTED_MODULE_4__add_workout_program_add_workout_program__["a" /* AddWorkoutProgramPage */]);
+    };
+    AddWorkoutexercisePage.prototype.onSubmit = function () {
+        var _this = this;
+        if (this.form.valid) {
+            this.providerExercise.save(this.form.value, this.keyProgram)
+                .then(function () {
+                _this.toast.create({ message: 'Exercício salvo com sucesso.', duration: 3000 }).present();
+                _this.navCtrl.pop();
+            })
+                .catch(function (e) {
+                _this.toast.create({ message: 'Erro ao salvar o Exercício.', duration: 3000 }).present();
+                console.log(e);
+            });
+        }
+    };
+    AddWorkoutexercisePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-list-treino',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-treino\list-treino.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Lista de Treinos</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-fab right bottom>\n        <button ion-fab color="primary" (click)="navigateAddTreinoPage()">\n          <ion-icon name="add"></ion-icon>\n        </button>\n    </ion-fab>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let treino of treino | async">\n\n      <ion-item>\n          <h2><p>Dia da Semana: </p>{{treino.diaSemana}} </h2>\n          <h3><p>NomeExercicio: </p>{{treino.NomeExercicio}}</h3>\n          <h3><p>Descricao: </p>{{treino.descricao}}</h3>\n          <h3><p>equipamento: </p>{{treino.equipamento}}</h3>\n          <h3><p>grupoMuscular: </p>{{treino.grupoMuscular}}</h3>\n          <h3><p>Repeticoes: </p>{{treino.repeticoes}}</h3>\n     \n      </ion-item>\n\n      <ion-item-options side="left">\n        <button ion-button color="secondary" (click)="editTreino(treino)">\n          <ion-icon name="create"></ion-icon>\n        </button>\n        <button ion-button color="danger" (click)="removeTreino(treino.key)">\n          <ion-icon name="trash"></ion-icon>\n        </button>\n        \n      </ion-item-options>\n\n      \n    </ion-item-sliding>\n  </ion-list>\n  \n  \n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-treino\list-treino.html"*/,
+            selector: 'page-add-workout-exercise',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-exercise\add-workout-exercise.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Adicionar Exercício ao treino:</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="bg">\n\n  <form [formGroup]="form">\n        \n          <ion-item>\n            <ion-label stacked>Exercício</ion-label>\n            <ion-select formControlName="idExercicio">\n              <ion-option *ngFor="let exercise of exercise | async" value="{{exercise.key}}">{{exercise.NomeExercicio}}</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item *ngIf="!form.controls.idExercicio.valid && (form.controls.idExercicio.dirty || form.controls.idExercicio.touched)" color="danger">\n              <div [hidden]="!form.controls.idExercicio.errors.required">\n                O campo é obrigatório\n              </div>\n          </ion-item>\n          \n          <ion-item>\n            <ion-label stacked>Série</ion-label>\n            <ion-input type="text" formControlName="serie"></ion-input>\n          </ion-item>\n           \n          <ion-item>\n            <ion-label stacked>Repetição</ion-label>\n            <ion-input type="text" formControlName="repeticao"></ion-input>\n          </ion-item>\n\n          <ion-item>\n            <ion-label stacked>Carga</ion-label>\n            <ion-input type="text" formControlName="carga"></ion-input>\n          </ion-item>\n\n          <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Exercício</button>\n    </form>\n  \n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-exercise\add-workout-exercise.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_treino_treino__["a" /* TreinoProvider */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__["a" /* AuthServiceProvider */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__["a" /* ExerciseProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_workout_program_exercise_workout_program_exercise__["a" /* WorkoutProgramExerciseProvider */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
-    ], ListTreinoPage);
-    return ListTreinoPage;
+    ], AddWorkoutexercisePage);
+    return AddWorkoutexercisePage;
 }());
 
-//# sourceMappingURL=list-treino.js.map
+//# sourceMappingURL=add-workout-exercise.js.map
 
 /***/ }),
 
@@ -906,13 +798,75 @@ var ListTreinoPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfileListPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_profile_profile__ = __webpack_require__(131);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ProfileListPage = /** @class */ (function () {
+    function ProfileListPage(navCtrl, navParams, provider, toast) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.provider = provider;
+        this.toast = toast;
+        this.profile = this.provider.getAll();
+    }
+    ProfileListPage.prototype.navigateEditProfilePage = function () {
+        // Navegar o usuário para a AddExercisePage
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__["a" /* EditProfilePage */]);
+    };
+    ProfileListPage.prototype.editProfile = function (profile) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__["a" /* EditProfilePage */], { profile: profile });
+    };
+    ProfileListPage.prototype.removeProfile = function (key) {
+        var _this = this;
+        this.provider.remove(key)
+            .then(function () {
+            _this.toast.create({ message: 'Informação removido com sucesso.', duration: 3000 }).present();
+        })
+            .catch(function () {
+            _this.toast.create({ message: 'Erro ao remover o Informação.', duration: 3000 }).present();
+        });
+    };
+    ProfileListPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-profile-list',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\profile-list\profile-list.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n      <ion-title>Seu perfil:</ion-title>\n    </ion-navbar>\n  \n  </ion-header>\n  \n  \n  <ion-content padding>\n  \n      <ion-fab right bottom>\n          <button ion-fab color="primary" (click)="navigateEditProfilePage()">\n            <ion-icon name="add"></ion-icon>\n          </button>\n      </ion-fab>\n  \n    <ion-list>\n      <ion-item-sliding *ngFor="let profile of profile | async">\n  \n        <ion-item>\n            <h2><p>Nome: </p>{{profile.nome}} </h2>\n            <h2><p>Sobrenome: </p>{{profile.sobrenome}} </h2>\n            <h3><p>Idade: </p>{{profile.idade}}</h3>\n            <h3><p>Altura: </p>{{profile.altura}}</h3>\n            <h3><p>Peso: </p>{{profile.peso}}</h3>\n            <h3><p>Circuferência Cintura: </p>{{profile.circuCintura}}</h3>\n            <h3><p>Circuferência Braço Direito: </p>{{profile.circuBracoDireito}}</h3>\n            <h3><p>Circuferência Braço Esquerdo: </p>{{profile.circuBracoEsquerdo}}</h3>\n            <h3><p>Objetivo: </p>{{profile.objetivo}}</h3>\n\n        </ion-item>\n  \n  \n        <ion-item-options side="left">\n            <button ion-button color="secondary" (click)="editProfile(profile)">\n              <ion-icon name="create"></ion-icon>\n            </button>\n          <button ion-button color="danger" (click)="removeProfile(profile.key)">\n            <ion-icon name="trash"></ion-icon>\n          </button>\n        </ion-item-options>\n  \n      </ion-item-sliding>\n    </ion-list>\n  </ion-content>\n  '/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\profile-list\profile-list.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_profile_profile__["a" /* ProfileProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
+    ], ProfileListPage);
+    return ProfileListPage;
+}());
+
+//# sourceMappingURL=profile-list.js.map
+
+/***/ }),
+
+/***/ 279:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ExerciseListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_exercise_add_exercise__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_exercise_exercise__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__signin_signin__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_exercise_add_exercise__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_exercise_exercise__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__signin_signin__ = __webpack_require__(70);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -970,7 +924,7 @@ var ExerciseListPage = /** @class */ (function () {
     };
     ExerciseListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-exercise-list',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\exercise-list\exercise-list.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Lista de Exercícios</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-fab right bottom>\n        <button ion-fab color="primary" (click)="navigateAddExercisePage()">\n          <ion-icon name="add"></ion-icon>\n        </button>\n    </ion-fab>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let exercise of exercise | async">\n\n      <ion-item>\n          <h1>{{exercise.NomeExercicio}}</h1>\n          <h2>Grupo Muscular: {{exercise.grupoMuscular}}</h2>\n          <h2>Equipamento: {{exercise.equipamento}}</h2>\n          <p>Descriçao: {{exercise.descricao}}</p>\n          \n      </ion-item>\n\n      <ion-item-options side="left">\n        <button ion-button color="secondary" (click)="editExercise(exercise)">\n          <ion-icon name="create"></ion-icon>\n        </button>\n        <button ion-button color="danger" (click)="removeExercise(exercise.key)">\n          <ion-icon name="trash"></ion-icon>\n        </button>\n        \n      </ion-item-options>\n\n      \n    </ion-item-sliding>\n  </ion-list>\n  \n      <ion-fab bottom left>\n        <button ion-button round color="primary" (click)="signOut()"> logout   -\n          <ion-icon name="md-exit"></ion-icon>\n        </button>\n      </ion-fab>\n      \n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\exercise-list\exercise-list.html"*/,
+            selector: 'page-exercise-list',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\exercise-list\exercise-list.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Lista de Exercícios</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-fab right bottom>\n        <button ion-fab color="primary" (click)="navigateAddExercisePage()">\n          <ion-icon name="add"></ion-icon>\n        </button>\n    </ion-fab>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let exercise of exercise | async">\n\n      <ion-item>\n          <h1>{{exercise.NomeExercicio}}</h1>\n          \n      </ion-item>\n\n      <ion-item-options side="left">\n        <button ion-button color="secondary" (click)="editExercise(exercise)">\n          <ion-icon name="create"></ion-icon>\n        </button>\n        <button ion-button color="danger" (click)="removeExercise(exercise.key)">\n          <ion-icon name="trash"></ion-icon>\n        </button>\n        \n      </ion-item-options>\n\n      \n    </ion-item-sliding>\n  </ion-list>\n  \n      <ion-fab bottom left>\n        <button ion-button round color="primary" (click)="signOut()"> logout   -\n          <ion-icon name="md-exit"></ion-icon>\n        </button>\n      </ion-fab>\n      \n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\exercise-list\exercise-list.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__providers_exercise_exercise__["a" /* ExerciseProvider */],
@@ -984,181 +938,13 @@ var ExerciseListPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 330:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkoutProgramExerciseProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(48);
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var WorkoutProgramExerciseProvider = /** @class */ (function () {
-    function WorkoutProgramExerciseProvider(db) {
-        this.db = db;
-        this.PATH = 'WorkoutProgramExercise/';
-    }
-    WorkoutProgramExerciseProvider.prototype.getAll = function (keyProgram) {
-        return this.db.list(this.PATH + keyProgram)
-            .snapshotChanges()
-            .map(function (changes) {
-            return changes.map(function (c) { return (__assign({ key: c.payload.key }, c.payload.val())); });
-        });
-    };
-    WorkoutProgramExerciseProvider.prototype.get = function (key, keyProgram) {
-        console.log(this.PATH + " " + keyProgram + " " + key);
-        return this.db.object(this.PATH + keyProgram)
-            .snapshotChanges()
-            .map(function (c) {
-            return __assign({ key: c.key }, c.payload.val());
-        });
-    };
-    WorkoutProgramExerciseProvider.prototype.save = function (WorkoutProgramExercise, keyProgram) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            if (WorkoutProgramExercise.key) {
-                _this.db.list(_this.PATH + keyProgram)
-                    .update(WorkoutProgramExercise.key, {
-                    idExercicio: WorkoutProgramExercise.idExercicio,
-                    serie: WorkoutProgramExercise.serie,
-                    repeticao: WorkoutProgramExercise.repeticao,
-                    carga: WorkoutProgramExercise.carga
-                })
-                    .then(function () { return resolve(); })
-                    .catch(function (e) { return reject(e); });
-            }
-            else {
-                _this.db.list(_this.PATH + keyProgram)
-                    .push({
-                    idExercicio: WorkoutProgramExercise.idExercicio,
-                    serie: WorkoutProgramExercise.serie,
-                    repeticao: WorkoutProgramExercise.repeticao,
-                    carga: WorkoutProgramExercise.carga
-                })
-                    .then(function () { return resolve(); });
-            }
-        });
-    };
-    WorkoutProgramExerciseProvider.prototype.remove = function (key, keyProgram) {
-        return this.db.list(this.PATH + keyProgram).remove(key);
-    };
-    WorkoutProgramExerciseProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
-    ], WorkoutProgramExerciseProvider);
-    return WorkoutProgramExerciseProvider;
-}());
-
-//# sourceMappingURL=workout-program-exercise.js.map
-
-/***/ }),
-
 /***/ 331:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkoutProgramProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(48);
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var WorkoutProgramProvider = /** @class */ (function () {
-    function WorkoutProgramProvider(db) {
-        this.db = db;
-        this.PATH = 'workoutProgram/';
-    }
-    WorkoutProgramProvider.prototype.getAll = function () {
-        return this.db.list(this.PATH)
-            .snapshotChanges()
-            .map(function (changes) {
-            return changes.map(function (c) { return (__assign({ key: c.payload.key }, c.payload.val())); });
-        });
-    };
-    WorkoutProgramProvider.prototype.get = function (key) {
-        return this.db.object(this.PATH + key)
-            .snapshotChanges()
-            .map(function (c) {
-            return __assign({ key: c.key }, c.payload.val());
-        });
-    };
-    WorkoutProgramProvider.prototype.save = function (workoutProgram) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            if (workoutProgram.key) {
-                _this.db.list(_this.PATH)
-                    .update(workoutProgram.key, {
-                    titulo: workoutProgram.titulo,
-                    objetivo: workoutProgram.objetivo
-                })
-                    .then(function () { return resolve(); })
-                    .catch(function (e) { return reject(e); });
-            }
-            else {
-                _this.db.list(_this.PATH)
-                    .push({
-                    titulo: workoutProgram.titulo,
-                    objetivo: workoutProgram.objetivo
-                })
-                    .then(function () { return resolve(); });
-            }
-        });
-    };
-    WorkoutProgramProvider.prototype.remove = function (key) {
-        this.db.list('WorkoutProgramExercise/').remove(key);
-        return this.db.list(this.PATH).remove(key);
-    };
-    WorkoutProgramProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
-    ], WorkoutProgramProvider);
-    return WorkoutProgramProvider;
-}());
-
-//# sourceMappingURL=workout-program.js.map
-
-/***/ }),
-
-/***/ 332:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(351);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(332);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(350);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1167,7 +953,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 351:
+/***/ 350:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1175,45 +961,39 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(328);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(329);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(329);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(330);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_auth_servicenpm_auth_servicenpm__ = __webpack_require__(518);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(522);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_home_home__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_signin_signin__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_auth_servicenpm_auth_servicenpm__ = __webpack_require__(517);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(521);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_home_home__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_signin_signin__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_signup_signup__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_resetpassword_resetpassword__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_add_exercise_add_exercise__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_exercise_list_exercise_list__ = __webpack_require__(278);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_edit_profile_edit_profile__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_profile_list_profile_list__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_auth_auth_service__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_exercise_exercise__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__providers_workout_program_workout_program__ = __webpack_require__(331);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_workout_program_exercise_workout_program_exercise__ = __webpack_require__(330);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_add_workout_program_add_workout_program__ = __webpack_require__(536);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_list_workout_program_list_workout_program__ = __webpack_require__(539);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_add_workout_exercise_add_workout_exercise__ = __webpack_require__(537);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_facebook__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_resetpassword_resetpassword__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_add_exercise_add_exercise__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_exercise_list_exercise_list__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_edit_profile_edit_profile__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_profile_list_profile_list__ = __webpack_require__(278);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_auth_auth_service__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_exercise_exercise__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__providers_workout_program_workout_program__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_workout_program_exercise_workout_program_exercise__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_add_workout_program_add_workout_program__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_list_workout_program_list_workout_program__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_add_workout_exercise_add_workout_exercise__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_facebook__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_google_plus__ = __webpack_require__(276);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_angularfire2_database__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_profile_profile__ = __webpack_require__(128);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_treino_treino__ = __webpack_require__(127);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_list_treino_list_treino__ = __webpack_require__(274);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_add_treino_add_treino__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__pages_contato_contato__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_list_menutreino_list_menutreino__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_profile_profile__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_treino_treino__ = __webpack_require__(522);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_contato_contato__ = __webpack_require__(163);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-
-
 
 
 
@@ -1267,10 +1047,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_14__pages_exercise_list_exercise_list__["a" /* ExerciseListPage */],
                 __WEBPACK_IMPORTED_MODULE_15__pages_edit_profile_edit_profile__["a" /* EditProfilePage */],
                 __WEBPACK_IMPORTED_MODULE_16__pages_profile_list_profile_list__["a" /* ProfileListPage */],
-                __WEBPACK_IMPORTED_MODULE_29__pages_list_treino_list_treino__["a" /* ListTreinoPage */],
-                __WEBPACK_IMPORTED_MODULE_30__pages_add_treino_add_treino__["a" /* AddTreinoPage */],
-                __WEBPACK_IMPORTED_MODULE_31__pages_contato_contato__["a" /* ContatoPage */],
-                __WEBPACK_IMPORTED_MODULE_32__pages_list_menutreino_list_menutreino__["a" /* ListMenutreinoPage */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_contato_contato__["a" /* ContatoPage */],
                 __WEBPACK_IMPORTED_MODULE_21__pages_add_workout_program_add_workout_program__["a" /* AddWorkoutProgramPage */],
                 __WEBPACK_IMPORTED_MODULE_22__pages_list_workout_program_list_workout_program__["a" /* ListWorkoutProgramPage */],
                 __WEBPACK_IMPORTED_MODULE_23__pages_add_workout_exercise_add_workout_exercise__["a" /* AddWorkoutexercisePage */]
@@ -1280,14 +1057,10 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/add-exercise/add-exercise.module#AddExercisePageModule', name: 'AddExercisePage', segment: 'add-exercise', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/add-treino/add-treino.module#AddTreinoPageModule', name: 'AddTreinoPage', segment: 'add-treino', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/add-workout-program/add-workout-program.module#AddWorkoutProgramPageModule', name: 'AddWorkoutProgramPage', segment: 'add-workout-program', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/add-workoutexercise/add-workoutexercise.module#AddWorkoutexercisePageModule', name: 'AddWorkoutexercisePage', segment: 'add-workoutexercise', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/contato/contato.module#ContatoPageModule', name: 'ContatoPage', segment: 'contato', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/edit-profile/edit-profile.module#EditProfilePageModule', name: 'EditProfilePage', segment: 'edit-profile', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/list-menutreino/list-menutreino.module#ListMenutreinoPageModule', name: 'ListMenutreinoPage', segment: 'list-menutreino', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/list-workout-program/list-workout-program.module#ListWorkoutProgramPageModule', name: 'ListWorkoutProgramPage', segment: 'list-workout-program', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/profile/profile.module#ProfilePageModule', name: 'ProfilePage', segment: 'profile', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/resetpassword/resetpassword.module#ResetpasswordPageModule', name: 'ResetpasswordPage', segment: 'resetpassword', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/signin/signin.module#LoginPageModule', name: 'SigninPage', segment: 'signin', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/signinwithemail/signinwithemail.module#LoginPageModule', name: 'SigninWithEmailPage', segment: 'signinwithemail', priority: 'low', defaultHistory: [] },
@@ -1309,10 +1082,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_14__pages_exercise_list_exercise_list__["a" /* ExerciseListPage */],
                 __WEBPACK_IMPORTED_MODULE_15__pages_edit_profile_edit_profile__["a" /* EditProfilePage */],
                 __WEBPACK_IMPORTED_MODULE_16__pages_profile_list_profile_list__["a" /* ProfileListPage */],
-                __WEBPACK_IMPORTED_MODULE_29__pages_list_treino_list_treino__["a" /* ListTreinoPage */],
-                __WEBPACK_IMPORTED_MODULE_30__pages_add_treino_add_treino__["a" /* AddTreinoPage */],
-                __WEBPACK_IMPORTED_MODULE_31__pages_contato_contato__["a" /* ContatoPage */],
-                __WEBPACK_IMPORTED_MODULE_32__pages_list_menutreino_list_menutreino__["a" /* ListMenutreinoPage */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_contato_contato__["a" /* ContatoPage */],
                 __WEBPACK_IMPORTED_MODULE_21__pages_add_workout_program_add_workout_program__["a" /* AddWorkoutProgramPage */],
                 __WEBPACK_IMPORTED_MODULE_22__pages_list_workout_program_list_workout_program__["a" /* ListWorkoutProgramPage */],
                 __WEBPACK_IMPORTED_MODULE_23__pages_add_workout_exercise_add_workout_exercise__["a" /* AddWorkoutexercisePage */]
@@ -1340,17 +1110,17 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 36:
+/***/ 44:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthServiceProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase_app__ = __webpack_require__(275);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase_app__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_google_plus__ = __webpack_require__(276);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_facebook__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_facebook__ = __webpack_require__(133);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1459,12 +1229,12 @@ var AuthServiceProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 518:
+/***/ 517:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthServicenpmProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(519);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(518);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1499,19 +1269,19 @@ var AuthServicenpmProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 522:
+/***/ 521:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(329);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(328);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_signin_signin__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_list_workout_program_list_workout_program__ = __webpack_require__(539);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(330);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(329);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_signin_signin__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_list_workout_program_list_workout_program__ = __webpack_require__(93);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1556,33 +1326,36 @@ var MyApp = /** @class */ (function () {
     }
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\app\app.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */]])
     ], MyApp);
     return MyApp;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
 
-/***/ 536:
+/***/ 522:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddWorkoutProgramPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreinoProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_workout_program_workout_program__ = __webpack_require__(331);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_workout_exercise_add_workout_exercise__ = __webpack_require__(537);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_workout_program_exercise_workout_program_exercise__ = __webpack_require__(330);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_exercise_exercise__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(67);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1595,124 +1368,85 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
-
-
-var AddWorkoutProgramPage = /** @class */ (function () {
-    function AddWorkoutProgramPage(navCtrl, navParams, formBuilder, provider, providerExerciseProgram, providerExercise, toast) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.provider = provider;
-        this.providerExerciseProgram = providerExerciseProgram;
-        this.providerExercise = providerExercise;
-        this.toast = toast;
-        this.listExercise = [];
-        this.workoutProgram = this.navParams.data.workoutProgram || {};
-        this.createForm();
-        this.setupPageTitle();
-        this.workoutProgramExercise = providerExerciseProgram.getAll(this.workoutProgram.key);
-        this.getInfoExercise();
+var TreinoProvider = /** @class */ (function () {
+    function TreinoProvider(db, auth) {
+        this.db = db;
+        this.auth = auth;
+        this.PATH = 'treino/';
     }
-    AddWorkoutProgramPage.prototype.setupPageTitle = function () {
-        this.title = this.navParams.data.workoutProgram ? 'Alterar Plano de Treino' : 'Adicionar Plano de Treino';
-    };
-    AddWorkoutProgramPage.prototype.createForm = function () {
-        this.form = this.formBuilder.group({
-            key: [this.workoutProgram.key],
-            titulo: [this.workoutProgram.titulo, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required],
-            objetivo: [this.workoutProgram.objetivo, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]
+    TreinoProvider.prototype.getAll = function () {
+        return this.db.list(this.PATH + this.auth.auth.currentUser.uid)
+            .snapshotChanges()
+            .map(function (changes) {
+            return changes.map(function (c) { return (__assign({ key: c.payload.key }, c.payload.val())); });
         });
     };
-    AddWorkoutProgramPage.prototype.onSubmit = function () {
-        var _this = this;
-        if (this.form.valid) {
-            this.provider.save(this.form.value)
-                .then(function () {
-                _this.toast.create({ message: 'Plano de Treino salvo com sucesso.', duration: 3000 }).present();
-            })
-                .catch(function (e) {
-                _this.toast.create({ message: 'Erro ao salvar o Plano de Treino.', duration: 3000 }).present();
-                console.log(e);
-            });
-        }
-    };
-    AddWorkoutProgramPage.prototype.navigateAddWorkoutexercisePage = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__add_workout_exercise_add_workout_exercise__["a" /* AddWorkoutexercisePage */], { keyProgram: this.workoutProgram.key });
-    };
-    AddWorkoutProgramPage.prototype.getInfoExercise = function () {
-        var _this = this;
-        this.workoutProgramExercise.forEach(function (exerciseProgram) {
-            exerciseProgram.forEach(function (exerciseWorkoutProgram) {
-                var exercise = _this.providerExercise.get(exerciseWorkoutProgram.idExercicio);
-                exercise.forEach(function (exercise) {
-                    _this.listExercise.forEach(function (e) {
-                        if (e.keyExercise == exerciseWorkoutProgram.key)
-                            _this.listExercise.splice(e.key);
-                    });
-                    _this.addExercise(exerciseWorkoutProgram, exercise);
-                });
-            });
+    TreinoProvider.prototype.get = function (key) {
+        return this.db.object(this.PATH + this.auth.auth.currentUser.uid)
+            .snapshotChanges()
+            .map(function (c) {
+            return __assign({ key: c.key }, c.payload.val());
         });
     };
-    AddWorkoutProgramPage.prototype.addExercise = function (exerciseWorkoutProgram, exercise) {
-        this.listExercise.push({
-            keyExercise: exerciseWorkoutProgram.key,
-            nomeExercicio: exercise.NomeExercicio,
-            serie: exerciseWorkoutProgram.serie,
-            repeticao: exerciseWorkoutProgram.repeticao,
-            carga: exerciseWorkoutProgram.carga
-        });
-    };
-    AddWorkoutProgramPage.prototype.editExercise = function (keyParam) {
+    TreinoProvider.prototype.save = function (treino, exercise) {
         var _this = this;
-        this.workoutProgramExercise = this.providerExerciseProgram.get(keyParam, this.workoutProgram.key);
-        this.workoutProgramExercise.map(function (exerciseWorkoutProgram) {
-            console.log(exerciseWorkoutProgram);
-            if (exerciseWorkoutProgram.key == keyParam) {
-                return _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__add_workout_exercise_add_workout_exercise__["a" /* AddWorkoutexercisePage */], { keyProgram: _this.workoutProgram.key, workoutProgramExercise: exerciseWorkoutProgram });
+        return new Promise(function (resolve, reject) {
+            if (treino.key) {
+                _this.db.list(_this.PATH + _this.auth.auth.currentUser.uid)
+                    .update(treino.key, {
+                    diaSemana: treino.diaSemana,
+                    NomeExercicio: treino.NomeExercicio,
+                    descricao: treino.descricao,
+                    equipamento: treino.equipamento,
+                    grupoMuscular: treino.grupoMuscular,
+                    repeticoes: treino.repeticoes,
+                })
+                    .then(function () { return resolve(); })
+                    .catch(function (e) { return reject(e); });
+            }
+            else {
+                _this.db.list(_this.PATH + _this.auth.auth.currentUser.uid)
+                    .push({
+                    diaSemana: treino.diaSemana,
+                    NomeExercicio: treino.NomeExercicio,
+                    descricao: treino.descricao,
+                    equipamento: treino.equipamento,
+                    grupoMuscular: treino.grupoMuscular,
+                    repeticoes: treino.repeticoes,
+                })
+                    .then(function () { return resolve(); });
             }
         });
     };
-    AddWorkoutProgramPage.prototype.removeExercise = function (key) {
-        var _this = this;
-        this.providerExerciseProgram.remove(key, this.workoutProgram.key)
-            .then(function () {
-            _this.toast.create({ message: 'Contato removido com sucesso.', duration: 3000 }).present();
-        })
-            .catch(function () {
-            _this.toast.create({ message: 'Erro ao remover o exercício.', duration: 3000 }).present();
-        });
+    TreinoProvider.prototype.remove = function (key) {
+        return this.db.list(this.PATH + this.auth.auth.currentUser.uid).remove(key);
     };
-    AddWorkoutProgramPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-add-workout-program',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-program\add-workout-program.html"*/'  <ion-header>\n\n    <ion-navbar color="primary">\n      <ion-title>{{title}}</ion-title>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding>\n\n       \n\n    <form [formGroup]="form">\n        \n          <ion-item>\n            <ion-label stacked>Título</ion-label>\n            <ion-input type="text" formControlName="titulo"></ion-input>\n          </ion-item>\n          <ion-item *ngIf="!form.controls.titulo.valid && (form.controls.titulo.dirty || form.controls.titulo.touched)" color="danger">\n            <div [hidden]="!form.controls.titulo.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n\n          <ion-item>\n              <ion-label stacked>Objetivo</ion-label>\n              <ion-input type="text" formControlName="objetivo"></ion-input>\n          </ion-item>\n          <ion-item *ngIf="!form.controls.objetivo.valid && (form.controls.objetivo.dirty || form.controls.objetivo.touched)" color="danger">\n            <div [hidden]="!form.controls.objetivo.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n\n        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Treino</button>\n      \n        <ion-segment color="dark">\n            <ion-segment-button value="standard">\n              EXERCÍCIOS\n            </ion-segment-button>\n          </ion-segment>\n\n          <ion-list>\n              <ion-item-sliding *ngFor="let exercise of listExercise">\n                <ion-item>\n                    <h2>{{exercise.nomeExercicio}}</h2>\n                    <ion-grid>\n                      <ion-row>\n                        <ion-col>\n                            <p>Série</p>\n                        </ion-col>\n                        <ion-col col-6>\n                            <p>Repetição</p>\n                        </ion-col>\n                        <ion-col>\n                            <p>Carga</p>\n                        </ion-col>\n                      </ion-row>\n                      <ion-row>\n                         <ion-col>\n                            <p>{{exercise.serie}}</p>\n                         </ion-col>\n                         <ion-col col-6>\n                            <p>{{exercise.repeticao}}</p>\n                         </ion-col>\n                         <ion-col>\n                            <p>{{exercise.carga}}</p>\n                         </ion-col>\n                        </ion-row>\n                      </ion-grid>\n                </ion-item>\n          \n                <ion-item-options side="left">\n                  <button ion-button color="secondary" (click)="editExercise(exercise.keyExercise)">\n                    <ion-icon name="create"></ion-icon>\n                  </button>\n                  <button ion-button color="danger" (click)="removeExercise(exercise.keyExercise)">\n                    <ion-icon name="trash"></ion-icon>\n                  </button>\n                </ion-item-options>\n          \n              </ion-item-sliding>\n            </ion-list>\n    </form>\n\n    <ion-fab right bottom>\n        <button ion-fab color="primary" (click)="navigateAddWorkoutexercisePage()">\n          <ion-icon name="add"></ion-icon>\n        </button>\n      </ion-fab>\n\n  </ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-program\add-workout-program.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__providers_workout_program_workout_program__["a" /* WorkoutProgramProvider */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_workout_program_exercise_workout_program_exercise__["a" /* WorkoutProgramExerciseProvider */],
-            __WEBPACK_IMPORTED_MODULE_6__providers_exercise_exercise__["a" /* ExerciseProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
-    ], AddWorkoutProgramPage);
-    return AddWorkoutProgramPage;
+    TreinoProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */]])
+    ], TreinoProvider);
+    return TreinoProvider;
 }());
 
-//# sourceMappingURL=add-workout-program.js.map
+//# sourceMappingURL=treino.js.map
 
 /***/ }),
 
-/***/ 537:
+/***/ 62:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddWorkoutexercisePage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ExerciseProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_workout_program_exercise_workout_program_exercise__ = __webpack_require__(330);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_workout_program_add_workout_program__ = __webpack_require__(536);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(48);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1724,131 +1458,60 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-
-
-
-var AddWorkoutexercisePage = /** @class */ (function () {
-    function AddWorkoutexercisePage(navCtrl, navParams, formBuilder, provider, providerExercise, toast) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.provider = provider;
-        this.providerExercise = providerExercise;
-        this.toast = toast;
-        this.exercise = this.provider.getAll();
-        this.keyProgram = this.navParams.data.keyProgram || {};
-        this.workoutProgramExercise = this.navParams.data.workoutProgramExercise || {};
-        console.log(this.keyProgram);
-        this.createForm();
-        this.setupPageTitle();
+var ExerciseProvider = /** @class */ (function () {
+    function ExerciseProvider(db) {
+        this.db = db;
+        this.PATH = 'exercise/';
     }
-    AddWorkoutexercisePage.prototype.setupPageTitle = function () {
-        this.title = this.navParams.data.workoutProgran ? 'Alterar Exercícios' : 'Adicionar Exercícios';
-    };
-    AddWorkoutexercisePage.prototype.createForm = function () {
-        this.form = this.formBuilder.group({
-            key: [this.workoutProgramExercise.key],
-            idExercicio: [this.workoutProgramExercise.idExercicio, __WEBPACK_IMPORTED_MODULE_5__angular_forms__["g" /* Validators */].required],
-            serie: [this.workoutProgramExercise.serie],
-            repeticao: [this.workoutProgramExercise.repeticao],
-            carga: [this.workoutProgramExercise.carga]
+    ExerciseProvider.prototype.getAll = function () {
+        return this.db.list(this.PATH)
+            .snapshotChanges()
+            .map(function (changes) {
+            return changes.map(function (c) { return (__assign({ key: c.payload.key }, c.payload.val())); });
         });
     };
-    AddWorkoutexercisePage.prototype.navigateAddWorkoutexercisePage = function () {
-        this.navCtrl.popTo(__WEBPACK_IMPORTED_MODULE_4__add_workout_program_add_workout_program__["a" /* AddWorkoutProgramPage */]);
+    ExerciseProvider.prototype.get = function (key) {
+        return this.db.object(this.PATH + key)
+            .snapshotChanges()
+            .map(function (c) {
+            return __assign({ key: c.key }, c.payload.val());
+        });
     };
-    AddWorkoutexercisePage.prototype.onSubmit = function () {
+    ExerciseProvider.prototype.save = function (exercise) {
         var _this = this;
-        if (this.form.valid) {
-            this.providerExercise.save(this.form.value, this.keyProgram)
-                .then(function () {
-                _this.toast.create({ message: 'Exercício salvo com sucesso.', duration: 3000 }).present();
-                _this.navCtrl.pop();
-            })
-                .catch(function (e) {
-                _this.toast.create({ message: 'Erro ao salvar o Exercício.', duration: 3000 }).present();
-                console.log(e);
-            });
-        }
+        return new Promise(function (resolve, reject) {
+            if (exercise.key) {
+                _this.db.list(_this.PATH)
+                    .update(exercise.key, {
+                    NomeExercicio: exercise.NomeExercicio,
+                })
+                    .then(function () { return resolve(); })
+                    .catch(function (e) { return reject(e); });
+            }
+            else {
+                _this.db.list(_this.PATH)
+                    .push({
+                    NomeExercicio: exercise.NomeExercicio,
+                })
+                    .then(function () { return resolve(); });
+            }
+        });
     };
-    AddWorkoutexercisePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-add-workout-exercise',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-exercise\add-workout-exercise.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>addWorkoutExercise</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <form [formGroup]="form">\n        \n          <ion-item>\n            <ion-label stacked>Exercício</ion-label>\n            <ion-select formControlName="idExercicio">\n              <ion-option *ngFor="let exercise of exercise | async" value="{{exercise.key}}">{{exercise.NomeExercicio}}</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item *ngIf="!form.controls.idExercicio.valid && (form.controls.idExercicio.dirty || form.controls.idExercicio.touched)" color="danger">\n              <div [hidden]="!form.controls.idExercicio.errors.required">\n                O campo é obrigatório\n              </div>\n          </ion-item>\n          \n          <ion-item>\n            <ion-label stacked>Série</ion-label>\n            <ion-input type="text" formControlName="serie"></ion-input>\n          </ion-item>\n           \n          <ion-item>\n            <ion-label stacked>Repetição</ion-label>\n            <ion-input type="text" formControlName="repeticao"></ion-input>\n          </ion-item>\n\n          <ion-item>\n            <ion-label stacked>Carga</ion-label>\n            <ion-input type="text" formControlName="carga"></ion-input>\n          </ion-item>\n\n          <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Exercício</button>\n    </form>\n  \n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-exercise\add-workout-exercise.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__["a" /* ExerciseProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_workout_program_exercise_workout_program_exercise__["a" /* WorkoutProgramExerciseProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
-    ], AddWorkoutexercisePage);
-    return AddWorkoutexercisePage;
+    ExerciseProvider.prototype.remove = function (key) {
+        return this.db.list(this.PATH).remove(key);
+    };
+    ExerciseProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+    ], ExerciseProvider);
+    return ExerciseProvider;
 }());
 
-//# sourceMappingURL=add-workout-exercise.js.map
+//# sourceMappingURL=exercise.js.map
 
 /***/ }),
 
-/***/ 539:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListWorkoutProgramPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_workout_program_add_workout_program__ = __webpack_require__(536);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_workout_program_workout_program__ = __webpack_require__(331);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var ListWorkoutProgramPage = /** @class */ (function () {
-    function ListWorkoutProgramPage(navCtrl, navParams, provider, toast) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.provider = provider;
-        this.toast = toast;
-        this.workoutProgram = this.provider.getAll();
-    }
-    ListWorkoutProgramPage.prototype.navigateAddWorkoutProgramPage = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__add_workout_program_add_workout_program__["a" /* AddWorkoutProgramPage */]);
-    };
-    ListWorkoutProgramPage.prototype.editExercise = function (workoutProgram) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__add_workout_program_add_workout_program__["a" /* AddWorkoutProgramPage */], { workoutProgram: workoutProgram });
-    };
-    ListWorkoutProgramPage.prototype.removeExercise = function (key) {
-        var _this = this;
-        this.provider.remove(key)
-            .then(function () {
-            _this.toast.create({ message: 'Contato removido com sucesso.', duration: 3000 }).present();
-        })
-            .catch(function () {
-            _this.toast.create({ message: 'Erro ao remover o exercício.', duration: 3000 }).present();
-        });
-    };
-    ListWorkoutProgramPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-list-workout-program',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-workout-program\list-workout-program.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Treinos</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-list>\n        <ion-item-sliding *ngFor="let workoutProgram of workoutProgram | async">\n    \n          <ion-item>\n              <h1>{{workoutProgram.titulo}}</h1>\n              <h2>{{workoutProgram.objetivo}}</h2>\n          </ion-item>\n    \n    \n          <ion-item-options side="left">\n            <button ion-button color="secondary" (click)="editExercise(workoutProgram)">\n              <ion-icon name="create"></ion-icon>\n            </button>\n            <button ion-button color="danger" (click)="removeExercise(workoutProgram.key)">\n              <ion-icon name="trash"></ion-icon>\n            </button>\n          </ion-item-options>\n    \n        </ion-item-sliding>\n      </ion-list>\n\n  <ion-fab right bottom>\n      <button ion-fab color="primary" (click)="navigateAddWorkoutProgramPage()">\n        <ion-icon name="add"></ion-icon>\n      </button>\n  </ion-fab>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-workout-program\list-workout-program.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_workout_program_workout_program__["a" /* WorkoutProgramProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
-    ], ListWorkoutProgramPage);
-    return ListWorkoutProgramPage;
-}());
-
-//# sourceMappingURL=list-workout-program.js.map
-
-/***/ }),
-
-/***/ 69:
+/***/ 70:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1857,14 +1520,14 @@ var ListWorkoutProgramPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_user__ = __webpack_require__(165);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth_service__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__signup_signup__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__resetpassword_resetpassword__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__exercise_list_exercise_list__ = __webpack_require__(278);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(472);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__resetpassword_resetpassword__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__exercise_list_exercise_list__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(471);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_facebook__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_facebook__ = __webpack_require__(133);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2006,18 +1669,18 @@ var SigninPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 70:
+/***/ 71:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__signin_signin__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__profile_list_profile_list__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__contato_contato__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__list_workout_program_list_workout_program__ = __webpack_require__(539);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__signin_signin__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__profile_list_profile_list__ = __webpack_require__(278);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__contato_contato__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__list_workout_program_list_workout_program__ = __webpack_require__(93);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2062,31 +1725,27 @@ var HomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Workout!\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class="bg">\n  \n\n    <ion-menu [content]="content">\n        <ion-content class="bg-menu">\n          <ion-list >\n          <button ion-button  full color="primary" (click)="ProfileRedirect()"> \n                Perfil\n            </button>\n          </ion-list>\n          \n            <ion-list>\n            <button ion-button full  color="primary" (click)="TreinoRedirect()"> \n                Treino\n              </button>\n            </ion-list>\n\n          <ion-list>\n              <button ion-button full  color="primary" (click)="ContatoRedirect()"> \n                  Contato\n                </button>\n              </ion-list>\n            </ion-content>\n\n        </ion-menu>      \n      <ion-nav #content [root]="HomePage"></ion-nav>\n\n\n      <button ion-button class="bg-logout" around  color="primary" (click)="signOut()">\n          <ion-icon name="md-exit"></ion-icon>\n            Logout\n        </button>\n\n   <ion-buttons  start>\n   <button ion-button icon-only menuToggle>   \n    <ion-icon name="menu"></ion-icon>       Menu Principal \n  </button>\n  </ion-buttons>\n\n \n  <ion-footer>\n    <ion-toolbar> Copyright 2018\n      <ion-title></ion-title>\n    </ion-toolbar>\n  </ion-footer>\n\n  \n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__["a" /* AuthServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__["a" /* AuthServiceProvider */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth_service__["a" /* AuthServiceProvider */]])
     ], HomePage);
     return HomePage;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=home.js.map
 
 /***/ }),
 
-/***/ 91:
+/***/ 92:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ExerciseProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddWorkoutProgramPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(48);
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_workout_program_workout_program__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_workout_exercise_add_workout_exercise__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_workout_program_exercise_workout_program_exercise__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_exercise_exercise__ = __webpack_require__(62);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2098,65 +1757,176 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var ExerciseProvider = /** @class */ (function () {
-    function ExerciseProvider(db) {
-        this.db = db;
-        this.PATH = 'exercise/';
+
+
+
+
+
+var AddWorkoutProgramPage = /** @class */ (function () {
+    function AddWorkoutProgramPage(navCtrl, navParams, formBuilder, provider, providerExerciseProgram, providerExercise, toast) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.formBuilder = formBuilder;
+        this.provider = provider;
+        this.providerExerciseProgram = providerExerciseProgram;
+        this.providerExercise = providerExercise;
+        this.toast = toast;
+        this.listExercise = [];
+        this.workoutProgram = this.navParams.data.workoutProgram || {};
+        this.createForm();
+        this.setupPageTitle();
+        this.workoutProgramExercise = providerExerciseProgram.getAll(this.workoutProgram.key);
+        this.getInfoExercise();
     }
-    ExerciseProvider.prototype.getAll = function () {
-        return this.db.list(this.PATH)
-            .snapshotChanges()
-            .map(function (changes) {
-            return changes.map(function (c) { return (__assign({ key: c.payload.key }, c.payload.val())); });
+    AddWorkoutProgramPage.prototype.setupPageTitle = function () {
+        this.title = this.navParams.data.workoutProgram ? 'Alterar Plano de Treino' : 'Adicionar Plano de Treino';
+    };
+    AddWorkoutProgramPage.prototype.createForm = function () {
+        this.form = this.formBuilder.group({
+            key: [this.workoutProgram.key],
+            titulo: [this.workoutProgram.titulo, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required],
+            objetivo: [this.workoutProgram.objetivo, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required],
+            grupoMuscular: [this.workoutProgram.grupoMuscular, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]
         });
     };
-    ExerciseProvider.prototype.get = function (key) {
-        return this.db.object(this.PATH + key)
-            .snapshotChanges()
-            .map(function (c) {
-            return __assign({ key: c.key }, c.payload.val());
-        });
-    };
-    ExerciseProvider.prototype.save = function (exercise) {
+    AddWorkoutProgramPage.prototype.onSubmit = function () {
         var _this = this;
-        return new Promise(function (resolve, reject) {
-            if (exercise.key) {
-                _this.db.list(_this.PATH)
-                    .update(exercise.key, {
-                    NomeExercicio: exercise.NomeExercicio,
-                    descricao: exercise.descricao,
-                    equipamento: exercise.equipamento,
-                    grupoMuscular: exercise.grupoMuscular
-                    //imagem: exercicse.imagem
-                })
-                    .then(function () { return resolve(); })
-                    .catch(function (e) { return reject(e); });
-            }
-            else {
-                _this.db.list(_this.PATH)
-                    .push({
-                    NomeExercicio: exercise.NomeExercicio,
-                    descricao: exercise.descricao,
-                    equipamento: exercise.equipamento,
-                    grupoMuscular: exercise.grupoMuscular
-                })
-                    .then(function () { return resolve(); });
+        if (this.form.valid) {
+            this.provider.save(this.form.value)
+                .then(function () {
+                _this.toast.create({ message: 'Plano de Treino salvo com sucesso.', duration: 3000 }).present();
+            })
+                .catch(function (e) {
+                _this.toast.create({ message: 'Erro ao salvar o Plano de Treino.', duration: 3000 }).present();
+                console.log(e);
+            });
+        }
+    };
+    AddWorkoutProgramPage.prototype.navigateAddWorkoutexercisePage = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__add_workout_exercise_add_workout_exercise__["a" /* AddWorkoutexercisePage */], { keyProgram: this.workoutProgram.key });
+    };
+    AddWorkoutProgramPage.prototype.getInfoExercise = function () {
+        var _this = this;
+        this.workoutProgramExercise.forEach(function (exerciseProgram) {
+            exerciseProgram.forEach(function (exerciseWorkoutProgram) {
+                var exercise = _this.providerExercise.get(exerciseWorkoutProgram.idExercicio);
+                exercise.forEach(function (exercise) {
+                    _this.listExercise.forEach(function (e) {
+                        if (e.keyExercise == exerciseWorkoutProgram.key)
+                            _this.listExercise.splice(e.key);
+                    });
+                    _this.addExercise(exerciseWorkoutProgram, exercise);
+                });
+            });
+        });
+    };
+    AddWorkoutProgramPage.prototype.addExercise = function (exerciseWorkoutProgram, exercise) {
+        this.listExercise.push({
+            keyExercise: exerciseWorkoutProgram.key,
+            nomeExercicio: exercise.NomeExercicio,
+            grupoMuscular: exercise.grupoMuscular,
+            serie: exerciseWorkoutProgram.serie,
+            repeticao: exerciseWorkoutProgram.repeticao,
+            carga: exerciseWorkoutProgram.carga
+        });
+    };
+    AddWorkoutProgramPage.prototype.editExercise = function (keyParam) {
+        var _this = this;
+        this.workoutProgramExercise = this.providerExerciseProgram.get(keyParam, this.workoutProgram.key);
+        this.workoutProgramExercise.map(function (exerciseWorkoutProgram) {
+            console.log(exerciseWorkoutProgram);
+            if (exerciseWorkoutProgram.key == keyParam) {
+                return _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__add_workout_exercise_add_workout_exercise__["a" /* AddWorkoutexercisePage */], { keyProgram: _this.workoutProgram.key, workoutProgramExercise: exerciseWorkoutProgram });
             }
         });
     };
-    ExerciseProvider.prototype.remove = function (key) {
-        return this.db.list(this.PATH).remove(key);
+    AddWorkoutProgramPage.prototype.removeExercise = function (key) {
+        var _this = this;
+        this.providerExerciseProgram.remove(key, this.workoutProgram.key)
+            .then(function () {
+            _this.toast.create({ message: 'Contato removido com sucesso.', duration: 3000 }).present();
+        })
+            .catch(function () {
+            _this.toast.create({ message: 'Erro ao remover o exercício.', duration: 3000 }).present();
+        });
     };
-    ExerciseProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
-    ], ExerciseProvider);
-    return ExerciseProvider;
+    AddWorkoutProgramPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-add-workout-program',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-program\add-workout-program.html"*/'  <ion-header>\n\n    <ion-navbar color="primary">\n      <ion-title>{{title}}</ion-title>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding>\n\n       \n\n    <form [formGroup]="form">\n        \n          <ion-item>\n            <ion-label stacked>Título</ion-label>\n            <ion-input type="text" formControlName="titulo"></ion-input>\n          </ion-item>\n          <ion-item *ngIf="!form.controls.titulo.valid && (form.controls.titulo.dirty || form.controls.titulo.touched)" color="danger">\n            <div [hidden]="!form.controls.titulo.errors.required">\n              O campo é obrigatório\n            </div>\n          </ion-item>\n\n          <ion-item>\n              <ion-label stacked>Objetivo</ion-label>\n              <ion-input type="text" formControlName="objetivo"></ion-input>\n          </ion-item>\n          <ion-item *ngIf="!form.controls.objetivo.valid && (form.controls.objetivo.dirty || form.controls.objetivo.touched)" color="danger">\n            <div [hidden]="!form.controls.objetivo.errors.required">\n              O campo é obrigatório\n            </div>\n\n\n          </ion-item>\n          <ion-item>\n            <ion-label stacked>Grupo Muscular</ion-label>\n            <ion-select formControlName="grupoMuscular">\n              <ion-option value="Abdominal">Abdominal</ion-option>\n              <ion-option value="Trapézio">Trapézio</ion-option>\n              <ion-option value="Dorsal">Dorsal</ion-option>\n              <ion-option value="Ombro posterior">Ombro posterior</ion-option>           \n              <ion-option value="Ombro frontal">Ombro frontal</ion-option>\n              <ion-option value="Ombro Lateral">Ombro Lateral</ion-option>\n              <ion-option value="Peito superior">Peito superior</ion-option>\n              <ion-option value="Peito">Peito</ion-option>\n              <ion-option value="Biceps">Biceps</ion-option>\n              <ion-option value="Triceps Lateral">Triceps Lateral</ion-option>\n              <ion-option value="Triceps branquial">Triceps branquial</ion-option>\n              <ion-option value="Antebraço">Antebraço</ion-option>\n              <ion-option value="Glúteo">Glúteo</ion-option>\n              <ion-option value="Quadrícepes">Quadrícepes</ion-option>\n  \n            </ion-select>\n          </ion-item>\n        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Salvar Treino</button>\n      \n        <ion-segment color="dark">\n            <ion-segment-button value="standard">\n              EXERCÍCIOS\n            </ion-segment-button>\n          </ion-segment>\n\n          <ion-list>\n              <ion-item-sliding *ngFor="let exercise of listExercise">\n                <ion-item>\n                    <h2>{{exercise.nomeExercicio}}</h2>\n                    <ion-grid>\n                      <ion-row>\n                        <ion-col>\n                            <p>Série</p>\n                        </ion-col>\n                        <ion-col col-6>\n                          <p>{{exercise.grupoMuscular}}</p>\n                       </ion-col>\n                        <ion-col col-6>\n                            <p>Repetição</p>\n                        </ion-col>\n                        <ion-col>\n                            <p>Carga</p>\n                        </ion-col>\n                      </ion-row>\n                      <ion-row>\n                         <ion-col>\n                            <p>{{exercise.serie}}</p>\n                         </ion-col>\n                         <ion-col col-6>\n                          <p>{{exercise.grupoMuscular}}</p>\n                       </ion-col>\n                         <ion-col col-6>\n                            <p>{{exercise.repeticao}}</p>\n                         </ion-col>\n                         <ion-col>\n                            <p>{{exercise.carga}}</p>\n                         </ion-col>\n                        </ion-row>\n                      </ion-grid>\n                </ion-item>\n          \n                <ion-item-options side="left">\n                  <button ion-button color="secondary" (click)="editExercise(exercise.keyExercise)">\n                    <ion-icon name="create"></ion-icon>\n                  </button>\n                  <button ion-button color="danger" (click)="removeExercise(exercise.keyExercise)">\n                    <ion-icon name="trash"></ion-icon>\n                  </button>\n                </ion-item-options>\n          \n              </ion-item-sliding>\n            </ion-list>\n    </form>\n\n    <ion-fab right bottom>\n        <button ion-fab color="primary" (click)="navigateAddWorkoutexercisePage()">\n          <ion-icon name="add"></ion-icon>\n        </button>\n      </ion-fab>\n\n  </ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-workout-program\add-workout-program.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__providers_workout_program_workout_program__["a" /* WorkoutProgramProvider */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_workout_program_exercise_workout_program_exercise__["a" /* WorkoutProgramExerciseProvider */],
+            __WEBPACK_IMPORTED_MODULE_6__providers_exercise_exercise__["a" /* ExerciseProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
+    ], AddWorkoutProgramPage);
+    return AddWorkoutProgramPage;
 }());
 
-//# sourceMappingURL=exercise.js.map
+//# sourceMappingURL=add-workout-program.js.map
+
+/***/ }),
+
+/***/ 93:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListWorkoutProgramPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_workout_program_add_workout_program__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_workout_program_workout_program__ = __webpack_require__(129);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ListWorkoutProgramPage = /** @class */ (function () {
+    function ListWorkoutProgramPage(navCtrl, navParams, provider, toast) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.provider = provider;
+        this.toast = toast;
+        this.workoutProgram = this.provider.getAll();
+    }
+    ListWorkoutProgramPage.prototype.navigateAddWorkoutProgramPage = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__add_workout_program_add_workout_program__["a" /* AddWorkoutProgramPage */]);
+    };
+    ListWorkoutProgramPage.prototype.editExercise = function (workoutProgram) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__add_workout_program_add_workout_program__["a" /* AddWorkoutProgramPage */], { workoutProgram: workoutProgram });
+    };
+    ListWorkoutProgramPage.prototype.removeExercise = function (key) {
+        var _this = this;
+        this.provider.remove(key)
+            .then(function () {
+            _this.toast.create({ message: 'Contato removido com sucesso.', duration: 3000 }).present();
+        })
+            .catch(function () {
+            _this.toast.create({ message: 'Erro ao remover o exercício.', duration: 3000 }).present();
+        });
+    };
+    ListWorkoutProgramPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-list-workout-program',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-workout-program\list-workout-program.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Treinos</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n\n<ion-content padding class="bg">\n\n    <ion-list>\n        <ion-item-sliding *ngFor="let workoutProgram of workoutProgram | async">\n    \n          <ion-item>\n              <h1>{{workoutProgram.titulo}}</h1>\n              <h2>{{workoutProgram.objetivo}}</h2>\n          </ion-item>\n    \n    \n          <ion-item-options side="left">\n            <button ion-button color="secondary" (click)="editExercise(workoutProgram)">\n              <ion-icon name="create"></ion-icon>\n            </button>\n            <button ion-button color="danger" (click)="removeExercise(workoutProgram.key)">\n              <ion-icon name="trash"></ion-icon>\n            </button>\n          </ion-item-options>\n    \n        </ion-item-sliding>\n      </ion-list>\n\n  <ion-fab right bottom>\n      <button ion-fab color="primary" (click)="navigateAddWorkoutProgramPage()">\n        <ion-icon name="add"></ion-icon>\n      </button>\n  </ion-fab>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\list-workout-program\list-workout-program.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_workout_program_workout_program__["a" /* WorkoutProgramProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]])
+    ], ListWorkoutProgramPage);
+    return ListWorkoutProgramPage;
+}());
+
+//# sourceMappingURL=list-workout-program.js.map
 
 /***/ })
 
-},[332]);
+},[331]);
 //# sourceMappingURL=main.js.map
