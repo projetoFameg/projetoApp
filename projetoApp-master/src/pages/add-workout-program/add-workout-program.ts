@@ -43,7 +43,8 @@ export class AddWorkoutProgramPage {
         key: [this.workoutProgram.key],
         titulo: [this.workoutProgram.titulo, Validators.required],
         objetivo: [this.workoutProgram.objetivo, Validators.required],
-        grupoMuscular: [this.workoutProgram.grupoMuscular, Validators.required]
+        grupoMuscular: [this.workoutProgram.grupoMuscular, Validators.required],
+        grupoMuscular2: [this.workoutProgram.grupoMuscular2, Validators.required]
 
       })
     }
@@ -86,6 +87,7 @@ export class AddWorkoutProgramPage {
         keyExercise: exerciseWorkoutProgram.key,
         nomeExercicio: exercise.NomeExercicio,
         grupoMuscular: exercise.grupoMuscular,
+        grupoMuscular2: [this.workoutProgram.grupoMuscular2, Validators.required],
         serie: exerciseWorkoutProgram.serie,
         repeticao: exerciseWorkoutProgram.repeticao,
         carga: exerciseWorkoutProgram.carga

@@ -35,7 +35,8 @@ export class WorkoutProgramProvider {
           {
             titulo: workoutProgram.titulo,
             objetivo: workoutProgram.objetivo,
-            grupoMuscular: workoutProgram.grupoMuscular
+            grupoMuscular: workoutProgram.grupoMuscular,
+            grupoMuscular2: workoutProgram.grupoMuscular2
           })
         .then(() => resolve())
         .catch((e) => reject(e));
@@ -44,7 +45,8 @@ export class WorkoutProgramProvider {
         .push({
           titulo: workoutProgram.titulo,
           objetivo: workoutProgram.objetivo,
-          grupoMuscular: workoutProgram.grupoMuscular
+          grupoMuscular: workoutProgram.grupoMuscular,
+          grupoMuscular2: workoutProgram.grupoMuscular2
         })
         .then(() => resolve());
       }
