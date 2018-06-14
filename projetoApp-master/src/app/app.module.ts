@@ -33,8 +33,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ProfileProvider } from '../providers/profile/profile';
-import { TreinoProvider } from '../providers/treino/treino';
-import { ContatoPage} from '../pages/contato/contato';
+import { ContactPage} from '../pages/contact/contact';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAJSb_bRCzXH5VwTkDI5Toz2Z2Hv3TB1q0",
@@ -57,8 +56,8 @@ const firebaseConfig = {
     ExerciseListPage,
     EditProfilePage,
     ProfileListPage,
-    ContatoPage,
-    AddWorkoutProgramPage,
+    ContactPage,
+        AddWorkoutProgramPage,
     ListWorkoutProgramPage,
     AddWorkoutexercisePage
   ],
@@ -81,7 +80,7 @@ const firebaseConfig = {
     ExerciseListPage,
     EditProfilePage,
     ProfileListPage,
-    ContatoPage,
+    ContactPage,
     AddWorkoutProgramPage,
     ListWorkoutProgramPage,
     AddWorkoutexercisePage
@@ -96,7 +95,6 @@ const firebaseConfig = {
     ExerciseProvider,
     Facebook,
     ProfileProvider,
-    TreinoProvider,
     WorkoutProgramProvider,
     WorkoutProgramExerciseProvider,
   ]

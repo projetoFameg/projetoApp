@@ -6,7 +6,6 @@ import { SigninPage } from '../signin/signin';
 import { ExerciseListPage } from '../exercise-list/exercise-list';
 import { AddExercisePage } from '../add-exercise/add-exercise';
 import { ProfileListPage } from '../profile-list/profile-list';
-import { ContatoPage} from '../contato/contato';
 import { ListWorkoutProgramPage } from '../list-workout-program/list-workout-program';
 
 @Component({
@@ -28,18 +27,6 @@ export class HomePage {
     })
   }
 
-
-  ProfileRedirect() {
-    this.navCtrl.push(ProfileListPage);
-}
-
-TreinoRedirect() {
-  this.navCtrl.push(ListWorkoutProgramPage);
-}
-
-ContatoRedirect() {
-  this.navCtrl.push(ContatoPage);
-}
 
 
 }

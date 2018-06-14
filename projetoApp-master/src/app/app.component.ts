@@ -11,6 +11,7 @@ import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { SigninPage } from '../pages/signin/signin';
 import { ListWorkoutProgramPage } from '../pages/list-workout-program/list-workout-program';
+import { ContactPage} from '../pages/contact/contact';
 
 
 @Component({
@@ -24,6 +25,15 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, afAuth: AngularFireAuth,) {
+    
+    this.pages = [
+      { title: 'Home', component: HomePage },
+      { title: 'Treinos', component: ListWorkoutProgramPage },
+      { title: 'Perfil', component: ProfileListPage },
+      { title: 'Contato', component: ContactPage }
+
+    ];
+
     const authObserver =  afAuth.authState.subscribe(user => {
       if (user) {
       this.rootPage = HomePage;
@@ -34,21 +44,16 @@ export class MyApp {
       }
     });
     
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Treinos', component: ListWorkoutProgramPage }
-    ];
-
-
-    
-
-  
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
+
+  openPage(page) {
+    this.nav.setRoot(page.component);
   }
 }
 

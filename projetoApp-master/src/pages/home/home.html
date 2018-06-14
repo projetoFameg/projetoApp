@@ -1,37 +1,15 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Workout!
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Workout!</ion-title>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content padding class="bg">
   
 
-    <ion-menu [content]="content">
-        <ion-content class="bg-menu">
-          <ion-list >
-          <button ion-button  full color="primary" (click)="ProfileRedirect()"> 
-                Perfil
-            </button>
-          </ion-list>
-          
-            <ion-list>
-            <button ion-button full  color="primary" (click)="TreinoRedirect()"> 
-                Treino
-              </button>
-            </ion-list>
-
-          <ion-list>
-              <button ion-button full  color="primary" (click)="ContatoRedirect()"> 
-                  Contato
-                </button>
-              </ion-list>
-            </ion-content>
-
-        </ion-menu>      
-      <ion-nav #content [root]="HomePage"></ion-nav>
 
 
       <button ion-button class="bg-logout" around  color="primary" (click)="signOut()">
@@ -39,12 +17,7 @@
             Logout
         </button>
 
-   <ion-buttons  start>
-   <button ion-button icon-only menuToggle>   
-    <ion-icon name="menu"></ion-icon>       Menu Principal 
-  </button>
-  </ion-buttons>
-
+ 
  
   <ion-footer>
     <ion-toolbar> Copyright 2018

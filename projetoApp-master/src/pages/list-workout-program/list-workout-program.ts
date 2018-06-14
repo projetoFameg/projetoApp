@@ -31,7 +31,7 @@ export class ListWorkoutProgramPage {
   removeExercise(key: string){
     this.provider.remove(key)
     .then(() => {
-      this.toast.create({message: 'Contato removido com sucesso.', duration: 3000}).present();
+      this.toast.create({message: 'Exercicio removido com sucesso.', duration: 3000}).present();
     })
     .catch(() => {
       this.toast.create({ message: 'Erro ao remover o exercício.', duration: 3000}).present();

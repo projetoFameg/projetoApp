@@ -14,8 +14,11 @@
     <ion-list>
         <ion-item-sliding *ngFor="let workoutProgram of workoutProgram | async">
     
-          <ion-item>
-              <h1>{{workoutProgram.titulo}}</h1>
+          <ion-item>              
+            <h1>{{workoutProgram.titulo}}</h1>
+
+              <p>{{workoutProgram.objetivo}}</p>
+
           </ion-item>
     
     

@@ -83,25 +83,7 @@
       </ion-segment-button>
     </ion-segment>
 
-    <ion-list>
-        <ion-item-sliding *ngFor="let exercise of listExercise">
     
-       
-    
-          <ion-item-options side="left">
-            <button ion-button color="secondary" (click)="editExercise(exercise)">
-              <ion-icon name="create"></ion-icon>
-            </button>
-            <button ion-button color="danger" (click)="removeExercise(exercise.key)">
-              <ion-icon name="trash"></ion-icon>
-            </button>
-            
-          </ion-item-options>
-    
-          
-        </ion-item-sliding>
-      </ion-list>
-
 
 
       <ion-list>
@@ -137,9 +119,6 @@
 
 
         <ion-item-options side="left">
-          <button ion-button color="secondary" (click)="editExercise(exercise.keyExercise)">
-            <ion-icon name="create"></ion-icon>
-          </button>
           <button ion-button color="danger" (click)="removeExercise(exercise.keyExercise)">
             <ion-icon name="trash"></ion-icon>
           </button>

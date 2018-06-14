@@ -18,8 +18,7 @@ export class WorkoutProgramExerciseProvider {
   }
 
   get(key: string, keyProgram: any){
-    console.log(this.PATH  + " " + keyProgram + " " + key );
-    
+  
     return this.db.object(this.PATH + keyProgram)
     .snapshotChanges()
     .map(c => {

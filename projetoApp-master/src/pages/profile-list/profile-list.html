@@ -1,11 +1,11 @@
 <ion-header>
-
-    <ion-navbar color="primary">
-      <ion-title>Seu perfil:</ion-title>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Perfil</ion-title>
     </ion-navbar>
-  
   </ion-header>
-  
   
   <ion-content padding>
   
@@ -19,14 +19,79 @@
       <ion-item-sliding *ngFor="let profile of profile | async">
   
         <ion-item>
-            <h2><p>Nome: </p>{{profile.nome}} </h2>
-            <h2><p>Sobrenome: </p>{{profile.sobrenome}} </h2>
-            <h3><p>Idade: </p>{{profile.idade}}</h3>
-            <h3><p>Altura: </p>{{profile.altura}} Cm</h3>
-            <h3><p>Peso: </p>{{profile.peso}} Kg</h3>
-            <h3><p>Circuferência Cintura: </p>{{profile.circuCintura}} Cm</h3>
-            <h3><p>Circuferência Braço Direito: </p>{{profile.circuBracoDireito }} Cm</h3>
-            <h3><p>Circuferência Braço Esquerdo: </p>{{profile.circuBracoEsquerdo}}Cm</h3>
+            <ion-grid>
+                <ion-row>
+                  <ion-col>
+                      <p>Nome:</p>
+                  </ion-col>
+                  <ion-col col-6>
+                      <p>{{profile.nome}}</p>
+                  </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                      <ion-col>
+                          <p>Sobrenome:</p>
+                      </ion-col>
+                      <ion-col col-6>
+                          <p>{{profile.sobrenome}}</p>
+                      </ion-col>
+                      </ion-row>
+
+                      <ion-row>
+                      <ion-col>
+                          <p>Idade:</p>
+                      </ion-col>
+                      <ion-col col-6>
+                          <p>{{profile.idade}}</p>
+                      </ion-col>
+                      </ion-row>
+                      
+                      <ion-row>
+                      <ion-col>
+                          <p>Altura:</p>
+                      </ion-col>
+                      <ion-col col-6>
+                          <p>{{profile.altura}}</p>
+                      </ion-col>
+                      </ion-row>
+                      
+                      <ion-row>
+                      <ion-col>
+                          <p>Peso:</p>
+                      </ion-col>
+                      <ion-col col-6>
+                          <p>{{profile.peso}}</p>
+                      </ion-col>
+                      </ion-row>
+
+                      <ion-row>
+                      <ion-col>
+                          <p>Circuferência Cintura:</p>
+                      </ion-col>
+                      <ion-col col-6>
+                          <p>{{profile.circuCintura}}</p>
+                      </ion-col>
+                      </ion-row>
+
+                      <ion-row>
+                      <ion-col>
+                          <p>Circuferência Braço Direito:</p>
+                      </ion-col>
+                      <ion-col col-6>
+                          <p>{{profile.circuBracoDireito }}</p>
+                      </ion-col>
+                      </ion-row>
+
+                      <ion-row>
+                          <ion-col>
+                              <p>Circuferência Braço Esquerdo:</p>
+                          </ion-col>
+                          <ion-col col-6>
+                              <p>{{profile.circuBracoEsquerdo }}</p>
+                          </ion-col>
+                          </ion-row>
+                </ion-grid>
 
         </ion-item>
   
