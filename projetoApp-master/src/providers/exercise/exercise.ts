@@ -33,6 +33,7 @@ export class ExerciseProvider {
         .update(exercise.key,
           {
             NomeExercicio: exercise.NomeExercicio,
+            grupoMuscular: exercise.grupoMuscular,
             //imagem: exercicse.imagem
           })
         .then(() => resolve())
@@ -41,6 +42,7 @@ export class ExerciseProvider {
         this.db.list(this.PATH)
         .push({
           NomeExercicio: exercise.NomeExercicio,
+          grupoMuscular: exercise.grupoMuscular,
         })
         .then(() => resolve());
       }

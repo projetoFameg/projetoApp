@@ -10,15 +10,15 @@
   <form [formGroup]="form">
 
     <ion-item>
-      <ion-label stacked>Treinos Da Semana:</ion-label>
+      <ion-label stacked>Treinos:</ion-label>
       <ion-select formControlName="titulo">
-        <ion-option value="Segunda Feira">Segunda Feira</ion-option>
-        <ion-option value="Terça Feira">Terça Feira</ion-option>
-        <ion-option value="Quarta Feira">Quarta Feira</ion-option>
-        <ion-option value="Quinta Feira">Quinta Feira</ion-option>
-        <ion-option value="Sexta Feira">Sexta Feira</ion-option>
-        <ion-option value="Sábado">Sábado</ion-option>
-        <ion-option value="Domingo">Domingo</ion-option>
+        <ion-option value="Treino A">Treino A</ion-option>
+        <ion-option value="Treino B">Treino B</ion-option>
+        <ion-option value="Treino C">Treino C</ion-option>
+        <ion-option value="Treino D">Treino D</ion-option>
+        <ion-option value="Treino E">Treino E</ion-option>
+        <ion-option value="Treino F">Treino F</ion-option>
+        <ion-option value="Treino G">reino G</ion-option>
       </ion-select>
     </ion-item>
 
@@ -57,7 +57,7 @@
     <ion-item>
         <ion-label stacked>Grupo Muscular</ion-label>
         <ion-select formControlName="grupoMuscular2">
-            <ion-option value="vazio">vazio</ion-option>
+            <ion-option value="vazio"></ion-option>
           <ion-option value="Abdominal">Abdominal</ion-option>
           <ion-option value="Trapézio">Trapézio</ion-option>
           <ion-option value="Dorsal">Dorsal</ion-option>
@@ -108,6 +108,7 @@
           <ion-item-sliding *ngFor="let exercise of listExercise">
             <ion-item>
                 <h2>Exercício: {{exercise.nomeExercicio}}</h2>
+                <h4>Musculo: {{exercise.grupoMuscular}}</h4>
                 <ion-grid>
                   <ion-row>
                     <ion-col>

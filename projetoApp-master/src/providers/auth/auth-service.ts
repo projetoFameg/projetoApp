@@ -25,7 +25,7 @@ export class AuthServiceProvider {
  
 
   signInWithAdmin(user: User) {
-    if (user.email == "cleverton_decker@hotmail.com") {
+    if (user.email == "projetos.orientados@gmail.com") {
       return this.angularFireAuth.auth.signInWithEmailAndPassword(user.email, user.password)
     }
   }

@@ -58,7 +58,6 @@ getAll() {
           circuCintura: profile.circuCintura,
           circuBracoEsquerdo: profile.circuBracoEsquerdo,
           circuBracoDireito: profile.circuBracoDireito,
-          objetivo: profile.objetivo,
         })
         .then(() => resolve());
       }

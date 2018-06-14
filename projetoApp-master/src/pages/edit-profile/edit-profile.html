@@ -97,20 +97,7 @@
                               </div>
                             </ion-item>
         
-                            <ion-item>
-                                <ion-label stacked>Objetivo</ion-label>
-                                <ion-select formControlName="objetivo">
-                                  <ion-option value="1">Ganho de massa muscular</ion-option>
-                                  <ion-option value="2">Resistência</ion-option>
-                                  <ion-option value="2">Perca de gordura</ion-option>
-                                </ion-select>
-                              </ion-item>
-                              <ion-item *ngIf="!form.controls.objetivo.valid && (form.controls.objetivo.dirty || form.controls.objetivo.touched)" color="danger">
-                                  <div [hidden]="!form.controls.objetivo.errors.required">
-                                    O campo é obrigatório
-                                  </div>
-                                </ion-item>
-                            
+                        
           <!-- <ion-item>
             <ion-label stacked>Imagem</ion-label>
             <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>

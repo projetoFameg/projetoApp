@@ -40,7 +40,6 @@ export class EditProfilePage {
       circuCintura: [this.profile.circuCintura],
       circuBracoEsquerdo: [this.profile.circuBracoEsquerdo],
       circuBracoDireito: [this.profile.circuBracoDireito],
-      objetivo: [this.profile.objetivo],
     })
   }
 

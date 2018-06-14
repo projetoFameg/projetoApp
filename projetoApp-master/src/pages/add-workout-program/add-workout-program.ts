@@ -94,6 +94,7 @@ export class AddWorkoutProgramPage {
       });
     }
 
+
     editExercise(keyParam: any){
 
       this.workoutProgramExercise = this.providerExerciseProgram.get(keyParam, this.workoutProgram.key);
