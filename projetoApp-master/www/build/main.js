@@ -236,9 +236,11 @@ var ProfileProvider = /** @class */ (function () {
                     altura: profile.altura,
                     peso: profile.peso,
                     circuCintura: profile.circuCintura,
+                    circuOmbro: profile.circuOmbro,
                     circuBracoDireito: profile.circuBracoDireito,
                     circuBracoEsquerdo: profile.circuBracoEsquerdo,
-                    objetivo: profile.objetivo,
+                    circuCoxa: profile.circuCoxa,
+                    circupanturilha: profile.circupanturilha,
                 })
                     .then(function () { return resolve(); })
                     .catch(function (e) { return reject(e); });
@@ -252,8 +254,11 @@ var ProfileProvider = /** @class */ (function () {
                     peso: profile.peso,
                     idade: profile.idade,
                     circuCintura: profile.circuCintura,
+                    circuOmbro: profile.circuOmbro,
                     circuBracoEsquerdo: profile.circuBracoEsquerdo,
                     circuBracoDireito: profile.circuBracoDireito,
+                    circuCoxa: profile.circuCoxa,
+                    circupanturilha: profile.circupanturilha,
                 })
                     .then(function () { return resolve(); });
             }
@@ -407,7 +412,7 @@ var AddExercisePage = /** @class */ (function () {
     };
     AddExercisePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-add-exercise',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/'<!--\n  Generated template for the AddExercisePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding class="bg">\n\n  <form [formGroup]="form">\n\n    <ion-item>\n      <ion-label stacked>Nome do exercício</ion-label>\n      <ion-input type="text" formControlName="NomeExercicio"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.NomeExercicio.valid && (form.controls.NomeExercicio.dirty || form.controls.NomeExercicio.touched)" color="danger">\n      <div [hidden]="!form.controls.NomeExercicio.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n    <ion-item>\n        <ion-label stacked>Grupo Muscular</ion-label>\n        <ion-select formControlName="grupoMuscular">\n            <ion-option value="vazio">vazio</ion-option>\n          <ion-option value="Abdominal">Abdominal</ion-option>\n          <ion-option value="Trapézio">Trapézio</ion-option>\n          <ion-option value="Dorsal">Dorsal</ion-option>\n          <ion-option value="Ombro posterior">Ombro posterior</ion-option>\n          <ion-option value="Ombro frontal">Ombro frontal</ion-option>\n          <ion-option value="Ombro Lateral">Ombro Lateral</ion-option>\n          <ion-option value="Peito superior">Peito superior</ion-option>\n          <ion-option value="Peito">Peito</ion-option>\n          <ion-option value="Biceps">Biceps</ion-option>\n          <ion-option value="Triceps Lateral">Triceps Lateral</ion-option>\n          <ion-option value="Triceps branquial">Triceps branquial</ion-option>\n          <ion-option value="Antebraço">Antebraço</ion-option>\n          <ion-option value="Glúteo">Glúteo</ion-option>\n          <ion-option value="Quadrícepes">Quadrícepes</ion-option>\n        </ion-select>\n      </ion-item>\n       \n   \n        \n       \n        <!-- <ion-item>\n          <ion-label stacked>Imagem</ion-label>\n          <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>\n        </ion-item> -->\n      \n        <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Exercício</button>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/,
+            selector: 'page-add-exercise',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding class="bg">\n\n  <form [formGroup]="form">\n\n    <ion-item>\n      <ion-label stacked>Nome do exercício</ion-label>\n      <ion-input type="text" formControlName="NomeExercicio"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.NomeExercicio.valid && (form.controls.NomeExercicio.dirty || form.controls.NomeExercicio.touched)"\n      color="danger">\n      <div [hidden]="!form.controls.NomeExercicio.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Grupo Muscular</ion-label>\n      <ion-select formControlName="grupoMuscular">\n        <ion-option value="vazio">vazio</ion-option>\n        <ion-option value="Abdominal">Abdominal</ion-option>\n        <ion-option value="Trapézio">Trapézio</ion-option>\n        <ion-option value="Dorsal">Dorsal</ion-option>\n        <ion-option value="Ombro posterior">Ombro posterior</ion-option>\n        <ion-option value="Ombro frontal">Ombro frontal</ion-option>\n        <ion-option value="Ombro Lateral">Ombro Lateral</ion-option>\n        <ion-option value="Peito superior">Peito superior</ion-option>\n        <ion-option value="Peito">Peito</ion-option>\n        <ion-option value="Biceps">Biceps</ion-option>\n        <ion-option value="Triceps Lateral">Triceps Lateral</ion-option>\n        <ion-option value="Triceps branquial">Triceps branquial</ion-option>\n        <ion-option value="Antebraço">Antebraço</ion-option>\n        <ion-option value="Glúteo">Glúteo</ion-option>\n        <ion-option value="Quadrícepes">Quadrícepes</ion-option>\n      </ion-select>\n    </ion-item>\n\n\n\n\n    <!-- <ion-item>\n          <ion-label stacked>Imagem</ion-label>\n          <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>\n        </ion-item> -->\n\n    <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Add Exercício</button>\n  </form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\add-exercise\add-exercise.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__providers_exercise_exercise__["a" /* ExerciseProvider */],
@@ -421,51 +426,6 @@ var AddExercisePage = /** @class */ (function () {
 /***/ }),
 
 /***/ 162:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/**
- * Generated class for the ContactPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var ContactPage = /** @class */ (function () {
-    function ContactPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    ContactPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ContactPage');
-    };
-    ContactPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contact',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\contact\contact.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Workout!</ion-title>\n    </ion-navbar>\n  </ion-header>\n\n<ion-content padding >\n\n\n        <h5>Sugestões ou problemas nos contato:</h5>\n        <h6>E-mail:  Projetos.orientados@gmail.com</h6>\n    \n \n  </ion-content>'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\contact\contact.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
-    ], ContactPage);
-    return ContactPage;
-}());
-
-//# sourceMappingURL=contact.js.map
-
-/***/ }),
-
-/***/ 163:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -508,10 +468,13 @@ var EditProfilePage = /** @class */ (function () {
             sobrenome: [this.profile.sobrenome],
             altura: [this.profile.altura],
             peso: [this.profile.peso],
-            idade: [this.profile.equipamento],
+            idade: [this.profile.idade],
             circuCintura: [this.profile.circuCintura],
+            circuOmbro: [this.profile.circuOmbro],
             circuBracoEsquerdo: [this.profile.circuBracoEsquerdo],
             circuBracoDireito: [this.profile.circuBracoDireito],
+            circuCoxa: [this.profile.circuCoxa],
+            circupanturilha: [this.profile.circupanturilha],
         });
     };
     EditProfilePage.prototype.onSubmit = function () {
@@ -530,7 +493,7 @@ var EditProfilePage = /** @class */ (function () {
     };
     EditProfilePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-edit-profile',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\edit-profile\edit-profile.html"*/'\n<ion-header>\n\n    <ion-navbar color="primary">\n      <ion-title>{{title}}</ion-title>\n    </ion-navbar>\n  \n  </ion-header>\n  \n  <ion-content padding>\n   \n    <form [formGroup]="form">\n           \n          <ion-item>\n              <ion-label stacked>Nome</ion-label>\n              <ion-input type="text" formControlName="nome"></ion-input>\n            </ion-item>\n            <ion-item *ngIf="!form.controls.nome.valid && (form.controls.nome.dirty || form.controls.nome.touched)" color="danger">\n                <div [hidden]="!form.controls.nome.errors.required">\n                  O campo é obrigatório\n                </div>\n              </ion-item>\n\n              <ion-item>\n                  <ion-label stacked>Sobrenome</ion-label>\n                  <ion-input type="text" formControlName="sobrenome"></ion-input>\n                </ion-item>\n                <ion-item *ngIf="!form.controls.sobrenome.valid && (form.controls.sobrenome.dirty || form.controls.sobrenome.touched)" color="danger">\n                    <div [hidden]="!form.controls.sobrenome.errors.required">\n                      O campo é obrigatório\n                    </div>\n                  </ion-item>\n\n                  <ion-item>\n                      <ion-label stacked>Altura</ion-label>\n                      <ion-input type="text" formControlName="altura"></ion-input>\n                    </ion-item>\n                    <ion-item *ngIf="!form.controls.altura.valid && (form.controls.altura.dirty || form.controls.altura.touched)" color="danger">\n                        <div [hidden]="!form.controls.altura.errors.required">\n                          O campo é obrigatório\n                        </div>\n                      </ion-item>\n\n\n                <ion-item>\n                    <ion-label stacked>Peso</ion-label>\n                    <ion-input type="text" formControlName="peso"></ion-input>\n                  </ion-item>\n                  <ion-item *ngIf="!form.controls.peso.valid && (form.controls.peso.dirty || form.controls.peso.touched)" color="danger">\n                      <div [hidden]="!form.controls.peso.errors.required">\n                        O campo é obrigatório\n                      </div>\n                    </ion-item>\n\n\n\n                  <ion-item>\n                      <ion-label stacked>idade</ion-label>\n                      <ion-input type="text" formControlName="idade"></ion-input>\n                    </ion-item>\n                    <ion-item *ngIf="!form.controls.idade.valid && (form.controls.idade.dirty || form.controls.idade.touched)" color="danger">\n                        <div [hidden]="!form.controls.idade.errors.required">\n                          O campo é obrigatório\n                        </div>\n                      </ion-item>\n\n\n                    <ion-item>\n                        <ion-label stacked>Circuferência Cintura</ion-label>\n                        <ion-input type="text" formControlName="circuCintura"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="!form.controls.circuCintura.valid && (form.controls.circuCintura.dirty || form.controls.circuCintura.touched)" color="danger">\n                          <div [hidden]="!form.controls.circuCintura.errors.required">\n                            O campo é obrigatório\n                          </div>\n                        </ion-item>\n\n\n                      <ion-item>\n                          <ion-label stacked>Circuferência Braço Esquerdo</ion-label>\n                          <ion-input type="text" formControlName="circuBracoEsquerdo"></ion-input>\n                        </ion-item>\n                        <ion-item *ngIf="!form.controls.circuBracoEsquerdo.valid && (form.controls.circuBracoEsquerdo.dirty || form.controls.circuBracoEsquerdo.touched)" color="danger">\n                            <div [hidden]="!form.controls.circuBracoEsquerdo.errors.required">\n                              O campo é obrigatório\n                            </div>\n                          </ion-item>\n                    \n\n                        <ion-item>\n                            <ion-label stacked>Circuferência Braço Direito</ion-label>\n                            <ion-input type="text" formControlName="circuBracoDireito"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="!form.controls.circuBracoDireito.valid && (form.controls.circuBracoDireito.dirty || form.controls.circuBracoDireito.touched)" color="danger">\n                              <div [hidden]="!form.controls.circuBracoDireito.errors.required">\n                                O campo é obrigatório\n                              </div>\n                            </ion-item>\n        \n                        \n          <!-- <ion-item>\n            <ion-label stacked>Imagem</ion-label>\n            <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>\n          </ion-item> -->\n        \n          <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Atualizar Perfil</button>\n    </form>\n  \n  </ion-content>\n  '/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\edit-profile\edit-profile.html"*/,
+            selector: 'page-edit-profile',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\edit-profile\edit-profile.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>{{title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <form [formGroup]="form">\n\n    <ion-item>\n      <ion-label stacked>Nome</ion-label>\n      <ion-input type="text" formControlName="nome"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.nome.valid && (form.controls.nome.dirty || form.controls.nome.touched)" color="danger">\n      <div [hidden]="!form.controls.nome.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Sobrenome</ion-label>\n      <ion-input type="text" formControlName="sobrenome"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.sobrenome.valid && (form.controls.sobrenome.dirty || form.controls.sobrenome.touched)" color="danger">\n      <div [hidden]="!form.controls.sobrenome.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Altura</ion-label>\n      <ion-input type="text" formControlName="altura"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.altura.valid && (form.controls.altura.dirty || form.controls.altura.touched)" color="danger">\n      <div [hidden]="!form.controls.altura.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label stacked>Peso</ion-label>\n      <ion-input type="text" formControlName="peso"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.peso.valid && (form.controls.peso.dirty || form.controls.peso.touched)" color="danger">\n      <div [hidden]="!form.controls.peso.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n\n\n    <ion-item>\n      <ion-label stacked>idade</ion-label>\n      <ion-input type="text" formControlName="idade"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.idade.valid && (form.controls.idade.dirty || form.controls.idade.touched)" color="danger">\n      <div [hidden]="!form.controls.idade.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label stacked>Circuferência Cintura</ion-label>\n      <ion-input type="text" formControlName="circuCintura"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.circuCintura.valid && (form.controls.circuCintura.dirty || form.controls.circuCintura.touched)"\n      color="danger">\n      <div [hidden]="!form.controls.circuCintura.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Circuferência Ombros</ion-label>\n      <ion-input type="text" formControlName="circuOmbro"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.circuOmbro.valid && (form.controls.circuOmbro.dirty || form.controls.circuOmbro.touched)"\n      color="danger">\n      <div [hidden]="!form.controls.circuOmbro.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Circuferência Braço Esquerdo</ion-label>\n      <ion-input type="text" formControlName="circuBracoEsquerdo"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.circuBracoEsquerdo.valid && (form.controls.circuBracoEsquerdo.dirty || form.controls.circuBracoEsquerdo.touched)"\n      color="danger">\n      <div [hidden]="!form.controls.circuBracoEsquerdo.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label stacked>Circuferência Braço Direito</ion-label>\n      <ion-input type="text" formControlName="circuBracoDireito"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.circuBracoDireito.valid && (form.controls.circuBracoDireito.dirty || form.controls.circuBracoDireito.touched)"\n      color="danger">\n      <div [hidden]="!form.controls.circuBracoDireito.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Circuferência Coxa</ion-label>\n      <ion-input type="text" formControlName="circuCoxa"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.circuCoxa.valid && (form.controls.circuCoxa.dirty || form.controls.circuCoxa.touched)"\n      color="danger">\n      <div [hidden]="!form.controls.circuCoxa.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Circuferência Panturilha</ion-label>\n      <ion-input type="text" formControlName="circupanturilha"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="!form.controls.circupanturilha.valid && (form.controls.circupanturilha.dirty || form.controls.circupanturilha.touched)"\n      color="danger">\n      <div [hidden]="!form.controls.circupanturilha.errors.required">\n        O campo é obrigatório\n      </div>\n    </ion-item>\n\n \n\n\n    <!-- <ion-item>\n            <ion-label stacked>Imagem</ion-label>\n            <ion-input ngControl="image" type="file" placeholder="Select Category Image" [(ngModel)]="exerciseItem.imagem"></ion-input>\n          </ion-item> -->\n\n    <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Atualizar Perfil</button>\n  </form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\edit-profile\edit-profile.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__providers_profile_profile__["a" /* ProfileProvider */],
@@ -540,6 +503,51 @@ var EditProfilePage = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=edit-profile.js.map
+
+/***/ }),
+
+/***/ 163:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the ContactPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var ContactPage = /** @class */ (function () {
+    function ContactPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    ContactPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ContactPage');
+    };
+    ContactPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-contact',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\contact\contact.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Workout!</ion-title>\n    </ion-navbar>\n  </ion-header>\n\n<ion-content padding >\n\n\n        <h5>Sugestões ou problemas nos contato:</h5>\n        <h6>E-mail:  Projetos.orientados@gmail.com</h6>\n    \n \n  </ion-content>'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\contact\contact.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+    ], ContactPage);
+    return ContactPage;
+}());
+
+//# sourceMappingURL=contact.js.map
 
 /***/ }),
 
@@ -729,11 +737,11 @@ var map = {
 		7
 	],
 	"../pages/contact/contact.module": [
-		524,
+		525,
 		6
 	],
 	"../pages/edit-profile/edit-profile.module": [
-		525,
+		524,
 		5
 	],
 	"../pages/list-workout-program/list-workout-program.module": [
@@ -947,7 +955,7 @@ var ExerciseListPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfileListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_profile_profile__ = __webpack_require__(130);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -989,7 +997,7 @@ var ProfileListPage = /** @class */ (function () {
     };
     ProfileListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-profile-list',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\profile-list\profile-list.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Perfil</ion-title>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding>\n  \n      <ion-fab right bottom>\n          <button ion-fab color="primary" (click)="navigateEditProfilePage()">\n            <ion-icon name="add"></ion-icon>\n          </button>\n      </ion-fab>\n  \n    <ion-list>\n      <ion-item-sliding *ngFor="let profile of profile | async">\n  \n        <ion-item>\n            <ion-grid>\n                <ion-row>\n                  <ion-col>\n                      <p>Nome:</p>\n                  </ion-col>\n                  <ion-col col-6>\n                      <p>{{profile.nome}}</p>\n                  </ion-col>\n                  </ion-row>\n\n                  <ion-row>\n                      <ion-col>\n                          <p>Sobrenome:</p>\n                      </ion-col>\n                      <ion-col col-6>\n                          <p>{{profile.sobrenome}}</p>\n                      </ion-col>\n                      </ion-row>\n\n                      <ion-row>\n                      <ion-col>\n                          <p>Idade:</p>\n                      </ion-col>\n                      <ion-col col-6>\n                          <p>{{profile.idade}}</p>\n                      </ion-col>\n                      </ion-row>\n                      \n                      <ion-row>\n                      <ion-col>\n                          <p>Altura:</p>\n                      </ion-col>\n                      <ion-col col-6>\n                          <p>{{profile.altura}}</p>\n                      </ion-col>\n                      </ion-row>\n                      \n                      <ion-row>\n                      <ion-col>\n                          <p>Peso:</p>\n                      </ion-col>\n                      <ion-col col-6>\n                          <p>{{profile.peso}}</p>\n                      </ion-col>\n                      </ion-row>\n\n                      <ion-row>\n                      <ion-col>\n                          <p>Circuferência Cintura:</p>\n                      </ion-col>\n                      <ion-col col-6>\n                          <p>{{profile.circuCintura}}</p>\n                      </ion-col>\n                      </ion-row>\n\n                      <ion-row>\n                      <ion-col>\n                          <p>Circuferência Braço Direito:</p>\n                      </ion-col>\n                      <ion-col col-6>\n                          <p>{{profile.circuBracoDireito }}</p>\n                      </ion-col>\n                      </ion-row>\n\n                      <ion-row>\n                          <ion-col>\n                              <p>Circuferência Braço Esquerdo:</p>\n                          </ion-col>\n                          <ion-col col-6>\n                              <p>{{profile.circuBracoEsquerdo }}</p>\n                          </ion-col>\n                          </ion-row>\n                </ion-grid>\n\n        </ion-item>\n  \n  \n        <ion-item-options side="left">\n            <button ion-button color="secondary" (click)="editProfile(profile)">\n              <ion-icon name="create"></ion-icon>\n            </button>\n          <button ion-button color="danger" (click)="removeProfile(profile.key)">\n            <ion-icon name="trash"></ion-icon>\n          </button>\n        </ion-item-options>\n  \n      </ion-item-sliding>\n    </ion-list>\n  </ion-content>\n  '/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\profile-list\profile-list.html"*/,
+            selector: 'page-profile-list',template:/*ion-inline-start:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\profile-list\profile-list.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Perfil</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n    <ion-fab right bottom>\n        <button ion-fab color="primary" (click)="navigateEditProfilePage()">\n            <ion-icon name="add"></ion-icon>\n        </button>\n    </ion-fab>\n\n    <ion-list>\n        <ion-item-sliding *ngFor="let profile of profile | async">\n\n            <ion-item>\n                <ion-grid>\n                    <ion-row>\n                        <ion-col>\n                            <h1> {{profile.nome}} {{profile.sobrenome}}</h1>\n                        </ion-col>\n                    </ion-row>\n\n                    <ion-row>\n                        <ion-col>\n                            <ion-col>\n                                <p>Idade: {{profile.idade}}</p>\n                            </ion-col>\n                        </ion-col>\n                    </ion-row>\n\n                    <ion-row>\n                        <ion-col>\n                            <p>Altura</p>\n                        </ion-col>\n                        <ion-col col-6>\n                            <p>Peso</p>\n                        </ion-col>\n                    </ion-row>\n\n                    <ion-row>\n                        <ion-col>\n                            <p>{{profile.altura}} Cm</p>\n                        </ion-col>\n                        <ion-col col-6>\n                            <p>{{profile.peso}} Kg</p>\n                        </ion-col>\n                    </ion-row>\n\n                    <ion-row>\n                        <ion-col>\n                            <p>Circuferência Braço Esquerdo</p>\n                        </ion-col>\n                        <ion-col col-6>\n                            <p>Circuferência Braço Direito</p>\n                        </ion-col>\n\n                    </ion-row>\n\n\n                    <ion-row>\n                        <ion-col>\n                            <p>{{profile.circuBracoEsquerdo}} Cm</p>\n                        </ion-col>\n                        <ion-col col-6>\n                            <p>{{profile.circuBracoDireito}} Cm</p>\n                        </ion-col>\n                    </ion-row>\n\n\n                    <ion-row>\n                        <ion-col>\n                            <p>Circuferência Cintura:</p>\n                        </ion-col>\n                        <ion-col>\n                            <p>Circuferência Ombros:</p>\n                        </ion-col>\n                    </ion-row>\n\n\n                    <ion-row>\n                        <ion-col>\n                            <p>{{profile.circuCintura}} Cm</p>\n                        </ion-col>\n                        <ion-col>\n                            <p>{{profile.circuOmbro}} Cm</p>\n                        </ion-col>\n                    </ion-row>\n\n\n\n                    <ion-row>\n                        <ion-col>\n                            <p>Circuferência Coxa</p>\n                        </ion-col>\n                        <ion-col col-6>\n                            <p>Circuferência Panturilha</p>\n                        </ion-col>\n\n                    </ion-row>\n\n\n                    <ion-row>\n                        <ion-col>\n                            <p>{{profile.circuCoxa}} Cm</p>\n                        </ion-col>\n                        <ion-col col-6>\n                            <p>{{profile.circupanturilha}} Cm</p>\n                        </ion-col>\n                    </ion-row>\n\n                </ion-grid>\n            </ion-item>\n\n\n\n            <ion-item-options side="left">\n                <button ion-button color="secondary" (click)="editProfile(profile)">\n                    <ion-icon name="create"></ion-icon>\n                </button>\n                <button ion-button color="danger" (click)="removeProfile(profile.key)">\n                    <ion-icon name="trash"></ion-icon>\n                </button>\n            </ion-item-options>\n\n        </ion-item-sliding>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"C:\Users\ton\Desktop\projetoApp-master\projetoApp-master\src\pages\profile-list\profile-list.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__providers_profile_profile__["a" /* ProfileProvider */],
@@ -1037,7 +1045,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_resetpassword_resetpassword__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_add_exercise_add_exercise__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_exercise_list_exercise_list__ = __webpack_require__(278);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_edit_profile_edit_profile__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_edit_profile_edit_profile__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_profile_list_profile_list__ = __webpack_require__(330);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_auth_auth_service__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_exercise_exercise__ = __webpack_require__(61);
@@ -1050,7 +1058,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_google_plus__ = __webpack_require__(276);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_angularfire2_database__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_profile_profile__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_contact_contact__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_contact_contact__ = __webpack_require__(163);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1120,8 +1128,8 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../pages/add-exercise/add-exercise.module#AddExercisePageModule', name: 'AddExercisePage', segment: 'add-exercise', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/add-workout-program/add-workout-program.module#AddWorkoutProgramPageModule', name: 'AddWorkoutProgramPage', segment: 'add-workout-program', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/contact/contact.module#ContactPageModule', name: 'ContactPage', segment: 'contact', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/edit-profile/edit-profile.module#EditProfilePageModule', name: 'EditProfilePage', segment: 'edit-profile', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/contact/contact.module#ContactPageModule', name: 'ContactPage', segment: 'contact', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/list-workout-program/list-workout-program.module#ListWorkoutProgramPageModule', name: 'ListWorkoutProgramPage', segment: 'list-workout-program', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/resetpassword/resetpassword.module#ResetpasswordPageModule', name: 'ResetpasswordPage', segment: 'resetpassword', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/signin/signin.module#LoginPageModule', name: 'SigninPage', segment: 'signin', priority: 'low', defaultHistory: [] },
@@ -1344,7 +1352,7 @@ var AuthServicenpmProvider = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_signin_signin__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_list_workout_program_list_workout_program__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_contact_contact__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_contact_contact__ = __webpack_require__(163);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1370,8 +1378,8 @@ var MyApp = /** @class */ (function () {
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
         this.pages = [
             { title: 'Home', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
-            { title: 'Treinos', component: __WEBPACK_IMPORTED_MODULE_8__pages_list_workout_program_list_workout_program__["a" /* ListWorkoutProgramPage */] },
             { title: 'Perfil', component: __WEBPACK_IMPORTED_MODULE_5__pages_profile_list_profile_list__["a" /* ProfileListPage */] },
+            { title: 'Treinos', component: __WEBPACK_IMPORTED_MODULE_8__pages_list_workout_program_list_workout_program__["a" /* ListWorkoutProgramPage */] },
             { title: 'Contato', component: __WEBPACK_IMPORTED_MODULE_9__pages_contact_contact__["a" /* ContactPage */] }
         ];
         var authObserver = afAuth.authState.subscribe(function (user) {

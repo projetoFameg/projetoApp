@@ -1,111 +1,133 @@
 <ion-header>
     <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Perfil</ion-title>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Perfil</ion-title>
     </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-  
-      <ion-fab right bottom>
-          <button ion-fab color="primary" (click)="navigateEditProfilePage()">
+</ion-header>
+
+<ion-content padding>
+
+    <ion-fab right bottom>
+        <button ion-fab color="primary" (click)="navigateEditProfilePage()">
             <ion-icon name="add"></ion-icon>
-          </button>
-      </ion-fab>
-  
+        </button>
+    </ion-fab>
+
     <ion-list>
-      <ion-item-sliding *ngFor="let profile of profile | async">
-  
-        <ion-item>
-            <ion-grid>
-                <ion-row>
-                  <ion-col>
-                      <p>Nome:</p>
-                  </ion-col>
-                  <ion-col col-6>
-                      <p>{{profile.nome}}</p>
-                  </ion-col>
-                  </ion-row>
+        <ion-item-sliding *ngFor="let profile of profile | async">
 
-                  <ion-row>
-                      <ion-col>
-                          <p>Sobrenome:</p>
-                      </ion-col>
-                      <ion-col col-6>
-                          <p>{{profile.sobrenome}}</p>
-                      </ion-col>
-                      </ion-row>
+            <ion-item>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <h1> {{profile.nome}} {{profile.sobrenome}}</h1>
+                        </ion-col>
+                    </ion-row>
 
-                      <ion-row>
-                      <ion-col>
-                          <p>Idade:</p>
-                      </ion-col>
-                      <ion-col col-6>
-                          <p>{{profile.idade}}</p>
-                      </ion-col>
-                      </ion-row>
-                      
-                      <ion-row>
-                      <ion-col>
-                          <p>Altura:</p>
-                      </ion-col>
-                      <ion-col col-6>
-                          <p>{{profile.altura}}</p>
-                      </ion-col>
-                      </ion-row>
-                      
-                      <ion-row>
-                      <ion-col>
-                          <p>Peso:</p>
-                      </ion-col>
-                      <ion-col col-6>
-                          <p>{{profile.peso}}</p>
-                      </ion-col>
-                      </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ion-col>
+                                <p>Idade: {{profile.idade}}</p>
+                            </ion-col>
+                        </ion-col>
+                    </ion-row>
 
-                      <ion-row>
-                      <ion-col>
-                          <p>Circuferência Cintura:</p>
-                      </ion-col>
-                      <ion-col col-6>
-                          <p>{{profile.circuCintura}}</p>
-                      </ion-col>
-                      </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <p>Altura</p>
+                        </ion-col>
+                        <ion-col col-6>
+                            <p>Peso</p>
+                        </ion-col>
+                    </ion-row>
 
-                      <ion-row>
-                      <ion-col>
-                          <p>Circuferência Braço Direito:</p>
-                      </ion-col>
-                      <ion-col col-6>
-                          <p>{{profile.circuBracoDireito }}</p>
-                      </ion-col>
-                      </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <p>{{profile.altura}} Cm</p>
+                        </ion-col>
+                        <ion-col col-6>
+                            <p>{{profile.peso}} Kg</p>
+                        </ion-col>
+                    </ion-row>
 
-                      <ion-row>
-                          <ion-col>
-                              <p>Circuferência Braço Esquerdo:</p>
-                          </ion-col>
-                          <ion-col col-6>
-                              <p>{{profile.circuBracoEsquerdo }}</p>
-                          </ion-col>
-                          </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <p>Circuferência Braço Esquerdo</p>
+                        </ion-col>
+                        <ion-col col-6>
+                            <p>Circuferência Braço Direito</p>
+                        </ion-col>
+
+                    </ion-row>
+
+
+                    <ion-row>
+                        <ion-col>
+                            <p>{{profile.circuBracoEsquerdo}} Cm</p>
+                        </ion-col>
+                        <ion-col col-6>
+                            <p>{{profile.circuBracoDireito}} Cm</p>
+                        </ion-col>
+                    </ion-row>
+
+
+                    <ion-row>
+                        <ion-col>
+                            <p>Circuferência Cintura:</p>
+                        </ion-col>
+                        <ion-col>
+                            <p>Circuferência Ombros:</p>
+                        </ion-col>
+                    </ion-row>
+
+
+                    <ion-row>
+                        <ion-col>
+                            <p>{{profile.circuCintura}} Cm</p>
+                        </ion-col>
+                        <ion-col>
+                            <p>{{profile.circuOmbro}} Cm</p>
+                        </ion-col>
+                    </ion-row>
+
+
+
+                    <ion-row>
+                        <ion-col>
+                            <p>Circuferência Coxa</p>
+                        </ion-col>
+                        <ion-col col-6>
+                            <p>Circuferência Panturilha</p>
+                        </ion-col>
+
+                    </ion-row>
+
+
+                    <ion-row>
+                        <ion-col>
+                            <p>{{profile.circuCoxa}} Cm</p>
+                        </ion-col>
+                        <ion-col col-6>
+                            <p>{{profile.circupanturilha}} Cm</p>
+                        </ion-col>
+                    </ion-row>
+
                 </ion-grid>
+            </ion-item>
 
-        </ion-item>
-  
-  
-        <ion-item-options side="left">
-            <button ion-button color="secondary" (click)="editProfile(profile)">
-              <ion-icon name="create"></ion-icon>
-            </button>
-          <button ion-button color="danger" (click)="removeProfile(profile.key)">
-            <ion-icon name="trash"></ion-icon>
-          </button>
-        </ion-item-options>
-  
-      </ion-item-sliding>
+
+
+            <ion-item-options side="left">
+                <button ion-button color="secondary" (click)="editProfile(profile)">
+                    <ion-icon name="create"></ion-icon>
+                </button>
+                <button ion-button color="danger" (click)="removeProfile(profile.key)">
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+            </ion-item-options>
+
+        </ion-item-sliding>
     </ion-list>
-  </ion-content>
-  
+</ion-content>

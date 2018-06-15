@@ -40,9 +40,11 @@ getAll() {
             altura: profile.altura,
             peso: profile.peso,
             circuCintura: profile.circuCintura,
+            circuOmbro: profile.circuOmbro,
             circuBracoDireito: profile.circuBracoDireito,
             circuBracoEsquerdo: profile.circuBracoEsquerdo,
-            objetivo: profile.objetivo,
+            circuCoxa: profile.circuCoxa,
+            circupanturilha: profile.circupanturilha,
             //imagem: exercicse.imagem
           })
         .then(() => resolve())
@@ -56,8 +58,11 @@ getAll() {
           peso: profile.peso,
           idade: profile.idade,
           circuCintura: profile.circuCintura,
+          circuOmbro: profile.circuOmbro,
           circuBracoEsquerdo: profile.circuBracoEsquerdo,
           circuBracoDireito: profile.circuBracoDireito,
+          circuCoxa: profile.circuCoxa,
+          circupanturilha: profile.circupanturilha,
         })
         .then(() => resolve());
       }

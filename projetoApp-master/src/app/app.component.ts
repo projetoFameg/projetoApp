@@ -28,8 +28,8 @@ export class MyApp {
     
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Treinos', component: ListWorkoutProgramPage },
       { title: 'Perfil', component: ProfileListPage },
+      { title: 'Treinos', component: ListWorkoutProgramPage },
       { title: 'Contato', component: ContactPage }
 
     ];

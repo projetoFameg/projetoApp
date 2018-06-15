@@ -36,10 +36,13 @@ export class EditProfilePage {
       sobrenome: [this.profile.sobrenome],
       altura : [this.profile.altura],
       peso: [this.profile.peso],
-      idade: [this.profile.equipamento],
+      idade: [this.profile.idade],
       circuCintura: [this.profile.circuCintura],
+      circuOmbro: [this.profile.circuOmbro],
       circuBracoEsquerdo: [this.profile.circuBracoEsquerdo],
       circuBracoDireito: [this.profile.circuBracoDireito],
+      circuCoxa: [this.profile.circuCoxa],
+      circupanturilha: [this.profile.circupanturilha],
     })
   }
 

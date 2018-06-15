@@ -28013,3 +28013,8 @@ page-list-workout-program .bg {
   background-size: cover;
   border-width: medium;
 }
+
+page-profile-list p {
+  border-radius: 4px;
+  float: left;
+}
