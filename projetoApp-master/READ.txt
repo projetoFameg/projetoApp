@@ -1,0 +1,1 @@
+Dados para autenticar no sistema e firebase enviados por e-mail.
